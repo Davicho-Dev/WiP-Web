@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+
+  local:
+    container_name: local
+    build:
+      context: ./
+      dockerfile: 'docker/local/Dockerfile'
+    ports:
+      - "3000:3000"
+    volumes:
+      - "/home/node_modules"
+      - "./:/home"
+
+  staging:
+    container_name: staging
+    build:
+      context: ./
+      dockerfile: 'docker/staging/Dockerfile'
+    ports:
+      - "80:80"
+
+  production:
+    container_name: production
+    build:
+      context: ./
+      dockerfile: 'docker/production/Dockerfile'
+    ports:
+      - "80:80"
