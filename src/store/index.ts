@@ -1,9 +1,11 @@
-import { userSlice } from './slices/userSlice'
 import { configureStore } from '@reduxjs/toolkit'
+
+import { uiSlice, userSlice } from './slices'
 
 const RTKStore = configureStore({
 	reducer: {
 		user: userSlice.reducer,
+		ui: uiSlice.reducer,
 	},
 })
 

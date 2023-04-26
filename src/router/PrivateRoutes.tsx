@@ -1,16 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { PrivateLayout } from '../components/layouts'
-import { ErrorPage, ProfilePage } from '../pages'
+import { ErrorPage, HomePage, ProfilePage } from '../pages'
 
 const PrivateRoutes = () => (
 	<Routes>
-		<Route
-			path='/auth'
-			element={<PrivateLayout />}
-			errorElement={<ErrorPage />}
-		>
-			<Route element={<ProfilePage />} index />
+		<Route path='/' element={<PrivateLayout />} errorElement={<ErrorPage />}>
+			<Route element={<HomePage />} index />
+			<Route path='user' element={<ProfilePage />} />
 		</Route>
 	</Routes>
 )
