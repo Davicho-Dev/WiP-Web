@@ -7,12 +7,14 @@ export const ButtonLink = ({
 	label,
 	type,
 	onClick,
+	disabled,
 }: IButtonLinkProps): JSX.Element => {
 	return (
 		<button
 			className={`${styles.button} ${className ?? ''}`}
 			onClick={onClick}
 			type={type}
+			disabled={disabled}
 		>
 			{label}
 		</button>

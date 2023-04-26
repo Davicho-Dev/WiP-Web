@@ -61,7 +61,7 @@ const RegisterForm = () => {
 	if (success)
 		return (
 			<section className='grid justify-items-center gap-y-6'>
-				<h1 className='text-3xl'>Successfully registered user</h1>
+				<h1 className='text-4xl'>Successfully registered user</h1>
 				<FontAwesomeIcon className='text-7xl' icon={faHandshake} />
 				<ButtonSolid label='Lets do it' className='w-1/2' />
 			</section>

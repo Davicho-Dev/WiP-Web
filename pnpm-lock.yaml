@@ -42,6 +42,7 @@ specifiers:
   identity-obj-proxy: ^3.0.0
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
+  jwt-js-decode: ^1.5.1
   lint-staged: ^13.2.1
   moment: ^2.29.4
   moment-timezone: ^0.5.39
@@ -71,6 +72,7 @@ dependencies:
   axios: 0.27.2
   framer-motion: 7.6.15_biqbaboplfbrettd7655fr4n2y
   gsap: 3.11.3
+  jwt-js-decode: 1.5.1
   moment: 2.29.4
   moment-timezone: 0.5.39
   react: 18.2.0
@@ -7494,6 +7496,16 @@ packages:
       object.assign: 4.1.4
     dev: true
 
+  /jwt-js-decode/1.5.1:
+    resolution:
+      {
+        integrity: sha512-CpfnSzK1qAFlIeaEB2c7Vn/2zk8cBHAG2t1MAy0mvf0hUX59TEuSU2I3o+1/4bWM2yDSgYbnEzNLvc446YO05g==,
+      }
+    engines: { node: '>=15.0.0' }
+    dependencies:
+      pako: 2.0.4
+    dev: false
+
   /kleur/3.0.3:
     resolution:
       {
@@ -8210,6 +8222,13 @@ packages:
       }
     engines: { node: '>=6' }
     dev: true
+
+  /pako/2.0.4:
+    resolution:
+      {
+        integrity: sha512-v8tweI900AUkZN6heMU/4Uy4cXRc2AYNRggVmTR+dEncawDJgCdLMximOVA2p4qO57WMynangsfGRb5WD6L1Bg==,
+      }
+    dev: false
 
   /parent-module/1.0.1:
     resolution:

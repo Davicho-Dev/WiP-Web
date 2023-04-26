@@ -14,8 +14,6 @@ const AuthPage = () => {
 	const currentAuthForm = useAppSelector(state => state.ui.currentAuthForm)
 	const dispatch = useAppDispatch()
 
-	console.log(currentAuthForm)
-
 	return (
 		<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
 			<header className='flex flex-col gap-y-10 mb-10'>
