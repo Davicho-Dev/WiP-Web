@@ -1,26 +1,16 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { faHandshake, faImages } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
-import { jwtDecode, jwtVerify, resignJwt } from 'jwt-js-decode'
-import {
-	ButtonLink,
-	ButtonSolid,
-	FormInput,
-	FormInputPassword,
-} from '../../components/atoms'
-import { IcLogo } from '../../components/atoms/Icons'
-import { apiPrivate, apiPublic } from '../../api'
-import { type } from 'os'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
+import { apiPrivate, apiPublic } from '../../api'
+import { ButtonLink, ButtonSolid, FormInput } from '../../components/atoms'
+import { IcLogo } from '../../components/atoms/Icons'
 import { getLocalAccessToken } from '../../constants'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faCheckCircle,
-	faHandshake,
-	faImage,
-	faImages,
-} from '@fortawesome/free-regular-svg-icons'
-import { watch } from 'fs'
 interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
@@ -154,7 +144,7 @@ const RegisterVerificationPage = () => {
 									rows={3}
 									{...register('about')}
 									style={{ resize: 'none' }}
-								></textarea>
+								/>
 							</fieldset>
 							<ButtonSolid
 								className='w-1/2 justify-self-end !bg-secondary'
