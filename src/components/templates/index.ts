@@ -1,1 +1,0 @@
-export { FormAuth } from './Form'
