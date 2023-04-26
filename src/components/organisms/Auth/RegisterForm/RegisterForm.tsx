@@ -9,6 +9,7 @@ import { FormInput } from '../../../atoms/Form/FormInput'
 import { apiPublic } from '../../../../api'
 
 import styles from './RegisterForm.module.sass'
+import { toast } from 'react-toastify'
 
 interface IFormProps {
 	email: string
@@ -48,8 +49,10 @@ const RegisterForm = () => {
 			})
 
 			setSuccess(true)
-		} catch (err) {
-			console.log(err)
+		} catch ({ response: { data } }) {
+			console.log(data)
+
+			toast.error(data.email[0])
 		} finally {
 			setOnLoading(false)
 		}

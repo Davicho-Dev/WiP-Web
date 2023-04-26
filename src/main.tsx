@@ -9,6 +9,7 @@ import { Router } from './router'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/globals.sass'
+import './assets/fonts/maison.ttf'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<StrictMode>

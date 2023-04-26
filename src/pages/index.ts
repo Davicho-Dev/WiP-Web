@@ -1,5 +1,6 @@
 export { default as ErrorPage } from './ErrorPage'
-export { default as ForgotPasswordPage } from './ForgotPasswordPage'
+export { default as ForgotPasswordVerificationPage } from './Auth/ForgotPasswordVerificationPage'
+export { default as RegisterVerificationPage } from './Auth/RegisterVerificationPage'
 export { default as HomePage } from './HomePage'
 export { default as ProfilePage } from './ProfilePage'
 export { default as AuthPage } from './AuthPage'

@@ -16,7 +16,7 @@ interface IFormProps {
 	password: string
 }
 
-interface ILoginResp {
+interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
 }
@@ -37,7 +37,7 @@ const LoginForm = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPublic.post<ILoginResp>('/auth/token/', {
+			const { data } = await apiPublic.post<IAuthResp>('/auth/token/', {
 				email,
 				password,
 			})

@@ -3,4 +3,5 @@ export interface IButtonSolidProps {
 	className?: string
 	disabled?: boolean
 	type?: 'button' | 'submit' | 'reset'
+	onClick?: () => void
 }
