@@ -2,6 +2,11 @@
 @import 'base/_typography.sass'
 
 *,
-*:before,
-*:after
+*::before,
+*::after
+	font-family: 'Maison', sans-serif !important
 	@apply transition-colors duration-500 ease-in-out
+
+.bg__public
+	background-image: url('src/assets/img/bg_public.png')
+	@apply bg-contain	bg-center bg-left
