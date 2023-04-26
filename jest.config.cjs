@@ -88,7 +88,9 @@ module.exports = {
 	],
 
 	// A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-	// moduleNameMapper: {},
+	moduleNameMapper: {
+		'^.+\\.(sass)$': 'identity-obj-proxy',
+	},
 
 	// An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
 	// modulePathIgnorePatterns: [],
@@ -132,7 +134,7 @@ module.exports = {
 	// runner: "jest-runner",
 
 	// The paths to modules that run some code to configure or set up the testing environment before each test
-	setupFiles: ['./jest.setup.cjs'],
+	setupFiles: ['./jest.setup.js'],
 
 	// A list of paths to modules that run some code to configure or set up the testing framework before each test
 	// setupFilesAfterEnv: [],
@@ -153,10 +155,7 @@ module.exports = {
 	// testLocationInResults: false,
 
 	// The glob patterns Jest uses to detect test files
-	testMatch: [
-		//   "**/__tests__/**/*.[jt]s?(x)",
-		'**/?(*.)+(spec).ts?(x)',
-	],
+	testMatch: ['**/?(*.)+(spec).ts?(x)'],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
 	// testPathIgnorePatterns: [
