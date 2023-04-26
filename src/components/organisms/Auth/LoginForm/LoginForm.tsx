@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
+import { apiPublic } from '../../../../api'
 import { useAppDispatch } from '../../../../hooks'
 import { setCurrentAuthForm } from '../../../../store/slices'
 import { ButtonLink, ButtonSolid, FormInputPassword } from '../../../atoms'
 import { FormInput } from '../../../atoms/Form/FormInput'
-import { apiPublic } from '../../../../api'
 
 import styles from './LoginForm.module.sass'
-import { useNavigate } from 'react-router-dom'
 
 interface IFormProps {
 	email: string

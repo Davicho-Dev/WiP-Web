@@ -1,0 +1,1 @@
+export { IcLogo } from './Logo'

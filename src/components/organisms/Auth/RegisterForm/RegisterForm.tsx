@@ -1,20 +1,14 @@
 import { useState } from 'react'
 
 import { useForm } from 'react-hook-form'
+import { faHandshake } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { useAppDispatch } from '../../../../hooks'
-import { setCurrentAuthForm } from '../../../../store/slices'
-import { ButtonLink, ButtonSolid, FormInputPassword } from '../../../atoms'
+import { ButtonSolid, FormInputPassword } from '../../../atoms'
 import { FormInput } from '../../../atoms/Form/FormInput'
+import { apiPublic } from '../../../../api'
 
 import styles from './RegisterForm.module.sass'
-import { apiPublic } from '../../../../api'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faHandScissors,
-	faHandSpock,
-	faHandshake,
-} from '@fortawesome/free-regular-svg-icons'
 
 interface IFormProps {
 	email: string

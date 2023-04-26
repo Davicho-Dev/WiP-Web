@@ -17,7 +17,7 @@ const AuthPage = () => {
 	console.log(currentAuthForm)
 
 	return (
-		<section className='w-screen h-screen bg-red-500 flex justify-start items-center bg__public'>
+		<section className='w-screen h-screen bg-red-500 flex justify-end items-center bg__public pr-20'>
 			<aside className='w-96 h-fit p-6 bg-white rounded-3xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
 					<IcLogo className='w-[200px]' />

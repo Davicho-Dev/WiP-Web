@@ -1,19 +1,7 @@
-import { Navigate, Outlet } from 'react-router-dom'
-
-import { useCookies } from 'react-cookie'
-
-import { CMSProvider } from '../../context'
+import { Outlet } from 'react-router-dom'
 
 const PrivateLayout = () => {
-	const [cookie] = useCookies()
-
-	return cookie['TOKEN'] ? (
-		<CMSProvider>
-			<Outlet />
-		</CMSProvider>
-	) : (
-		<Navigate to='/login' />
-	)
+	return <Outlet />
 }
 
 export default PrivateLayout
