@@ -1,0 +1,32 @@
+.wrapper
+	@apply w-full py-0 px-4 flex gap-x-1 items-center border border-black rounded-3xl relative
+	@apply transition-all ease-in-out duration-500
+
+	&::after
+		content: attr(data-error-message)
+		@apply w-fit h-fit m-auto top-0 text-red-700 text-xs absolute hidden transition-all duration-500 ease-in-out
+
+	&:hover, &:focus-within
+		@apply border-primary
+
+	&--error
+		@apply border border-red-700 #{'!important'}
+
+		&::after
+			content: attr(data-error-message)
+			@apply top-11 flex
+
+		&:hover
+			@apply border-red-800 #{'!important'}
+
+	&__input
+		height: 2.5rem
+		@apply p-0 bg-transparent border-none #{'!important'}
+		@apply flex-grow text-neutral-600 relative caret-neutral-600 text-neutral-600
+
+		&:focus
+			box-shadow: none !important
+			@apply outline-none border-none border-transparent #{'!important'}
+
+		&--error
+			@apply text-red-700 #{'!important'}

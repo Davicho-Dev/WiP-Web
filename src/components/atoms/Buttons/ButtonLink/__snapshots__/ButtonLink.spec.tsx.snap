@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonLink test suite Should render correctly 1`] = `
+<button
+  class="button "
+>
+  Button Link
+</button>
+`;
