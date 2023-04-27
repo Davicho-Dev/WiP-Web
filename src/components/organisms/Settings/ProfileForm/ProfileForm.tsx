@@ -3,10 +3,13 @@ import { ButtonSolid, FormInput } from '../../../atoms'
 
 import { jwtDecode, jwtVerify, resignJwt } from 'jwt-js-decode'
 import DummyImg from '../../../../assets/img/img_no_picture.png'
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 import { apiPrivate } from '../../../../api'
 import { getLocalAccessToken } from '../../../../constants'
 import { toast } from 'react-toastify'
+import { hdlAxiosErrors } from '../../../../helpers'
+import { AxiosError } from 'axios'
+import { IUser } from '../../../../interfaces'
 
 interface IFormProps {
 	about: string
@@ -18,20 +21,19 @@ interface IFormProps {
 	instagram: string
 	tiktok: string
 	sex: string
-	cellphone: string
+	phone_number: string
 	email: string
 	has_private_likes: boolean
 }
 
-export const ProfileForm = () => {
+export const ProfileForm = (props: IUser): JSX.Element => {
+	const { picture, has_private_likes } = props
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
 
-	const {
-		handleSubmit,
-		formState: { errors },
-		register,
-	} = useForm<IFormProps>()
+	const { handleSubmit, register, watch } = useForm<IFormProps>({
+		defaultValues: props,
+	})
 
 	const onSubmit: SubmitHandler<IFormProps> = async data => {
 		setOnLoading(true)
@@ -49,8 +51,7 @@ export const ProfileForm = () => {
 		try {
 			await apiPrivate.patch(`/users/${payload.user_id}/`, data)
 		} catch (err) {
-			// TODO: handle error
-			toast.error('Something went wrong')
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -77,7 +78,13 @@ export const ProfileForm = () => {
 						>
 							<img
 								className='w-full h-full'
-								src={avatar ? URL.createObjectURL(avatar) : DummyImg}
+								src={
+									avatar
+										? URL.createObjectURL(avatar)
+										: picture
+										? picture
+										: DummyImg
+								}
 								alt=''
 							/>
 							<input
@@ -152,9 +159,9 @@ export const ProfileForm = () => {
 						type='email'
 					/>
 					<FormInput
-						placeholder='Celular phone'
+						placeholder='Phone number'
 						type='tel'
-						register={{ ...register('cellphone') }}
+						register={{ ...register('phone_number') }}
 					/>
 					<FormInput
 						placeholder='Sex (Yes, please)'

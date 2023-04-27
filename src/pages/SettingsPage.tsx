@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { PasswordForm, ProfileForm } from '../components/organisms'
+import { useAppSelector } from '../hooks'
 
 type TFormTab = 'profile' | 'password'
 
 const SettingsPage = () => {
+	const user = useAppSelector(state => state.user)
+
 	const [currentTab, setCurrentTab] = useState<TFormTab>('profile')
+
 	return (
 		<section className='grid grid-flow-col grid-cols-[15rem_1fr] py-9 px-32 gap-x-5 overflow-y-auto'>
 			<aside className=' '>
@@ -40,8 +44,8 @@ const SettingsPage = () => {
 					</ul>
 				</nav>
 			</aside>
-			{currentTab === 'profile' ? <ProfileForm /> : null}
-			{currentTab === 'password' ? <PasswordForm /> : null}
+			{currentTab === 'profile' ? <ProfileForm {...user} /> : null}
+			{currentTab === 'password' ? <PasswordForm {...user} /> : null}
 		</section>
 	)
 }
