@@ -1,5 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useAuth0 } from '@auth0/auth0-react'
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { ButtonLink } from '../components/atoms'
 import { IcLogo } from '../components/atoms/Icons'
 import {
 	ForgotPasswordForm,
@@ -7,12 +10,21 @@ import {
 	RegisterForm,
 } from '../components/organisms'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { ButtonLink } from '../components/atoms'
 import { setCurrentAuthForm } from '../store/slices'
 
 const AuthPage = () => {
 	const currentAuthForm = useAppSelector(state => state.ui.currentAuthForm)
 	const dispatch = useAppDispatch()
+
+	const { loginWithRedirect } = useAuth0()
+
+	const hdlLogin = async () => {
+		await loginWithRedirect({
+			appState: {
+				returnTo: '/',
+			},
+		})
+	}
 
 	return (
 		<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
@@ -34,8 +46,16 @@ const AuthPage = () => {
 							<hr className='grow border-neutral-500' />
 						</article>
 						<nav className='flex gap-x-4'>
-							<FontAwesomeIcon icon={faGoogle} />
-							<FontAwesomeIcon icon={faFacebook} />
+							<FontAwesomeIcon
+								className='cursor-pointer'
+								icon={faGoogle}
+								onClick={hdlLogin}
+							/>
+							<FontAwesomeIcon
+								className='cursor-pointer text-blue-700'
+								icon={faFacebook}
+								onClick={hdlLogin}
+							/>
 						</nav>
 						{currentAuthForm === 'login' ? (
 							<ButtonLink

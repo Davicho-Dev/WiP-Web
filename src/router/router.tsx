@@ -1,16 +1,15 @@
-import { BrowserRouter } from 'react-router-dom'
-import PublicRoutes from './PublicRoutes'
-import PrivateRoutes from './PrivateRoutes'
 import { getLocalAccessToken } from '../constants'
+import PrivateRoutes from './PrivateRoutes'
+import PublicRoutes from './PublicRoutes'
 
 const Router = () => {
 	const access = getLocalAccessToken()
 
 	return (
-		<BrowserRouter>
+		<>
 			<PrivateRoutes />
 			<PublicRoutes />
-		</BrowserRouter>
+		</>
 	)
 }
 
