@@ -65,10 +65,12 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 
 	return (
 		<form className='grid gap-y-12 pt-10' onSubmit={handleSubmit(onSubmit)}>
-			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-900 border-2'>
-				<header className='w-full p-4 bg-neutral-900 text-white'>
-					<h1>Profile</h1>
-					<span className='text-sm'>This data is public for any user</span>
+			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
+				<header className='w-full p-4 bg-neutral-800 text-white'>
+					<h1 className='text-white'>Profile</h1>
+					<span className='text-sm text-white'>
+						This data is public for any user
+					</span>
 				</header>
 				<section className='flex p-8 gap-x-6'>
 					<aside>
@@ -147,10 +149,12 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 					</article>
 				</section>
 			</section>
-			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-900 border-2'>
-				<header className='w-full p-4 bg-neutral-900 text-white'>
-					<h1>Profile</h1>
-					<span className='text-sm'>This data is public for any user</span>
+			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
+				<header className='w-full p-4 bg-neutral-800 text-white'>
+					<h1 className='text-white'>Profile</h1>
+					<span className='text-sm text-white'>
+						This data is public for any user
+					</span>
 				</header>
 				<section className='grid gap-y-4 p-8 gap-x-6'>
 					<FormInput

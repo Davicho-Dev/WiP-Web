@@ -17,7 +17,7 @@ const AuthPage = () => {
 	return (
 		<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
 			<header className='flex flex-col gap-y-10 mb-10'>
-				<IcLogo className='w-[200px]' />
+				<IcLogo className='w-[200px] fill-neutral-800' />
 				<h1 className='text-3xl uppercase text-primary line-clamp-1'>
 					join now get feedback
 				</h1>

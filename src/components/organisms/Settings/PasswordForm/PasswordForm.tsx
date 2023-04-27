@@ -60,10 +60,10 @@ export const PasswordForm = ({
 			className='flex flex-col gap-y-12 pt-10'
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-900 border-2'>
-				<header className='w-full p-4 bg-neutral-900 text-white'>
-					<h1>Password</h1>
-					<span className='text-sm'>Your passwords for login</span>
+			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
+				<header className='w-full p-4 bg-neutral-800'>
+					<h1 className='text-white'>Password</h1>
+					<span className='text-sm text-white'>Your passwords for login</span>
 				</header>
 				<section className='grid gap-y-6 p-8'>
 					<FormInputPassword

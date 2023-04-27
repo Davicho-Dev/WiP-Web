@@ -102,7 +102,7 @@ const RegisterVerificationPage = () => {
 		hdlVerifyToken()
 	}, [])
 
-	if (!showNextStep)
+	if (showNextStep)
 		return (
 			<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
@@ -190,7 +190,7 @@ const RegisterVerificationPage = () => {
 							</fieldset>
 							<nav>
 								<ButtonSolid
-									className='w-1/2 border-neutral-900 border-2 text-neutral-900'
+									className='w-1/2 border-neutral-800 border-2 text-neutral-800'
 									label='Prev'
 									type='button'
 									onClick={() => setStep(1)}
@@ -223,4 +223,5 @@ const RegisterVerificationPage = () => {
 		</aside>
 	)
 }
+
 export default RegisterVerificationPage

@@ -16,8 +16,8 @@ export const ButtonNavLink = ({
 	return (
 		<NavLink
 			className={({ isActive }) =>
-				`w-full h-10 grid items-center pl-4 border-2 border-neutral-900 rounded-3xl ${
-					isActive ? 'bg-neutral-800 text-secondary' : 'text-neutral-900'
+				`w-full h-10 grid items-center pl-4 border-2 border-neutral-800 rounded-3xl ${
+					isActive ? 'bg-neutral-800 text-secondary' : 'text-neutral-800'
 				}  ${className}`
 			}
 			to={to}
