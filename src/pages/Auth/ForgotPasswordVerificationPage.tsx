@@ -1,19 +1,17 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { jwtDecode, jwtVerify, resignJwt } from 'jwt-js-decode'
-import {
-	ButtonSolid,
-	FormInput,
-	FormInputPassword,
-} from '../../components/atoms'
-import { IcLogo } from '../../components/atoms/Icons'
-import { apiPrivate, apiPublic } from '../../api'
-import { type } from 'os'
-import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { getLocalAccessToken } from '../../constants'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
+
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-js-decode'
+import { useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { apiPrivate, apiPublic } from '../../api'
+import { ButtonSolid, FormInputPassword } from '../../components/atoms'
+import { IcLogo } from '../../components/atoms/Icons'
+import { getLocalAccessToken } from '../../constants'
+import { hdlAxiosErrors } from '../../helpers'
 interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
@@ -58,7 +56,7 @@ const ForgotPasswordVerificationPage = () => {
 			console.log(data)
 			setShowModal(true)
 		} catch (err) {
-			console.log(err)
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -82,9 +80,8 @@ const ForgotPasswordVerificationPage = () => {
 			localStorage.setItem('refresh', data.REFRESH)
 
 			setSuccess(true)
-		} catch ({ response: { data } }) {
-			console.log(data)
-			toast.error(data.token[0])
+		} catch (err) {
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -131,16 +128,22 @@ const ForgotPasswordVerificationPage = () => {
 						errorDescription={`${errors.password?.message}`}
 						register={{
 							...register('password', {
-								required: { message: 'Input is required', value: true },
-								minLength: {
-									message: 'Password must be at least 12 characters',
-									value: 12,
-								},
 								validate: value =>
 									value !== getValues('password_confirmation') &&
 									getValues('password_confirmation') !== ''
 										? 'The passwords do not match'
 										: undefined,
+								required: { value: true, message: 'This field is required' },
+								minLength: {
+									value: 12,
+									message: 'Password must be at least 12 characters',
+								},
+								pattern: {
+									value:
+										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									message:
+										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
+								},
 							}),
 						}}
 						onError={errors.password ? true : false}
@@ -150,16 +153,22 @@ const ForgotPasswordVerificationPage = () => {
 						errorDescription={`${errors.password_confirmation?.message}`}
 						register={{
 							...register('password_confirmation', {
-								required: { message: 'Input is required', value: true },
-								minLength: {
-									message: 'Password must be at least 12 characters',
-									value: 12,
-								},
 								validate: value =>
 									value !== getValues('password') &&
 									getValues('password') !== ''
 										? 'The passwords do not match'
 										: undefined,
+								required: { value: true, message: 'This field is required' },
+								minLength: {
+									value: 12,
+									message: 'Password must be at least 12 characters',
+								},
+								pattern: {
+									value:
+										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									message:
+										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
+								},
 							}),
 						}}
 						onError={errors.password_confirmation ? true : false}

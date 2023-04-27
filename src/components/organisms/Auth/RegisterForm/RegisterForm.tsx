@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-import { useForm } from 'react-hook-form'
+import { AxiosError } from 'axios'
 import { faHandshake } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useForm } from 'react-hook-form'
 
-import { ButtonSolid, FormInputPassword } from '../../../atoms'
-import { FormInput } from '../../../atoms/Form/FormInput'
 import { apiPublic } from '../../../../api'
+import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
+import { hdlAxiosErrors } from '../../../../helpers'
 
 import styles from './RegisterForm.module.sass'
-import { toast } from 'react-toastify'
 
 interface IFormProps {
 	email: string
@@ -49,10 +49,8 @@ const RegisterForm = () => {
 			})
 
 			setSuccess(true)
-		} catch ({ response: { data } }) {
-			console.log(data)
-
-			toast.error(data.email[0])
+		} catch (err) {
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -86,16 +84,22 @@ const RegisterForm = () => {
 				errorDescription={`${errors.password?.message}`}
 				register={{
 					...register('password', {
-						required: { message: 'Input is required', value: true },
-						minLength: {
-							message: 'Password must be at least 12 characters',
-							value: 12,
-						},
 						validate: value =>
 							value !== getValues('password_confirmation') &&
 							getValues('password_confirmation') !== ''
 								? 'The passwords do not match'
 								: undefined,
+						required: { value: true, message: 'This field is required' },
+						minLength: {
+							value: 12,
+							message: 'Password must be at least 12 characters',
+						},
+						pattern: {
+							value:
+								/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+							message:
+								'Password must contain at least one number and symbol and one uppercase and lowercase letter',
+						},
 					}),
 				}}
 				onError={errors.password ? true : false}
@@ -105,15 +109,21 @@ const RegisterForm = () => {
 				errorDescription={`${errors.password_confirmation?.message}`}
 				register={{
 					...register('password_confirmation', {
-						required: { message: 'Input is required', value: true },
-						minLength: {
-							message: 'Password must be at least 12 characters',
-							value: 12,
-						},
 						validate: value =>
 							value !== getValues('password') && getValues('password') !== ''
 								? 'The passwords do not match'
 								: undefined,
+						required: { value: true, message: 'This field is required' },
+						minLength: {
+							value: 12,
+							message: 'Password must be at least 12 characters',
+						},
+						pattern: {
+							value:
+								/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+							message:
+								'Password must contain at least one number and symbol and one uppercase and lowercase letter',
+						},
 					}),
 				}}
 				onError={errors.password_confirmation ? true : false}

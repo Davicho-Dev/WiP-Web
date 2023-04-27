@@ -1,11 +1,14 @@
 import { useState } from 'react'
 
+import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 
 import { apiPublic } from '../../../../api'
 import { useAppDispatch } from '../../../../hooks'
 import { setCurrentAuthForm } from '../../../../store/slices'
 import { ButtonLink, ButtonSolid, FormInput } from '../../../atoms'
+import { hdlAxiosErrors } from '../../../../helpers'
+
 interface IFormProps {
 	email: string
 }
@@ -33,7 +36,7 @@ const ForgotPasswordForm = () => {
 
 			setSuccess(true)
 		} catch (err) {
-			console.log(err)
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

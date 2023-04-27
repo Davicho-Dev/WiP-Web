@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react'
 
 import { faHandshake, faImages } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { apiPrivate, apiPublic } from '../../api'
 import { ButtonLink, ButtonSolid, FormInput } from '../../components/atoms'
 import { IcLogo } from '../../components/atoms/Icons'
 import { getLocalAccessToken } from '../../constants'
+import { hdlAxiosErrors } from '../../helpers'
+
 interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
@@ -65,10 +67,7 @@ const RegisterVerificationPage = () => {
 
 			navigate('/')
 		} catch (err) {
-			console.log(err)
-
-			// TODO: handle error
-			toast.error('Something went wrong')
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -92,9 +91,8 @@ const RegisterVerificationPage = () => {
 			localStorage.setItem('refresh', data.REFRESH)
 
 			setSuccess(true)
-		} catch ({ response: { data } }) {
-			console.log(data)
-			toast.error(data.token[0])
+		} catch (err) {
+			hdlAxiosErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
