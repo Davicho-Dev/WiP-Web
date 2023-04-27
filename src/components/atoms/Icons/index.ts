@@ -1,1 +1,1 @@
-export { IcLogo } from './Logo'
+export { IcLogo } from './IcLogo'

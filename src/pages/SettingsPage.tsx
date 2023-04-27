@@ -7,13 +7,15 @@ import { useAppSelector } from '../hooks'
 
 type TFormTab = 'profile' | 'password'
 
+// FIXME: Screen size is not responsive
+
 const SettingsPage = () => {
 	const user = useAppSelector(state => state.user)
 
 	const [currentTab, setCurrentTab] = useState<TFormTab>('profile')
 
 	return (
-		<section className='grid grid-flow-col grid-cols-[15rem_1fr] py-9 px-32 gap-x-5 overflow-y-auto'>
+		<section className='w-full h-full grid grid-flow-col grid-cols-[15rem_1fr] py-9 px-32 gap-x-5 overflow-y-auto'>
 			<aside className=' '>
 				<h1 className='mb-4'>Settings</h1>
 				<nav className='border-2 rounded-lg overflow-hidden'>
