@@ -963,6 +963,12 @@ module.exports = {
 			40: '40',
 			50: '50',
 		},
+		extend: {
+			backgroundImage: {
+				mobile: "url('/src/assets/img/img_bg_mobile.png')",
+				web: "url('/src/assets/img/img_bg_web.png')",
+			},
+		},
 	},
 	variantOrder: [
 		'first',
@@ -982,5 +988,5 @@ module.exports = {
 		'active',
 		'disabled',
 	],
-	plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/forms')],
 }
