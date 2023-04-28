@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 import { apiPublic } from '../../../../api'
 import { useAppDispatch } from '../../../../hooks'
@@ -58,7 +60,11 @@ const ForgotPasswordForm = () => {
 					If you cannot see the mail in your in-tray, please check your
 					notifications and spam tray.
 				</p>
-				<ButtonSolid className='w-1/2' label='Sent' />
+				<ButtonSolid
+					className='w-1/2 gap-x-2 flex-row-reverse'
+					label='Sent'
+					icon={<FontAwesomeIcon icon={faCircleCheck} />}
+				/>
 			</section>
 		)
 

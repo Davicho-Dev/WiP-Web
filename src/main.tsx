@@ -11,9 +11,6 @@ import { Router } from './router'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/globals.sass'
-import './assets/fonts/MaisonNeue-Mono.ttf'
-import './assets/fonts/MaisonNeue-Mono.woff'
-import './assets/fonts/MaisonNeue-Mono.woff2'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<StrictMode>

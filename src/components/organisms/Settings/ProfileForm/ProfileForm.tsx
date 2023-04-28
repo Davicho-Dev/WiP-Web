@@ -93,6 +93,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 							/>
 							<input
 								type='file'
+								accept={'.jpg, .jpeg, .png, .gif'}
 								className='hidden'
 								id='picture'
 								onChangeCapture={hdlAddPicture}

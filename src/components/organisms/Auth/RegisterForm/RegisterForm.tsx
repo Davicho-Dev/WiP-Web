@@ -12,6 +12,8 @@ import { setShowAuthFormFooter } from '../../../../store/slices'
 import IcHands from '../../../../assets/img/img_hands.png'
 
 import styles from './RegisterForm.module.sass'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 interface IFormProps {
 	email: string
@@ -66,7 +68,11 @@ const RegisterForm = () => {
 			<section className='grid justify-items-center gap-y-6'>
 				<h1 className='text-4xl'>Successfully registered user</h1>
 				<img className='w-20' src={IcHands} alt='' />
-				<ButtonSolid label='Lets do it' className='w-1/2' />
+				<ButtonSolid
+					label="Let's do it"
+					className='w-1/2'
+					icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
+				/>
 			</section>
 		)
 

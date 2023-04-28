@@ -11,6 +11,7 @@ export const ButtonSolid = ({
 	type,
 	disabled,
 	onClick,
+	icon,
 	onLoading,
 }: IButtonSolidProps): JSX.Element => {
 	return (
@@ -20,6 +21,7 @@ export const ButtonSolid = ({
 			disabled={disabled}
 			onClick={onClick}
 		>
+			{!onLoading && icon}
 			{onLoading ? (
 				<FontAwesomeIcon
 					icon={faSpinner}

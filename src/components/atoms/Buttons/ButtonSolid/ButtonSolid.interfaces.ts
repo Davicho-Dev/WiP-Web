@@ -5,4 +5,5 @@ export interface IButtonSolidProps {
 	type?: 'button' | 'submit' | 'reset'
 	onLoading?: boolean
 	onClick?: () => void
+	icon?: React.ReactNode
 }

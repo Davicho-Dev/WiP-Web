@@ -12,6 +12,7 @@ import { ButtonSolid, FormInputPassword } from '../../components/atoms'
 import { IcLogo } from '../../components/atoms/Icons'
 import { getLocalAccessToken } from '../../constants'
 import { hdlAxiosErrors } from '../../helpers'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
 interface IAuthResp {
 	ACCESS: string
@@ -192,9 +193,10 @@ const ForgotPasswordVerificationPage = () => {
 					notifications and spam tray.
 				</h5>
 				<ButtonSolid
-					className='w-1/2'
+					className='w-1/2 gap-x-2 flex-row-reverse'
 					label='Sent'
-					disabled={!success}
+					disabled={success}
+					icon={<FontAwesomeIcon icon={faCircleCheck} />}
 					onClick={() => setShowNextStep(true)}
 				/>
 			</section>

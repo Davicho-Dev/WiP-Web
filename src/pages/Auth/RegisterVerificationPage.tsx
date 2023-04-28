@@ -14,6 +14,11 @@ import { hdlAxiosErrors } from '../../helpers'
 import IcHands from '../../assets/img/img_hands.png'
 
 import DummyImg from '../../assets/img/img_no_picture.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+	faArrowLeft,
+	faCircleArrowRight,
+} from '@fortawesome/free-solid-svg-icons'
 
 interface IAuthResp {
 	ACCESS: string
@@ -105,7 +110,7 @@ const RegisterVerificationPage = () => {
 		hdlVerifyToken()
 	}, [])
 
-	if (showNextStep)
+	if (!showNextStep)
 		return (
 			<aside className='w-11/12 md:!w-1/2 lg:!w-96 h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
@@ -148,8 +153,9 @@ const RegisterVerificationPage = () => {
 								/>
 							</fieldset>
 							<ButtonSolid
-								className='w-1/2 justify-self-end !bg-secondary'
+								className='w-1/2 justify-self-end !bg-secondary gap-x-2 flex-row-reverse'
 								label='Next'
+								icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
 								onClick={() => setStep(2)}
 								type='button'
 							/>
@@ -190,6 +196,7 @@ const RegisterVerificationPage = () => {
 									/>
 									<input
 										type='file'
+										accept={'.jpg, .jpeg, .png, .gif'}
 										id='profile_picture'
 										className='hidden'
 										onChangeCapture={hdlAddPicture}
@@ -198,9 +205,15 @@ const RegisterVerificationPage = () => {
 							</fieldset>
 							<nav className='flex items-center'>
 								<ButtonSolid
-									className='w-1/2 border-neutral-800 border-2 text-neutral-800'
+									className='w-1/2 border-neutral-800 border-2 text-neutral-800 gap-x-2'
 									label='Prev'
 									type='button'
+									icon={
+										<FontAwesomeIcon
+											className='text-primary'
+											icon={faArrowLeft}
+										/>
+									}
 									onClick={() => setStep(1)}
 								/>
 								<ButtonLink
@@ -222,9 +235,10 @@ const RegisterVerificationPage = () => {
 				<h1 className='text-4xl'>Successfully registered user</h1>
 				<img className='w-20' src={IcHands} alt='' />
 				<ButtonSolid
-					label='Lets do it'
-					className='w-1/2'
+					label="Let's do it"
+					className='w-1/2 gap-x-2 flex-row-reverse'
 					disabled={!success}
+					icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
 					onClick={() => setShowNextStep(true)}
 				/>
 			</section>
