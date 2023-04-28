@@ -94,7 +94,7 @@ const ForgotPasswordVerificationPage = () => {
 
 	if (showModal)
 		return (
-			<aside className='w-96 h-fit py-14 px-6 bg-white rounded-3xl shadow-2xl flex flex-col items-center gap-y-8'>
+			<aside className='w-11/12 md:!w-1/2 lg:!w-96 h-fit lg:mr-20 py-14 px-6 bg-white rounded-3xl shadow-2xl flex flex-col items-center gap-y-8'>
 				<FontAwesomeIcon
 					icon={faCheckCircle}
 					className='text-primary text-3xl'
@@ -112,9 +112,9 @@ const ForgotPasswordVerificationPage = () => {
 
 	if (showNextStep)
 		return (
-			<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
+			<aside className='w-11/12 md:!w-1/2 lg:!w-[29rem] h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
-					<IcLogo className='w-[200px]' />
+					<IcLogo className='w-[200px] fill-neutral-800' />
 				</header>
 				<form
 					className='flex flex-col items-center gap-y-5'
@@ -180,17 +180,17 @@ const ForgotPasswordVerificationPage = () => {
 		)
 
 	return (
-		<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
+		<aside className='w-11/12 md:!w-1/2 lg:!w-[29rem] h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 			<section className='grid gap-y-6 justify-items-center'>
 				<h2 className='text-3xl justify-self-start'>Great!</h2>
-				<p className='text-sm text-neutral-600'>
+				<h5 className='text-neutral-600'>
 					If you have sent a confirmation link to the mail, click on the link
 					and log in.
-				</p>
-				<p className='text-sm text-neutral-400'>
+				</h5>
+				<h5 className='text-neutral-400'>
 					If you cannot see the mail in your in-tray, please check your
 					notifications and spam tray.
-				</p>
+				</h5>
 				<ButtonSolid
 					className='w-1/2'
 					label='Sent'

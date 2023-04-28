@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 
-import { faHandshake, faImages } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
@@ -13,6 +11,10 @@ import { IcLogo } from '../../components/atoms/Icons'
 import { getLocalAccessToken } from '../../constants'
 import { hdlAxiosErrors } from '../../helpers'
 
+import IcHands from '../../assets/img/img_hands.png'
+
+import DummyImg from '../../assets/img/img_no_picture.png'
+
 interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
@@ -20,7 +22,6 @@ interface IAuthResp {
 interface IFormProps {
 	username?: string
 	about?: string
-	picture: File
 }
 
 type TQueryParams = {
@@ -36,15 +37,11 @@ const RegisterVerificationPage = () => {
 	const [success, setSuccess] = useState(false)
 	const [showNextStep, setShowNextStep] = useState<boolean>(false)
 	const [step, setStep] = useState<number>(1)
+	const [avatar, setAvatar] = useState<File>()
 
-	const {
-		handleSubmit,
-		formState: { errors },
-		register,
-		getValues,
-	} = useForm<IFormProps>()
+	const { handleSubmit, register } = useForm<IFormProps>()
 
-	const onSubmit = async ({ about, picture, username }: IFormProps) => {
+	const onSubmit = async ({ about, username }: IFormProps) => {
 		setOnLoading(true)
 
 		const access = getLocalAccessToken() ?? ''
@@ -52,8 +49,8 @@ const RegisterVerificationPage = () => {
 
 		const formData = new FormData()
 
-		if (picture?.length > 0) {
-			formData.append('picture', picture[0])
+		if (avatar) {
+			formData.append('picture', avatar)
 		}
 		if (username) {
 			formData.append('username', username)
@@ -98,15 +95,21 @@ const RegisterVerificationPage = () => {
 		}
 	}
 
+	const hdlAddPicture: FormEventHandler<HTMLInputElement> = ({
+		currentTarget,
+	}) => {
+		setAvatar(currentTarget?.files[0])
+	}
+
 	useEffect(() => {
 		hdlVerifyToken()
 	}, [])
 
 	if (showNextStep)
 		return (
-			<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
+			<aside className='w-11/12 md:!w-1/2 lg:!w-96 h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
-					<IcLogo className='w-[200px]' />
+					<IcLogo className='w-[200px] fill-neutral-800' />
 				</header>
 				<form className='w-full ' onSubmit={handleSubmit(onSubmit)}>
 					<section
@@ -123,7 +126,7 @@ const RegisterVerificationPage = () => {
 							<h5>About you</h5>
 						</header>
 						<article
-							className={`w-full pl-8 justify-self-end grid gap-y-6 overflow-hidden transition-all ease-out duration-500 ${
+							className={`w-full pl-8 justify-self-end grid gap-y-6 overflow-hidden transition-all ease-in-out duration-75 ${
 								step === 1 ? 'h-full' : 'h-0'
 							}`}
 						>
@@ -170,25 +173,30 @@ const RegisterVerificationPage = () => {
 							<h5>Add your photo</h5>
 						</header>
 						<article
-							className={`w-full pl-8 justify-self-end grid gap-y-6 overflow-hidden transition-all ease-out duration-500 delay-250 ${
+							className={`w-full pl-8 justify-self-end grid gap-y-6 overflow-hidden transition-all ease-in-out duration-75 ${
 								step === 2 ? 'h-full' : 'h-0'
 							}`}
 						>
 							<fieldset className='grid gap-y-2'>
 								<label
-									className='w-36 h-36 bg-neutral-200 rounded-full flex items-center justify-center'
+									data-before=''
+									className='w-36 h-36 rounded-full overflow-hidden block relative before:absolute before:content-[attr(data-before)] before:w-full before:h-full before:bg-neutral-800/50 before:-top-full hover:before:top-0 before:m-auto before:transition-all before:ease-in-out before:duration-200 before:rounded-t-full'
 									htmlFor='profile_picture'
 								>
-									<FontAwesomeIcon icon={faImages} className='text-6xl' />
+									<img
+										className='w-full h-full'
+										src={avatar ? URL.createObjectURL(avatar) : DummyImg}
+										alt=''
+									/>
+									<input
+										type='file'
+										id='profile_picture'
+										className='hidden'
+										onChangeCapture={hdlAddPicture}
+									/>
 								</label>
-								<input
-									type='file'
-									id='profile_picture'
-									className='hidden'
-									{...register('picture')}
-								/>
 							</fieldset>
-							<nav>
+							<nav className='flex items-center'>
 								<ButtonSolid
 									className='w-1/2 border-neutral-800 border-2 text-neutral-800'
 									label='Prev'
@@ -209,10 +217,10 @@ const RegisterVerificationPage = () => {
 		)
 
 	return (
-		<aside className='w-96 h-fit p-6 bg-white rounded-3xl shadow-2xl'>
+		<aside className='w-11/12 md:!w-1/2 lg:!w-96 h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 			<section className='grid justify-items-center gap-y-6'>
 				<h1 className='text-4xl'>Successfully registered user</h1>
-				<FontAwesomeIcon className='text-7xl' icon={faHandshake} />
+				<img className='w-20' src={IcHands} alt='' />
 				<ButtonSolid
 					label='Lets do it'
 					className='w-1/2'

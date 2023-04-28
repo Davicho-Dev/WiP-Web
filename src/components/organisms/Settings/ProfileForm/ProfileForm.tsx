@@ -1,15 +1,16 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { ButtonSolid, FormInput } from '../../../atoms'
+import { FormEventHandler, useState } from 'react'
 
-import { jwtDecode, jwtVerify, resignJwt } from 'jwt-js-decode'
-import DummyImg from '../../../../assets/img/img_no_picture.png'
-import { FormEventHandler, useEffect, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-js-decode'
+
+import { ButtonSolid, FormInput } from '../../../atoms'
 import { apiPrivate } from '../../../../api'
 import { getLocalAccessToken } from '../../../../constants'
-import { toast } from 'react-toastify'
 import { hdlAxiosErrors } from '../../../../helpers'
-import { AxiosError } from 'axios'
 import { IUser } from '../../../../interfaces'
+
+import DummyImg from '../../../../assets/img/img_no_picture.png'
 
 interface IFormProps {
 	about: string
@@ -27,11 +28,12 @@ interface IFormProps {
 }
 
 export const ProfileForm = (props: IUser): JSX.Element => {
-	const { picture, has_private_likes } = props
+	const { picture } = props
+
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
 
-	const { handleSubmit, register, watch } = useForm<IFormProps>({
+	const { handleSubmit, register } = useForm<IFormProps>({
 		defaultValues: props,
 	})
 
@@ -176,6 +178,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 			<ButtonSolid
 				label='Save'
 				disabled={onLoading}
+				onLoading={onLoading}
 				className='w-48 bg-primary text-white justify-self-end'
 			/>
 		</form>

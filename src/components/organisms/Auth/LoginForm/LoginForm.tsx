@@ -6,7 +6,10 @@ import { useForm } from 'react-hook-form'
 
 import { apiPublic } from '../../../../api'
 import { useAppDispatch } from '../../../../hooks'
-import { setCurrentAuthForm } from '../../../../store/slices'
+import {
+	setCurrentAuthForm,
+	setShowAuthFormFooter,
+} from '../../../../store/slices'
 import {
 	ButtonLink,
 	ButtonSolid,
@@ -87,10 +90,13 @@ const LoginForm = () => {
 				}}
 				onError={errors.password ? true : false}
 			/>
-			<ButtonSolid label='Login' disabled={onLoading} />
+			<ButtonSolid label='Login' disabled={onLoading} onLoading={onLoading} />
 			<ButtonLink
 				label='I forgot my password'
-				onClick={() => dispatch(setCurrentAuthForm('forgot_password'))}
+				onClick={() => {
+					dispatch(setCurrentAuthForm('forgot_password'))
+					dispatch(setShowAuthFormFooter(false))
+				}}
 			/>
 		</form>
 	)

@@ -43,7 +43,7 @@ const Router = () => {
 			>
 				<Route index element={<AuthPage />} />
 				<Route
-					path='register(/:email)(/:token)'
+					path='register/:email/:token'
 					element={<RegisterVerificationPage />}
 				/>
 				<Route

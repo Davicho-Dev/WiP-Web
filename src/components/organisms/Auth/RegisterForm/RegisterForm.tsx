@@ -1,13 +1,15 @@
 import { useState } from 'react'
 
 import { AxiosError } from 'axios'
-import { faHandshake } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useForm } from 'react-hook-form'
 
 import { apiPublic } from '../../../../api'
-import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 import { hdlAxiosErrors } from '../../../../helpers'
+import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
+import { useAppDispatch } from '../../../../hooks'
+import { setShowAuthFormFooter } from '../../../../store/slices'
+
+import IcHands from '../../../../assets/img/img_hands.png'
 
 import styles from './RegisterForm.module.sass'
 
@@ -26,6 +28,8 @@ interface IRegisterResp {
 const RegisterForm = () => {
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [success, setSuccess] = useState(false)
+
+	const dispatch = useAppDispatch()
 
 	const {
 		register,
@@ -49,6 +53,7 @@ const RegisterForm = () => {
 			})
 
 			setSuccess(true)
+			dispatch(setShowAuthFormFooter(false))
 		} catch (err) {
 			hdlAxiosErrors(err as AxiosError)
 		} finally {
@@ -60,7 +65,7 @@ const RegisterForm = () => {
 		return (
 			<section className='grid justify-items-center gap-y-6'>
 				<h1 className='text-4xl'>Successfully registered user</h1>
-				<FontAwesomeIcon className='text-7xl' icon={faHandshake} />
+				<img className='w-20' src={IcHands} alt='' />
 				<ButtonSolid label='Lets do it' className='w-1/2' />
 			</section>
 		)
@@ -142,7 +147,7 @@ const RegisterForm = () => {
 					I agree to the Terms and Conditions
 				</label>
 			</fieldset>
-			<ButtonSolid label='Sign Up' disabled={onLoading} />
+			<ButtonSolid label='Sign Up' disabled={onLoading} onLoading={onLoading} />
 		</form>
 	)
 }

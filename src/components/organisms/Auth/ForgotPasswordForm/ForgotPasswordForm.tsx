@@ -5,7 +5,10 @@ import { useForm } from 'react-hook-form'
 
 import { apiPublic } from '../../../../api'
 import { useAppDispatch } from '../../../../hooks'
-import { setCurrentAuthForm } from '../../../../store/slices'
+import {
+	setCurrentAuthForm,
+	setShowAuthFormFooter,
+} from '../../../../store/slices'
 import { ButtonLink, ButtonSolid, FormInput } from '../../../atoms'
 import { hdlAxiosErrors } from '../../../../helpers'
 
@@ -35,6 +38,7 @@ const ForgotPasswordForm = () => {
 			})
 
 			setSuccess(true)
+			dispatch(setShowAuthFormFooter(false))
 		} catch (err) {
 			hdlAxiosErrors(err as AxiosError)
 		} finally {
@@ -77,14 +81,22 @@ const ForgotPasswordForm = () => {
 					}),
 				}}
 			/>
-			<ButtonSolid className='w-1/2' label='Continue' disabled={onLoading} />
+			<ButtonSolid
+				className='w-1/2'
+				label='Continue'
+				disabled={onLoading}
+				onLoading={onLoading}
+			/>
 			<span>
 				Do you have an account?
 				<ButtonLink
 					className='ml-1'
 					label='login'
 					type='button'
-					onClick={() => dispatch(setCurrentAuthForm('login'))}
+					onClick={() => {
+						dispatch(setCurrentAuthForm('login'))
+						dispatch(setShowAuthFormFooter(true))
+					}}
 				/>
 			</span>
 		</form>
