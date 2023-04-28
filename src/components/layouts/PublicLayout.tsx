@@ -2,7 +2,10 @@ import { Outlet } from 'react-router-dom'
 
 const PublicLayout = () => {
 	return (
-		<section className='w-screen h-screen flex justify-end items-center bg__public pr-20'>
+		<section className='w-screen h-screen flex justify-center lg:!justify-end items-center bg__public relative'>
+			<h1 className='w-40 top-14 left-40 text-3xl absolute hidden lg:!inline'>
+				LET’S PUSH THINGS FORWARD_
+			</h1>
 			<Outlet />
 		</section>
 	)

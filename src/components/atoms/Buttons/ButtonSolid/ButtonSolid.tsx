@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 import { IButtonSolidProps } from './ButtonSolid.interfaces'
 
 import styles from './ButtonSolid.module.sass'
@@ -8,6 +11,7 @@ export const ButtonSolid = ({
 	type,
 	disabled,
 	onClick,
+	onLoading,
 }: IButtonSolidProps): JSX.Element => {
 	return (
 		<button
@@ -16,7 +20,14 @@ export const ButtonSolid = ({
 			disabled={disabled}
 			onClick={onClick}
 		>
-			{label}
+			{onLoading ? (
+				<FontAwesomeIcon
+					icon={faSpinner}
+					className='text-primary animate-spin'
+				/>
+			) : (
+				label
+			)}
 		</button>
 	)
 }
