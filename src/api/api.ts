@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 import { refreshToken } from './auth/refreshToken'
 import { getLocalAccessToken } from '../constants'
@@ -20,6 +20,8 @@ apiPrivate.interceptors.request.use(
 		const access = getLocalAccessToken()
 
 		if (access) {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			config.headers['Authorization'] = 'Bearer ' + access
 		}
 		return config
@@ -46,7 +48,8 @@ apiPrivate.interceptors.response.use(
 					apiPrivate.defaults.headers.common['Authorization'] = access
 
 					return apiPrivate(originalConfig)
-				} catch (err) {
+				} catch (error) {
+					const err = error as AxiosError
 					if (err.response && err.response.data) {
 						return Promise.reject(err.response.data)
 					}

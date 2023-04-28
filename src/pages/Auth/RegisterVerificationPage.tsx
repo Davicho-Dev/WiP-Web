@@ -103,6 +103,8 @@ const RegisterVerificationPage = () => {
 	const hdlAddPicture: FormEventHandler<HTMLInputElement> = ({
 		currentTarget,
 	}) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		setAvatar(currentTarget?.files[0])
 	}
 

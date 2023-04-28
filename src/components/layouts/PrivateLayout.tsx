@@ -1,4 +1,14 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+	faCircleQuestion,
+	faCog,
+	faHeart,
+	faHomeAlt,
+	faMessage,
+	faPlusCircle,
+	faRightFromBracket,
+} from '@fortawesome/free-solid-svg-icons'
 
 import { useAppSelector } from '../../hooks'
 import { ButtonNavLink, ButtonSolid } from '../atoms'
@@ -28,18 +38,54 @@ const PrivateLayout = () => {
 				</nav>
 			</header>
 			<section className='w-full h-full grid grid-flow-col grid-cols-[15rem,_1fr] grow'>
-				<aside className='bg-[#f9fbf1] border-r border-r-neutral-300 py-5 px-3'>
-					<nav className='h-full flex flex-col gap-y-6'>
-						<ButtonNavLink to='/' label='Home_' />
-						<ButtonNavLink to='/settings' label='Post you like_' />
-						<ButtonNavLink to='/settings' label='Direct messages_' />
+				<aside className='bg-[#f9fbf1] border-r border-r-neutral-300 py-5 px-3 inline-flex flex-col justify-between'>
+					<nav className='flex flex-col gap-y-6'>
+						<ButtonNavLink
+							to='/'
+							label='Home_'
+							className='grid-flow-col items-center justify-start gap-x-2'
+							icon={<FontAwesomeIcon icon={faHomeAlt} />}
+						/>
+						<ButtonNavLink
+							to='/settings'
+							label='Post you like_'
+							className='grid-flow-col items-center justify-start gap-x-2'
+							icon={<FontAwesomeIcon icon={faMessage} />}
+						/>
+						<ButtonNavLink
+							to='/settings'
+							label='Direct messages_'
+							className='grid-flow-col items-center justify-start gap-x-2'
+							icon={<FontAwesomeIcon icon={faHeart} />}
+						/>
 						<ButtonSolid
 							type='button'
-							className='w-full pl-4 bg-primary text-white text-left'
+							className='w-full pl-4 bg-primary text-white text-left justify-start gap-x-2'
 							label='Create_'
+							icon={<FontAwesomeIcon icon={faPlusCircle} />}
 							onClick={() => navigate('/settings')}
 						/>
 					</nav>
+					<footer className='grid gap-y-3'>
+						<NavLink to='/settings' className='flex gap-x-2'>
+							<FontAwesomeIcon
+								className='text-primary'
+								icon={faCircleQuestion}
+							/>
+							<span>Help_</span>
+						</NavLink>
+						<NavLink to='/settings' className='flex gap-x-2'>
+							<FontAwesomeIcon className='text-primary' icon={faCog} />
+							<span>Settings_</span>
+						</NavLink>
+						<NavLink to='/settings' className='flex gap-x-2'>
+							<FontAwesomeIcon
+								className='text-primary'
+								icon={faRightFromBracket}
+							/>
+							<span>Go out_</span>
+						</NavLink>
+					</footer>
 				</aside>
 				<Outlet />
 			</section>
