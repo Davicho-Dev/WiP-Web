@@ -13,7 +13,9 @@ import { useAppDispatch, useAppSelector } from '../hooks'
 import { setCurrentAuthForm } from '../store/slices'
 
 const AuthPage = () => {
-	const currentAuthForm = useAppSelector(state => state.ui.currentAuthForm)
+	const { currentAuthForm, showAuthFormFooter } = useAppSelector(
+		state => state.ui
+	)
 	const dispatch = useAppDispatch()
 
 	const { loginWithRedirect } = useAuth0()
@@ -37,39 +39,38 @@ const AuthPage = () => {
 			{currentAuthForm === 'login' ? <LoginForm /> : null}
 			{currentAuthForm === 'register' ? <RegisterForm /> : null}
 			{currentAuthForm === 'forgot_password' ? <ForgotPasswordForm /> : null}
-			{currentAuthForm !== 'forgot_password' ? (
-				<>
-					<footer className='w-full grid gap-y-5 justify-items-center'>
-						<article className='w-full flex items-center gap-x-2 mt-5'>
-							<hr className='grow border-neutral-500' />
-							<span>Connect with</span>
-							<hr className='grow border-neutral-500' />
-						</article>
-						<nav className='flex gap-x-4'>
-							<FontAwesomeIcon
-								className='cursor-pointer'
-								icon={faGoogle}
-								onClick={hdlLogin}
-							/>
-							<FontAwesomeIcon
-								className='cursor-pointer text-blue-700'
-								icon={faFacebook}
-								onClick={hdlLogin}
-							/>
-						</nav>
-						{currentAuthForm === 'login' ? (
-							<ButtonLink
-								label='Create one here'
-								onClick={() => dispatch(setCurrentAuthForm('register'))}
-							/>
-						) : null}
-						{currentAuthForm === 'register' ? (
-							<ButtonLink
-								label='Login'
-								onClick={() => dispatch(setCurrentAuthForm('login'))}
-							/>
-						) : null}
-					</footer>
+			{showAuthFormFooter ? (
+				<footer className='w-full grid gap-y-5 justify-items-center'>
+					<article className='w-full flex items-center gap-x-2 mt-5'>
+						<hr className='grow border-neutral-500' />
+						<span>Connect with</span>
+						<hr className='grow border-neutral-500' />
+					</article>
+					<nav className='flex gap-x-4'>
+						<FontAwesomeIcon
+							className='cursor-pointer'
+							icon={faGoogle}
+							onClick={hdlLogin}
+						/>
+						<FontAwesomeIcon
+							className='cursor-pointer text-blue-700'
+							icon={faFacebook}
+							onClick={hdlLogin}
+						/>
+					</nav>
+					{currentAuthForm === 'login' ? (
+						<ButtonLink
+							label='Create one here'
+							onClick={() => dispatch(setCurrentAuthForm('register'))}
+						/>
+					) : null}
+					{currentAuthForm === 'register' ? (
+						<ButtonLink
+							label='Login'
+							onClick={() => dispatch(setCurrentAuthForm('login'))}
+						/>
+					) : null}
+				</footer>
 			) : null}
 		</aside>
 	)

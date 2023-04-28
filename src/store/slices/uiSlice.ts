@@ -4,9 +4,13 @@ type TAuthForm = 'login' | 'register' | 'forgot_password'
 
 interface IUI {
 	currentAuthForm: TAuthForm
+	showAuthFormFooter: boolean
 }
 
-const INITIAL_STATE: IUI = { currentAuthForm: 'login' }
+const INITIAL_STATE: IUI = {
+	currentAuthForm: 'login',
+	showAuthFormFooter: true,
+}
 
 export const uiSlice = createSlice({
 	name: 'user',
@@ -15,7 +19,10 @@ export const uiSlice = createSlice({
 		setCurrentAuthForm: (state, action: PayloadAction<TAuthForm>) => {
 			state.currentAuthForm = action.payload
 		},
+		setShowAuthFormFooter: (state, action: PayloadAction<boolean>) => {
+			state.showAuthFormFooter = action.payload
+		},
 	},
 })
 
-export const { setCurrentAuthForm } = uiSlice.actions
+export const { setCurrentAuthForm, setShowAuthFormFooter } = uiSlice.actions
