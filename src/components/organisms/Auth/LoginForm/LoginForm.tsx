@@ -17,6 +17,7 @@ import {
 	FormInputPassword,
 } from '../../../atoms'
 import { hdlAxiosErrors } from '../../../../helpers'
+import { PATTERN_EMAIL } from '../../../../constants'
 
 import styles from './LoginForm.module.sass'
 
@@ -42,14 +43,10 @@ const LoginForm = () => {
 	const dispatch = useAppDispatch()
 
 	const onSubmit = async (formData: IFormProps) => {
-		const { email, password } = formData
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPublic.post<IAuthResp>('/auth/token/', {
-				email,
-				password,
-			})
+			const { data } = await apiPublic.post<IAuthResp>('/auth/token/', formData)
 
 			localStorage.setItem('access', data.ACCESS)
 			localStorage.setItem('refresh', data.REFRESH)
@@ -72,6 +69,10 @@ const LoginForm = () => {
 				register={{
 					...register('email', {
 						required: { message: 'Write a valid email', value: true },
+						pattern: {
+							value: PATTERN_EMAIL,
+							message: 'Please enter a valid email',
+						},
 					}),
 				}}
 				onError={errors.email ? true : false}

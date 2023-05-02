@@ -1,14 +1,14 @@
 import { FormEventHandler, useState } from 'react'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { ButtonSolid, FormInput } from '../../../atoms'
 import { apiPrivate } from '../../../../api'
-import { getLocalAccessToken } from '../../../../constants'
+import { PATTERN_EMAIL, getLocalAccessToken } from '../../../../constants'
 import { hdlAxiosErrors } from '../../../../helpers'
 import { IUser } from '../../../../interfaces'
+import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
 
@@ -69,7 +69,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 
 	return (
 		<form className='grid gap-y-12 pt-10' onSubmit={handleSubmit(onSubmit)}>
-			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
+			<section className='bg-[#f9fbf1] rounded-[20px] overflow-hidden border-neutral-800 border-2'>
 				<header className='w-full p-4 bg-neutral-800 text-white'>
 					<h1 className='text-white'>Profile</h1>
 					<span className='text-sm text-white'>
@@ -82,7 +82,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 							className='w-36 h-36 rounded-full overflow-hidden block relative'
 							htmlFor='picture'
 						>
-							<img
+							<Avatar
 								className='w-full h-full'
 								src={
 									avatar
@@ -91,7 +91,6 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 										? picture
 										: DummyImg
 								}
-								alt=''
 							/>
 							<input
 								type='file'
@@ -109,7 +108,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 						/>
 						<fieldset>
 							<textarea
-								className='w-full p-4 flex gap-x-1 items-center border border-black rounded-xl'
+								className='w-full p-4 flex gap-x-1 items-center border border-neutral-800 rounded-xl'
 								placeholder='Presentation'
 								rows={3}
 								{...register('about')}
@@ -164,7 +163,14 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 				<section className='grid gap-y-4 p-8 gap-x-6'>
 					<FormInput
 						placeholder='Email'
-						register={{ ...register('email') }}
+						register={{
+							...register('email', {
+								pattern: {
+									value: PATTERN_EMAIL,
+									message: 'Please enter a valid email',
+								},
+							}),
+						}}
 						type='email'
 					/>
 					<FormInput

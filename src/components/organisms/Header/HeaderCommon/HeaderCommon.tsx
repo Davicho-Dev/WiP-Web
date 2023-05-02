@@ -4,7 +4,6 @@ import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Avatar, IcLogo } from '../../../atoms'
 
 import { IHeaderPrivateProps } from './HeaderCommon.interfaces'
-
 import styles from './HeaderCommon.module.sass'
 
 export const HeaderCommon = ({
@@ -24,7 +23,7 @@ export const HeaderCommon = ({
 			/>
 			<FontAwesomeIcon icon={faBell} className='text-xl text-secondary' />
 			<Avatar
-				picture={picture}
+				src={picture}
 				title={username}
 				onClick={() => navigate(`/user/${username}`)}
 			/>

@@ -1,19 +1,20 @@
 import { useState } from 'react'
 
+import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 
 import { apiPublic } from '../../../../api'
+import { PATTERN_EMAIL, PATTERN_PASSWORD } from '../../../../constants'
 import { hdlAxiosErrors } from '../../../../helpers'
-import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 import { useAppDispatch } from '../../../../hooks'
 import { setShowAuthFormFooter } from '../../../../store/slices'
+import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 
 import IcHands from '../../../../assets/img/img_hands.png'
 
 import styles from './RegisterForm.module.sass'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 interface IFormProps {
 	email: string
@@ -86,6 +87,10 @@ const RegisterForm = () => {
 				register={{
 					...register('email', {
 						required: { message: 'Write a valid email', value: true },
+						pattern: {
+							value: PATTERN_EMAIL,
+							message: 'Write a valid email',
+						},
 					}),
 				}}
 				onError={errors.email ? true : false}
@@ -106,8 +111,7 @@ const RegisterForm = () => {
 							message: 'Password must be at least 12 characters',
 						},
 						pattern: {
-							value:
-								/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+							value: PATTERN_PASSWORD,
 							message:
 								'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 						},
@@ -130,8 +134,7 @@ const RegisterForm = () => {
 							message: 'Password must be at least 12 characters',
 						},
 						pattern: {
-							value:
-								/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+							value: PATTERN_PASSWORD,
 							message:
 								'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 						},

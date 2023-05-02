@@ -13,6 +13,7 @@ import {
 } from '../../../../store/slices'
 import { ButtonLink, ButtonSolid, FormInput } from '../../../atoms'
 import { hdlAxiosErrors } from '../../../../helpers'
+import { PATTERN_EMAIL } from '../../../../constants'
 
 interface IFormProps {
 	email: string
@@ -84,6 +85,10 @@ const ForgotPasswordForm = () => {
 				register={{
 					...register('email', {
 						required: { message: 'Input is required', value: true },
+						pattern: {
+							value: PATTERN_EMAIL,
+							message: 'Please enter a valid email',
+						},
 					}),
 				}}
 			/>

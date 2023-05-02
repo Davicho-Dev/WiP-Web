@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
-
 import { AxiosError } from 'axios'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
+
 import { apiPrivate } from '../../../../api'
+import { PATTERN_PASSWORD } from '../../../../constants'
 import { hdlAxiosErrors } from '../../../../helpers'
-import { ButtonLink, ButtonSolid, FormInputPassword } from '../../../atoms'
+import { ButtonSolid, FormInputPassword } from '../../../atoms'
 
 interface IFormProps {
 	password: string
@@ -78,10 +80,9 @@ export const PasswordForm = ({
 									message: 'Password must be at least 12 characters',
 								},
 								pattern: {
+									value: PATTERN_PASSWORD,
 									message:
 										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
-									value:
-										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
 								},
 							}),
 						}}
@@ -103,8 +104,7 @@ export const PasswordForm = ({
 									message: 'Password must be at least 12 characters',
 								},
 								pattern: {
-									value:
-										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									value: PATTERN_PASSWORD,
 									message:
 										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 								},
@@ -128,18 +128,16 @@ export const PasswordForm = ({
 									message: 'Password must be at least 12 characters',
 								},
 								pattern: {
-									value:
-										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									value: PATTERN_PASSWORD,
 									message:
 										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 								},
 							}),
 						}}
 					/>
-					<ButtonLink
-						label='I forgot my password'
-						className='justify-self-center'
-					/>
+					<NavLink className='justify-self-center text-primary' to=''>
+						I forgot my password
+					</NavLink>
 				</section>
 			</section>
 			<ButtonSolid
