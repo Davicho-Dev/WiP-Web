@@ -1,6 +1,9 @@
 .wrapper
   background-color: #f9fbf1
-  @apply border-r border-r-neutral-300 py-5 px-3 inline-flex flex-col justify-between
+  @apply fixed -left-full inline-flex flex-col justify-between py-5 px-3 border-r border-r-neutral-300
+
+  @screen lg
+    @apply static
 
   &__nav
     @apply flex flex-col gap-y-6

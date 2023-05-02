@@ -1,0 +1,1 @@
+export { PostItemCompact } from './PostItemCompact'

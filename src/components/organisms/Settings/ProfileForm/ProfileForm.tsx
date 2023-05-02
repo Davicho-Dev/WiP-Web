@@ -11,6 +11,8 @@ import { apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
+import { useAppDispatch } from '../../../../hooks'
+import { setUser } from '../../../../store'
 
 interface IFormProps {
 	about: string
@@ -30,6 +32,8 @@ interface IFormProps {
 export const ProfileForm = (props: IUser): JSX.Element => {
 	const { picture } = props
 
+	const dispatch = useAppDispatch()
+
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
 
@@ -45,13 +49,18 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		const formData = new FormData()
 
 		Object.entries(data).forEach(([key, value]) => {
-			if (value) formData.append(key, value)
+			if (value && key !== 'picture') formData.append(key, value)
 		})
 
 		if (avatar) formData.append('picture', avatar)
 
 		try {
-			await apiPrivate.patch(`/users/${payload.user_id}/`, data)
+			const { data } = await apiPrivate.patch(
+				`/users/${payload.user_id}/`,
+				formData
+			)
+
+			dispatch(setUser(data))
 		} catch (err) {
 			hdlErrors(err as AxiosError)
 		} finally {

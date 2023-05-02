@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios'
 
 import { getLocalAccessToken } from '../constants'
+import { refresh } from '../helpers'
 
 export const apiPrivate = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
@@ -37,7 +38,7 @@ apiPrivate.interceptors.response.use(
 				originalConfig._retry = true
 
 				try {
-					const { access } = await refreshToken()
+					const { access } = await refresh()
 					localStorage.setItem('access', access)
 					apiPrivate.defaults.headers.common['Authorization'] = access
 

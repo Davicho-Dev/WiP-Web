@@ -1,2 +1,3 @@
 export * from './components/atoms'
-export * from './User/User.interface'
+export * from './User/User.interfaces'
+export * from './store'

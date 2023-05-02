@@ -30,7 +30,9 @@ interface IAuthResp {
 
 const LoginForm = () => {
 	const navigate = useNavigate()
+
 	const [onLoading, setOnLoading] = useState<boolean>(false)
+
 	const {
 		register,
 		handleSubmit,
@@ -43,10 +45,12 @@ const LoginForm = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPublic.post<IAuthResp>('/auth/token/', formData)
+			const {
+				data: { ACCESS, REFRESH },
+			} = await apiPublic.post<IAuthResp>('/auth/token/', formData)
 
-			localStorage.setItem('access', data.ACCESS)
-			localStorage.setItem('refresh', data.REFRESH)
+			localStorage.setItem('access', ACCESS)
+			localStorage.setItem('refresh', REFRESH)
 
 			navigate('/')
 		} catch (err) {
