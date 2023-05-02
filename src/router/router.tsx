@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react'
+
 import { Route, Routes } from 'react-router-dom'
 
 const ErrorPage = lazy(() => import('../pages/ErrorPage'))
@@ -10,7 +11,7 @@ const ForgotPasswordVerificationPage = lazy(
 const RegisterVerificationPage = lazy(
 	() => import('../pages/Auth/RegisterVerificationPage')
 )
-const ProfilePage = lazy(() => import('../pages/ProfilePage'))
+const UserPage = lazy(() => import('../pages/UserPage'))
 const SettingsPage = lazy(() => import('../pages/SettingsPage'))
 
 import { PrivateLayout, PublicLayout } from '../components/layouts'
@@ -30,7 +31,7 @@ const Router = () => {
 				<Route element={<HomePage />} index />
 
 				<Route path='settings' element={<SettingsPage />} />
-				<Route path='user' element={<ProfilePage />} />
+				<Route path='user/:username' element={<UserPage />} />
 			</Route>
 			<Route
 				path='/auth'
@@ -41,7 +42,8 @@ const Router = () => {
 				}
 				errorElement={<ErrorPage />}
 			>
-				<Route index element={<AuthPage />} />
+				{/* <Route index element={<AuthPage />} /> */}
+				<Route index path=':currentForm?' element={<AuthPage />} />
 				<Route
 					path='register/:email/:token'
 					element={<RegisterVerificationPage />}

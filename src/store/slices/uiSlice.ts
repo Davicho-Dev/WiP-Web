@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-type TAuthForm = 'login' | 'register' | 'forgot_password'
+type TAuthForm = 'login' | 'register' | 'forgot_password' | string
 
 interface IUI {
 	currentAuthForm: TAuthForm
