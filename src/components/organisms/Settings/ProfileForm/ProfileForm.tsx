@@ -6,13 +6,13 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { PATTERN_EMAIL, getLocalAccessToken } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
+import { useAppDispatch } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
+import { setUser } from '../../../../store'
 import { apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
-import { useAppDispatch } from '../../../../hooks'
-import { setUser } from '../../../../store'
 
 interface IFormProps {
 	about: string

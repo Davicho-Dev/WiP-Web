@@ -1,5 +1,9 @@
+import {
+	faBars,
+	faBell,
+	faMagnifyingGlass,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 import { Avatar, IcLogo } from '../../../atoms'
 
@@ -12,6 +16,10 @@ export const HeaderCommon = ({
 	username,
 }: IHeaderPrivateProps): JSX.Element => (
 	<header className={styles.wrapper}>
+		<FontAwesomeIcon
+			className='text-xl text-white inline lg:!hidden'
+			icon={faBars}
+		/>
 		<IcLogo
 			className='h-8 fill-secondary cursor-pointer'
 			onClick={() => navigate('/')}
