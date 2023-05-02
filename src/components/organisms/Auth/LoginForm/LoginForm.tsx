@@ -1,23 +1,20 @@
 import { useState } from 'react'
 
 import { AxiosError } from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import { apiPublic } from '../../../../api'
+import { PATTERN_EMAIL } from '../../../../constants'
+import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
-import {
-	setCurrentAuthForm,
-	setShowAuthFormFooter,
-} from '../../../../store/slices'
+import { setCurrentAuthForm, setShowAuthFormFooter } from '../../../../store'
+import { apiPublic } from '../../../../utils'
 import {
 	ButtonLink,
 	ButtonSolid,
 	FormInput,
 	FormInputPassword,
 } from '../../../atoms'
-import { hdlAxiosErrors } from '../../../../helpers'
-import { PATTERN_EMAIL } from '../../../../constants'
 
 import styles from './LoginForm.module.sass'
 
@@ -53,7 +50,7 @@ const LoginForm = () => {
 
 			navigate('/')
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

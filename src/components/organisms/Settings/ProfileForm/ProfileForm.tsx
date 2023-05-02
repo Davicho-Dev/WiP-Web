@@ -4,10 +4,10 @@ import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { apiPrivate } from '../../../../api'
 import { PATTERN_EMAIL, getLocalAccessToken } from '../../../../constants'
-import { hdlAxiosErrors } from '../../../../helpers'
+import { hdlErrors } from '../../../../helpers'
 import { IUser } from '../../../../interfaces'
+import { apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
@@ -53,7 +53,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		try {
 			await apiPrivate.patch(`/users/${payload.user_id}/`, data)
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

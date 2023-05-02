@@ -1,19 +1,16 @@
 import { useState } from 'react'
 
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 
-import { apiPublic } from '../../../../api'
-import { useAppDispatch } from '../../../../hooks'
-import {
-	setCurrentAuthForm,
-	setShowAuthFormFooter,
-} from '../../../../store/slices'
-import { ButtonLink, ButtonSolid, FormInput } from '../../../atoms'
-import { hdlAxiosErrors } from '../../../../helpers'
 import { PATTERN_EMAIL } from '../../../../constants'
+import { hdlErrors } from '../../../../helpers'
+import { useAppDispatch } from '../../../../hooks'
+import { setCurrentAuthForm, setShowAuthFormFooter } from '../../../../store'
+import { apiPublic } from '../../../../utils'
+import { ButtonLink, ButtonSolid, FormInput } from '../../../atoms'
 
 interface IFormProps {
 	email: string
@@ -43,7 +40,7 @@ const ForgotPasswordForm = () => {
 			setSuccess(true)
 			dispatch(setShowAuthFormFooter(false))
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

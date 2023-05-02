@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
 
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { apiPrivate, apiPublic } from '../../api'
-import { ButtonSolid, FormInputPassword } from '../../components/atoms'
-import { IcLogo } from '../../components/atoms/Icons'
-import { getLocalAccessToken } from '../../constants'
-import { hdlAxiosErrors } from '../../helpers'
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { ButtonSolid, FormInputPassword, IcLogo } from '../../components/atoms'
+import { PATTERN_PASSWORD, getLocalAccessToken } from '../../constants'
+import { hdlErrors } from '../../helpers'
+import { apiPrivate, apiPublic } from '../../utils'
 
 interface IAuthResp {
 	ACCESS: string
@@ -58,7 +57,7 @@ const ForgotPasswordVerificationPage = () => {
 			console.log(data)
 			setShowModal(true)
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -83,7 +82,7 @@ const ForgotPasswordVerificationPage = () => {
 
 			setSuccess(true)
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -141,8 +140,7 @@ const ForgotPasswordVerificationPage = () => {
 									message: 'Password must be at least 12 characters',
 								},
 								pattern: {
-									value:
-										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									value: PATTERN_PASSWORD,
 									message:
 										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 								},
@@ -166,8 +164,7 @@ const ForgotPasswordVerificationPage = () => {
 									message: 'Password must be at least 12 characters',
 								},
 								pattern: {
-									value:
-										/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{1,}/gm,
+									value: PATTERN_PASSWORD,
 									message:
 										'Password must contain at least one number and symbol and one uppercase and lowercase letter',
 								},

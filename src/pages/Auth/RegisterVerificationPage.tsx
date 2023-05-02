@@ -1,24 +1,23 @@
 import { FormEventHandler, useEffect, useState } from 'react'
 
+import {
+	faArrowLeft,
+	faCircleArrowRight,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { apiPrivate, apiPublic } from '../../api'
 import { ButtonLink, ButtonSolid, FormInput } from '../../components/atoms'
 import { IcLogo } from '../../components/atoms/Icons'
 import { getLocalAccessToken } from '../../constants'
-import { hdlAxiosErrors } from '../../helpers'
+import { hdlErrors } from '../../helpers'
+import { apiPrivate, apiPublic } from '../../utils'
 
 import IcHands from '../../assets/img/img_hands.png'
-
 import DummyImg from '../../assets/img/img_no_picture.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faArrowLeft,
-	faCircleArrowRight,
-} from '@fortawesome/free-solid-svg-icons'
 
 interface IAuthResp {
 	ACCESS: string
@@ -69,7 +68,7 @@ const RegisterVerificationPage = () => {
 
 			navigate('/')
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -94,7 +93,7 @@ const RegisterVerificationPage = () => {
 
 			setSuccess(true)
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}
@@ -147,7 +146,7 @@ const RegisterVerificationPage = () => {
 							<fieldset>
 								<label>Tell us about yourself</label>
 								<textarea
-									className='w-full p-4 flex gap-x-1 items-center border border-black rounded-3xl'
+									className='w-full p-4 flex gap-x-1 items-center border border-neutral-800 rounded-3xl'
 									placeholder='About you'
 									rows={3}
 									{...register('about')}

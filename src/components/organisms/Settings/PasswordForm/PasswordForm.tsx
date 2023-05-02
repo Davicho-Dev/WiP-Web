@@ -4,9 +4,9 @@ import { AxiosError } from 'axios'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 
-import { apiPrivate } from '../../../../api'
 import { PATTERN_PASSWORD } from '../../../../constants'
-import { hdlAxiosErrors } from '../../../../helpers'
+import { hdlErrors } from '../../../../helpers'
+import { apiPrivate } from '../../../../utils'
 import { ButtonSolid, FormInputPassword } from '../../../atoms'
 
 interface IFormProps {
@@ -49,7 +49,7 @@ export const PasswordForm = ({
 
 			reset()
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

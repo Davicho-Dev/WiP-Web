@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 
-import { apiPublic } from '../../../../api'
 import { PATTERN_EMAIL, PATTERN_PASSWORD } from '../../../../constants'
-import { hdlAxiosErrors } from '../../../../helpers'
+import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
-import { setShowAuthFormFooter } from '../../../../store/slices'
+import { setShowAuthFormFooter } from '../../../../store'
+import { apiPublic } from '../../../../utils'
 import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 
 import IcHands from '../../../../assets/img/img_hands.png'
@@ -58,7 +58,7 @@ const RegisterForm = () => {
 			setSuccess(true)
 			dispatch(setShowAuthFormFooter(false))
 		} catch (err) {
-			hdlAxiosErrors(err as AxiosError)
+			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
 		}

@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
+
 import { useAuth0 } from '@auth0/auth0-react'
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useParams } from 'react-router-dom'
 
 import { ButtonLink } from '../components/atoms'
 import { IcLogo } from '../components/atoms/Icons'
@@ -10,9 +13,11 @@ import {
 	RegisterForm,
 } from '../components/organisms'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setCurrentAuthForm } from '../store/slices'
+import { setCurrentAuthForm } from '../store'
 
 const AuthPage = () => {
+	const { currentForm } = useParams()
+
 	const { currentAuthForm, showAuthFormFooter } = useAppSelector(
 		state => state.ui
 	)
@@ -27,6 +32,10 @@ const AuthPage = () => {
 			},
 		})
 	}
+
+	useEffect(() => {
+		if (currentForm) dispatch(setCurrentAuthForm(currentForm))
+	}, [currentForm])
 
 	return (
 		<aside className='w-11/12 md:!w-1/2 lg:!w-[29rem] h-fit p-6 lg:mr-20 bg-white rounded-3xl shadow-2xl'>
