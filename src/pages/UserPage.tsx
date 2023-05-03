@@ -6,21 +6,20 @@ import {
 	faTiktok,
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate, useParams } from 'react-router-dom'
-
-import { ButtonSolid } from '../components/atoms'
-import { PostItemCompact, Tabs } from '../components/molecules'
-import { useAppSelector } from '../hooks'
-import { hdlErrors } from '../helpers'
-import { AxiosError } from 'axios'
-import { apiPrivate } from '../utils'
-import { IUser } from '../interfaces'
 import {
 	faHeart,
 	faTableCells,
 	faUnlockKeyhole,
 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AxiosError } from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { ButtonSolid } from '../components/atoms'
+import { PostItemCompact, Tabs } from '../components/molecules'
+import { hdlErrors } from '../helpers'
+import { IUser } from '../interfaces'
+import { apiPrivate } from '../utils'
 
 const ProfilePage = () => {
 	const { username } = useParams()
@@ -121,7 +120,7 @@ const ProfilePage = () => {
 					/>
 					<ButtonSolid
 						label={`${following_count} Followed_`}
-						onClick={() => navigate(`/user/follows/${id}/following`)}
+						onClick={() => navigate(`/user/follows/${id}/followed`)}
 						className='w-fit px-8 bg-transparent border border-2 border-neutral-800 text-neutral-800'
 					/>
 				</section>
