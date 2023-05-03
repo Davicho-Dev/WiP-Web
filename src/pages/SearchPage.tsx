@@ -43,9 +43,18 @@ const SearchPage = () => {
 		}
 	}
 
-	const followUser = async (id: number) => {
-		// setOnLoading(true)
-		console.log(id)
+	const followUser = async (id: number, followed: boolean) => {
+		setOnLoading(true)
+
+		try {
+			await apiPrivate.patch(`users/${id}/follows/`, {
+				active: !followed,
+			})
+		} catch (err) {
+			hdlErrors(err as AxiosError)
+		} finally {
+			setOnLoading(false)
+		}
 	}
 
 	return (
@@ -69,31 +78,34 @@ const SearchPage = () => {
 			<section className='w-full px-10 flex flex-col items-center'>
 				<Tabs
 					tabList={tabs}
-					className=''
 					currentTab={currentTab}
 					setCurrentTab={setCurrentTab}
 				/>
 				{currentTab === 0 && (
 					<section className='w-3/5 py-10 grid gap-y-6'>
-						{userList.map(({ id, public_name }) => (
-							<article key={id} className='flex justify-between'>
-								<aside className='inline-flex items-center gap-x-2'>
-									<Avatar
-										className='w-11 h-11'
-										src='https://wip-app-prod-public-media.s3.amazonaws.com/media/users/pictures/2023/04/26/8319b910-e037-4c5b-a7eb-f6bf282611a9_yqfEvlm.jpg'
+						{userList && userList.length > 0 ? (
+							userList.map(({ id, public_name }) => (
+								<article key={id} className='flex justify-between'>
+									<aside className='inline-flex items-center gap-x-2'>
+										<Avatar
+											className='w-11 h-11'
+											src='https://wip-app-prod-public-media.s3.amazonaws.com/media/users/pictures/2023/04/26/8319b910-e037-4c5b-a7eb-f6bf282611a9_yqfEvlm.jpg'
+										/>
+										<article>
+											<h1 className='text-sm'>{public_name}</h1>
+											<p className='text-xs'>@username</p>
+										</article>
+									</aside>
+									<ButtonSolid
+										label={'Follow_'}
+										onClick={() => followUser(id, false)}
+										className='w-fit px-5 border border-neutral-800 bg-transparent'
 									/>
-									<article>
-										<h1 className='text-sm'>{public_name}</h1>
-										<p className='text-xs'>@username</p>
-									</article>
-								</aside>
-								<ButtonSolid
-									label={'Follow_'}
-									onClick={() => followUser(id)}
-									className='w-fit px-5 border border-neutral-800 bg-transparent'
-								/>
-							</article>
-						))}
+								</article>
+							))
+						) : (
+							<h1>No user</h1>
+						)}
 					</section>
 				)}
 				{currentTab === 1 && <section>Hashtags</section>}

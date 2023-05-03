@@ -49,7 +49,9 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		const formData = new FormData()
 
 		Object.entries(data).forEach(([key, value]) => {
-			if (value && key !== 'picture') formData.append(key, value)
+			if (value !== '' && value !== undefined && key !== 'picture') {
+				formData.append(key, value)
+			}
 		})
 
 		if (avatar) formData.append('picture', avatar)

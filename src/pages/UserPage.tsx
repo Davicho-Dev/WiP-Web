@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
 	faFacebook,
@@ -10,19 +10,65 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { ButtonSolid } from '../components/atoms'
-import { PostItemCompact } from '../components/molecules'
+import { PostItemCompact, Tabs } from '../components/molecules'
 import { useAppSelector } from '../hooks'
+import { hdlErrors } from '../helpers'
+import { AxiosError } from 'axios'
+import { apiPrivate } from '../utils'
+import { IUser } from '../interfaces'
+import {
+	faHeart,
+	faTableCells,
+	faUnlockKeyhole,
+} from '@fortawesome/free-solid-svg-icons'
 
 const ProfilePage = () => {
 	const { username } = useParams()
 
-	const [currentTab, setCurrentTab] = useState<number>(1)
+	const [currentTab, setCurrentTab] = useState<number>(0)
+	const [onLoading, setOnLoading] = useState<boolean>(false)
+	const [tabs, setTabs] = useState([
+		{
+			label: 'Post',
+			icon: <FontAwesomeIcon icon={faTableCells} />,
+		},
+		{
+			label: 'Anonymous posts',
+			icon: <FontAwesomeIcon icon={faUnlockKeyhole} />,
+		},
+		{
+			label: 'Post you like',
+			icon: <FontAwesomeIcon icon={faHeart} />,
+		},
+	])
+	const [
+		{ picture, about, has_private_likes, follower_count, following_count, id },
+		setUser,
+	] = useState<IUser>({})
 
 	const navigate = useNavigate()
 
-	const { picture, about, has_private_likes } = useAppSelector(
-		state => state.user
-	)
+	const getUser = async () => {
+		setOnLoading(true)
+
+		try {
+			const { data } = await apiPrivate.get(`/users/${username}/`)
+
+			setUser(data)
+		} catch (err) {
+			hdlErrors(err as AxiosError)
+		} finally {
+			setOnLoading(false)
+		}
+	}
+
+	useEffect(() => {
+		if (username) getUser()
+	}, [username])
+
+	useEffect(() => {
+		if (has_private_likes) tabs.pop()
+	}, [has_private_likes])
 
 	return (
 		<section className='w-full h-full py-9 px-10 overflow-y-auto'>
@@ -69,44 +115,21 @@ const ProfilePage = () => {
 				</article>
 				<section className='w-full inline-flex gap-x-4'>
 					<ButtonSolid
-						label={`${1000} Followers_`}
+						label={`${follower_count} Followers_`}
+						onClick={() => navigate(`/user/follows/${id}/followers`)}
 						className='w-fit px-8 bg-transparent border border-2 border-neutral-800 text-neutral-800'
 					/>
 					<ButtonSolid
-						label={`${300} Followed_`}
+						label={`${following_count} Followed_`}
+						onClick={() => navigate(`/user/follows/${id}/following`)}
 						className='w-fit px-8 bg-transparent border border-2 border-neutral-800 text-neutral-800'
 					/>
 				</section>
-				<nav className='w-full grid grid-flow-col justify-center border-b border-b-neutral-300'>
-					<h2
-						className={`w-60 h-10 inline-grid place-items-center text-center cursor-pointer text-neutral-500 ${
-							currentTab === 1 ? 'text-primary border-b-2 border-b-primary' : ''
-						}`}
-						onClick={() => setCurrentTab(1)}
-					>
-						Post_
-					</h2>
-					<h2
-						className={`w-60 h-10 inline-grid place-items-center text-center cursor-pointer text-neutral-500 ${
-							currentTab === 2 ? 'text-primary border-b-2 border-b-primary' : ''
-						}`}
-						onClick={() => setCurrentTab(2)}
-					>
-						Anonymous posts_
-					</h2>
-					{!has_private_likes ? (
-						<h2
-							className={`w-60 h-10 inline-grid place-items-center text-center cursor-pointer text-neutral-500 ${
-								currentTab === 3
-									? 'text-primary border-b-2 border-b-primary'
-									: ''
-							}`}
-							onClick={() => setCurrentTab(3)}
-						>
-							Post you like_
-						</h2>
-					) : null}
-				</nav>
+				<Tabs
+					tabList={tabs}
+					currentTab={currentTab}
+					setCurrentTab={setCurrentTab}
+				/>
 			</header>
 			<section className='grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-3 gap-8 py-8'>
 				<PostItemCompact />

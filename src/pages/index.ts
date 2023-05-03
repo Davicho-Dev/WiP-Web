@@ -2,6 +2,7 @@ export { default as ForgotPasswordVerificationPage } from './Auth/ForgotPassword
 export { default as RegisterVerificationPage } from './Auth/RegisterVerificationPage'
 export { default as AuthPage } from './AuthPage'
 export { default as ErrorPage } from './ErrorPage'
+export { default as FollowsPage } from './FollowsPage'
 export { default as HomePage } from './HomePage'
 export { default as SearchPage } from './SearchPage'
 export { default as SettingsPage } from './SettingsPage'

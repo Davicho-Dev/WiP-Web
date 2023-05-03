@@ -10,6 +10,7 @@ const RegisterVerificationPage = lazy(
 )
 const AuthPage = lazy(() => import('../pages/AuthPage'))
 const ErrorPage = lazy(() => import('../pages/ErrorPage'))
+const FollowsPage = lazy(() => import('../pages/FollowsPage'))
 const HomePage = lazy(() => import('../pages/HomePage'))
 const SearchPage = lazy(() => import('../pages/SearchPage'))
 const SettingsPage = lazy(() => import('../pages/SettingsPage'))
@@ -33,6 +34,7 @@ const Router = () => {
 				<Route path='search' element={<SearchPage />} />
 				<Route path='settings' element={<SettingsPage />} />
 				<Route path='user/:username' element={<UserPage />} />
+				<Route path='user/follows/:userID/:list' element={<FollowsPage />} />
 			</Route>
 			<Route
 				path='/auth'
