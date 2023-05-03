@@ -108,7 +108,7 @@ const ProfilePage = () => {
 					) : null}
 				</nav>
 			</header>
-			<section className='grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-3 gap-8 py-5'>
+			<section className='grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-3 gap-8 py-8'>
 				<PostItemCompact />
 				<PostItemCompact />
 				<PostItemCompact />

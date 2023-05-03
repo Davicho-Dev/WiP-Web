@@ -1,17 +1,19 @@
 export interface IUser {
-	id?: number
-	email?: string
-	username?: string
-	first_name?: string
-	last_name?: string
-	dob?: string
-	phone_number?: string
-	public?: boolean
-	picture?: string
 	about?: string
-	location?: string
 	city?: string
-	sex?: string
+	dob?: string
+	email?: string
+	first_name?: string
+	follower_count?: number
+	following_count?: number
 	has_private_likes?: boolean
-	social?: string[]
+	id?: number
+	last_name?: string
+	location?: string
+	phone_number?: string
+	picture?: string
+	public?: boolean
+	sex?: string
+	social?: any[]
+	username?: string
 }

@@ -8,4 +8,9 @@ const getLocalRefreshToken = () => {
 	return refresh
 }
 
-export { getLocalAccessToken, getLocalRefreshToken }
+const getLocalUsername = () => {
+	const username = localStorage.getItem('username')
+	return username
+}
+
+export { getLocalAccessToken, getLocalRefreshToken, getLocalUsername }
