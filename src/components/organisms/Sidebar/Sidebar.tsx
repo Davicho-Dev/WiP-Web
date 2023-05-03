@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom'
-
 import {
 	faCircleQuestion,
 	faCog,
@@ -10,7 +8,9 @@ import {
 	faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { NavLink } from 'react-router-dom'
 
+import { logout } from '../../../helpers'
 import { ButtonNavLink, ButtonSolid } from '../../atoms'
 
 import { ISidebarProps } from './Sidebar.interfaces'
@@ -47,18 +47,21 @@ export const Sidebar = ({ navigate }: ISidebarProps) => (
 			/>
 		</nav>
 		<footer className={styles.wrapper__footer}>
-			<NavLink to='/settings' className='flex gap-x-2'>
+			<NavLink to='/settings' className='flex gap-x-2 w-fit'>
 				<FontAwesomeIcon className='text-primary' icon={faCircleQuestion} />
 				<span>Help_</span>
 			</NavLink>
-			<NavLink to='/settings' className='flex gap-x-2'>
+			<NavLink to='/settings' className='flex gap-x-2 w-fit'>
 				<FontAwesomeIcon className='text-primary' icon={faCog} />
 				<span>Settings_</span>
 			</NavLink>
-			<NavLink to='/settings' className='flex gap-x-2'>
+			<a
+				className='flex gap-x-2 w-fit cursor-pointer'
+				onClick={() => logout({ navigate })}
+			>
 				<FontAwesomeIcon className='text-primary' icon={faRightFromBracket} />
 				<span>Go out_</span>
-			</NavLink>
+			</a>
 		</footer>
 	</aside>
 )

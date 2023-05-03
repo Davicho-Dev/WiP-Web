@@ -12,6 +12,7 @@ import { HeaderCommon, Sidebar } from '../../organisms'
 import styles from './PrivateLayout.module.sass'
 
 import NoAvatar from '../../../assets/img/img_no_avatar.png'
+import { getLocalUsername } from '../../../constants'
 
 const PrivateLayout = () => {
 	const navigate = useNavigate()
@@ -20,8 +21,10 @@ const PrivateLayout = () => {
 	const dispatch = useAppDispatch()
 
 	const getUser = async () => {
+		const username = getLocalUsername()
+
 		try {
-			const { data } = await apiPrivate.get('/users/DavichoDev/')
+			const { data } = await apiPrivate.get(`/users/${username}/`)
 
 			dispatch(setUser(data))
 		} catch (err) {

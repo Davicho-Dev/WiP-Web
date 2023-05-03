@@ -26,6 +26,7 @@ interface IFormProps {
 interface IAuthResp {
 	ACCESS: string
 	REFRESH: string
+	USERNAME: string
 }
 
 const LoginForm = () => {
@@ -46,11 +47,12 @@ const LoginForm = () => {
 
 		try {
 			const {
-				data: { ACCESS, REFRESH },
+				data: { ACCESS, REFRESH, USERNAME },
 			} = await apiPublic.post<IAuthResp>('/auth/token/', formData)
 
 			localStorage.setItem('access', ACCESS)
 			localStorage.setItem('refresh', REFRESH)
+			localStorage.setItem('username', USERNAME)
 
 			navigate('/')
 		} catch (err) {
