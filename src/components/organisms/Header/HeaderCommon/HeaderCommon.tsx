@@ -4,6 +4,7 @@ import {
 	faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
 import { Avatar, IcLogo } from '../../../atoms'
 
@@ -25,10 +26,12 @@ export const HeaderCommon = ({
 			onClick={() => navigate('/')}
 		/>
 		<nav className='flex justify-between items-center gap-x-8'>
-			<FontAwesomeIcon
-				icon={faMagnifyingGlass}
-				className='text-xl text-white'
-			/>
+			<Link className='w-fit h-fit leading-none' to='/search'>
+				<FontAwesomeIcon
+					icon={faMagnifyingGlass}
+					className='text-xl text-white'
+				/>
+			</Link>
 			<FontAwesomeIcon icon={faBell} className='text-xl text-secondary' />
 			<Avatar
 				src={picture}
