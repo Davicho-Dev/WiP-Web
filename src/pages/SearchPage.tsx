@@ -27,19 +27,25 @@ const SearchPage = () => {
 
 	const [userList, setUserList] = useState([])
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	//  @ts-ignore
 	const getUsers = async ({ target }) => {
 		setOnLoading(true)
 
-		try {
-			const { data } = await apiPrivate.get(`users/`, {
-				params: { search: target.value },
-			})
+		if (target.value === '') {
+			setUserList([])
+		} else {
+			try {
+				const { data } = await apiPrivate.get(`users/`, {
+					params: { search: target.value },
+				})
 
-			setUserList(data.results)
-		} catch (err) {
-			hdlErrors(err as AxiosError)
-		} finally {
-			setOnLoading(false)
+				setUserList(data.results)
+			} catch (err) {
+				hdlErrors(err as AxiosError)
+			} finally {
+				setOnLoading(false)
+			}
 		}
 	}
 
