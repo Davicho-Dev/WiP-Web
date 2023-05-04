@@ -42,7 +42,7 @@ const AuthPage = () => {
 			<header className='flex flex-col gap-y-8 lg:!gap-y-10 mb-10'>
 				<IcLogo className='w-[200px] fill-neutral-800' />
 				<h1 className='text-3xl uppercase text-primary line-clamp-1'>
-					join now get feedback
+					All art is a work in progress_
 				</h1>
 			</header>
 			{currentAuthForm === 'login' ? <LoginForm /> : null}
