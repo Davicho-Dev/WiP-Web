@@ -15,6 +15,7 @@ export const HeaderCommon = ({
 	navigate,
 	picture,
 	username,
+	hasAccess,
 }: IHeaderPrivateProps): JSX.Element => (
 	<header className={styles.wrapper}>
 		<FontAwesomeIcon
@@ -23,10 +24,13 @@ export const HeaderCommon = ({
 		/>
 		<IcLogo
 			className='h-8 fill-secondary cursor-pointer'
-			onClick={() => navigate('/')}
+			onClick={() => navigate(hasAccess ? '/' : '/auth')}
 		/>
 		<nav className='flex justify-between items-center gap-x-8'>
-			<Link className='w-fit h-fit leading-none' to='/search'>
+			<Link
+				className='w-fit h-fit leading-none'
+				to={hasAccess ? '/search' : '/auth'}
+			>
 				<FontAwesomeIcon
 					icon={faMagnifyingGlass}
 					className='text-xl text-white'
@@ -36,7 +40,7 @@ export const HeaderCommon = ({
 			<Avatar
 				src={picture}
 				title={username}
-				onClick={() => navigate(`/user/${username}`)}
+				onClick={() => navigate(hasAccess ? `/user/${username}` : '/auth')}
 			/>
 		</nav>
 	</header>

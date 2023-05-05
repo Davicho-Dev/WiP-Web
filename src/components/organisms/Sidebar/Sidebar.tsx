@@ -17,7 +17,10 @@ import { ISidebarProps } from './Sidebar.interfaces'
 
 import styles from './Sidebar.module.sass'
 
-export const Sidebar = ({ navigate }: ISidebarProps) => (
+export const Sidebar = ({
+	navigate,
+	hasAccess,
+}: ISidebarProps): JSX.Element => (
 	<aside className={styles.wrapper}>
 		<nav className={styles.wrapper__nav}>
 			<ButtonNavLink
@@ -27,13 +30,13 @@ export const Sidebar = ({ navigate }: ISidebarProps) => (
 				icon={<FontAwesomeIcon icon={faHomeAlt} />}
 			/>
 			<ButtonNavLink
-				to='/'
+				to={hasAccess ? '/post_you_like' : '/auth'}
 				label='Post you like_'
 				className='grid-flow-col items-center justify-start gap-x-2'
 				icon={<FontAwesomeIcon icon={faMessage} />}
 			/>
 			<ButtonNavLink
-				to='/'
+				to={hasAccess ? '/direct_messages' : '/auth'}
 				label='Direct messages_'
 				className='grid-flow-col items-center justify-start gap-x-2'
 				icon={<FontAwesomeIcon icon={faHeart} />}
@@ -47,11 +50,17 @@ export const Sidebar = ({ navigate }: ISidebarProps) => (
 			/>
 		</nav>
 		<footer className={styles.wrapper__footer}>
-			<NavLink to='/settings' className='flex gap-x-2 w-fit'>
+			<NavLink
+				to={hasAccess ? '/settings' : '/auth'}
+				className='flex gap-x-2 w-fit'
+			>
 				<FontAwesomeIcon className='text-primary' icon={faCircleQuestion} />
 				<span>Help_</span>
 			</NavLink>
-			<NavLink to='/settings' className='flex gap-x-2 w-fit'>
+			<NavLink
+				to={hasAccess ? '/settings' : '/auth'}
+				className='flex gap-x-2 w-fit'
+			>
 				<FontAwesomeIcon className='text-primary' icon={faCog} />
 				<span>Settings_</span>
 			</NavLink>

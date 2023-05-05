@@ -5,19 +5,27 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 import { hdlErrors } from '../../../helpers'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
-import { RootState, setUser } from '../../../store'
+import { RootState, setHasAccess, setUser } from '../../../store'
 import { apiPrivate } from '../../../utils'
 import { HeaderCommon, Sidebar } from '../../organisms'
 
 import styles from './PrivateLayout.module.sass'
 
 import NoAvatar from '../../../assets/img/img_no_avatar.png'
-import { getLocalUsername } from '../../../constants'
+import {
+	getLocalAccessToken,
+	getLocalRefreshToken,
+	getLocalUsername,
+} from '../../../constants'
 
 const PrivateLayout = () => {
+	const access = getLocalAccessToken()
+	const refresh = getLocalRefreshToken()
+
 	const navigate = useNavigate()
 
 	const { picture, username } = useAppSelector((state: RootState) => state.user)
+	const { hasAccess } = useAppSelector((state: RootState) => state.ui)
 	const dispatch = useAppDispatch()
 
 	const getUser = async () => {
@@ -33,7 +41,10 @@ const PrivateLayout = () => {
 	}
 
 	useEffect(() => {
-		getUser()
+		if (access && refresh) {
+			getUser()
+			dispatch(setHasAccess(true))
+		}
 	}, [])
 
 	return (
@@ -42,9 +53,10 @@ const PrivateLayout = () => {
 				navigate={navigate}
 				picture={picture ?? NoAvatar}
 				username={username ?? ''}
+				hasAccess={hasAccess}
 			/>
 			<section className={styles.wrapper__content}>
-				<Sidebar navigate={navigate} />
+				<Sidebar navigate={navigate} hasAccess={hasAccess} />
 				<Outlet />
 			</section>
 		</main>

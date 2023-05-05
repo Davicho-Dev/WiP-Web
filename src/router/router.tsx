@@ -31,6 +31,8 @@ const Router = () => {
 				errorElement={<ErrorPage />}
 			>
 				<Route element={<HomePage />} index />
+				<Route path='post_you_like' element={<HomePage />} />
+				<Route path='direct_messages' element={<HomePage />} />
 				<Route path='search' element={<SearchPage />} />
 				<Route path='settings' element={<SettingsPage />} />
 				<Route path='user/:username' element={<UserPage />} />

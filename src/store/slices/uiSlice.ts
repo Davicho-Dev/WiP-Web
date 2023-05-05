@@ -6,12 +6,14 @@ interface IUI {
 	currentAuthForm: TAuthForm
 	showAuthFormFooter: boolean
 	showSidebar: boolean
+	hasAccess: boolean
 }
 
 const INITIAL_STATE: IUI = {
 	currentAuthForm: 'login',
 	showAuthFormFooter: true,
 	showSidebar: false,
+	hasAccess: false,
 }
 
 export const uiSlice = createSlice({
@@ -27,7 +29,15 @@ export const uiSlice = createSlice({
 		setShowSidebar: (_state, action: PayloadAction<boolean>) => {
 			_state.showSidebar = action.payload
 		},
+		setHasAccess: (_state, action: PayloadAction<boolean>) => {
+			_state.hasAccess = action.payload
+		},
 	},
 })
 
-export const { setCurrentAuthForm, setShowAuthFormFooter } = uiSlice.actions
+export const {
+	setCurrentAuthForm,
+	setShowAuthFormFooter,
+	setShowSidebar,
+	setHasAccess,
+} = uiSlice.actions

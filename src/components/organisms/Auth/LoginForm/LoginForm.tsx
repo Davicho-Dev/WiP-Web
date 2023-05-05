@@ -7,7 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import { PATTERN_EMAIL } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
-import { setCurrentAuthForm, setShowAuthFormFooter } from '../../../../store'
+import {
+	setCurrentAuthForm,
+	setHasAccess,
+	setShowAuthFormFooter,
+} from '../../../../store'
 import { apiPublic } from '../../../../utils'
 import {
 	ButtonLink,
@@ -53,6 +57,7 @@ const LoginForm = () => {
 			localStorage.setItem('access', ACCESS)
 			localStorage.setItem('refresh', REFRESH)
 			localStorage.setItem('username', USERNAME)
+			dispatch(setHasAccess(true))
 
 			navigate('/')
 		} catch (err) {
