@@ -48,8 +48,7 @@ const RegisterVerificationPage = () => {
 	const onSubmit = async ({ about, username }: IFormProps) => {
 		setOnLoading(true)
 
-		const access = getLocalAccessToken() ?? ''
-		const { payload } = jwtDecode(access)
+		const { payload } = jwtDecode(getLocalAccessToken()!)
 
 		const formData = new FormData()
 
@@ -65,6 +64,8 @@ const RegisterVerificationPage = () => {
 
 		try {
 			await apiPrivate.patch(`/users/${payload.user_id}/`, formData)
+
+			localStorage.setItem('username', username!)
 
 			navigate('/')
 		} catch (err) {
@@ -104,7 +105,7 @@ const RegisterVerificationPage = () => {
 	}) => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		setAvatar(currentTarget?.files[0])
+		if (currentTarget?.files[0]) setAvatar(currentTarget?.files[0])
 	}
 
 	useEffect(() => {
