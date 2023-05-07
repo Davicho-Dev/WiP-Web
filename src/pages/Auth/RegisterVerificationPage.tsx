@@ -111,7 +111,7 @@ const RegisterVerificationPage = () => {
 		hdlVerifyToken()
 	}, [])
 
-	if (!showNextStep)
+	if (showNextStep)
 		return (
 			<aside className='w-11/12 md:!w-1/2 lg:!w-96 h-fit lg:mr-20 p-6 bg-white rounded-3xl shadow-2xl'>
 				<header className='flex flex-col gap-y-10 mb-10'>
@@ -163,11 +163,7 @@ const RegisterVerificationPage = () => {
 						</article>
 					</section>
 					<section
-						className={`grid h-fit relative ${
-							step === 2
-								? 'before:absolute before:h-[calc(100%_-_3rem)] before:border-l-2 before:left-[calc(0.75rem_-_1px)] before:top-[3rem]'
-								: ''
-						} `}
+						className='grid h-fit relative'
 					>
 						<header className='flex items-center gap-x-2 mb-4'>
 							<span

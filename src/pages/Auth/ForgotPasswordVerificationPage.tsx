@@ -192,7 +192,7 @@ const ForgotPasswordVerificationPage = () => {
 				<ButtonSolid
 					className='w-1/2 gap-x-2 flex-row-reverse'
 					label='Sent'
-					disabled={success}
+					disabled={!success}
 					icon={<FontAwesomeIcon icon={faCircleCheck} />}
 					onClick={() => setShowNextStep(true)}
 				/>
