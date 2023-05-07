@@ -162,9 +162,7 @@ const RegisterVerificationPage = () => {
 							/>
 						</article>
 					</section>
-					<section
-						className='grid h-fit relative'
-					>
+					<section className='grid h-fit relative'>
 						<header className='flex items-center gap-x-2 mb-4'>
 							<span
 								className={`w-6 h-6 text-white ${

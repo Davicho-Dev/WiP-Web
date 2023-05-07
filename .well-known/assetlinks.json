@@ -1,0 +1,13 @@
+[
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "com.themadfox.wip",
+			"sha256_cert_fingerprints": [
+				"11:39:C8:85:35:6C:D3:93:7A:4B:C3:1D:8E:7A:0A:75:8B:77:24:4F:7E:1C:45:FC:55:06:32:D5:E1:6E:8A:BA",
+				"BF:B8:5F:68:9B:6F:03:D3:44:23:5E:32:0F:FC:47:E0:5D:D8:38:A9:8B:91:88:36:72:9B:0B:5B:93:53:A5:F2"
+			]
+		}
+	}
+]
