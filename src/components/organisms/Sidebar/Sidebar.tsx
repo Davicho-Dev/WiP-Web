@@ -20,8 +20,13 @@ import styles from './Sidebar.module.sass'
 export const Sidebar = ({
 	navigate,
 	hasAccess,
+	showSidebar,
 }: ISidebarProps): JSX.Element => (
-	<aside className={styles.wrapper}>
+	<aside
+		className={`${styles.wrapper} ${
+			showSidebar ? styles['wrapper--show'] : ''
+		}`}
+	>
 		<nav className={styles.wrapper__nav}>
 			<ButtonNavLink
 				to='/'
@@ -43,7 +48,7 @@ export const Sidebar = ({
 			/>
 			<ButtonSolid
 				type='button'
-				className='w-full pl-4 bg-primary text-white text-left justify-start gap-x-2'
+				className='w-full px-4 bg-primary text-white text-left justify-start gap-x-2'
 				label='Create_'
 				icon={<FontAwesomeIcon icon={faPlusCircle} />}
 				onClick={() => navigate('/settings')}

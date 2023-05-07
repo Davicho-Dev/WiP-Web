@@ -16,9 +16,11 @@ export const HeaderCommon = ({
 	picture,
 	username,
 	hasAccess,
+	setShowSidebar,
 }: IHeaderPrivateProps): JSX.Element => (
 	<header className={styles.wrapper}>
 		<FontAwesomeIcon
+			onClick={setShowSidebar}
 			className='text-xl text-white inline lg:!hidden'
 			icon={faBars}
 		/>
