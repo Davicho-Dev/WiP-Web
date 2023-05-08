@@ -30,7 +30,17 @@ interface IFormProps {
 }
 
 export const ProfileForm = (props: IUser): JSX.Element => {
-	const { picture } = props
+	const {
+		picture,
+		about,
+		city,
+		email,
+		has_private_likes,
+		location,
+		phone_number,
+		sex,
+		username,
+	} = props
 
 	const dispatch = useAppDispatch()
 
@@ -38,7 +48,16 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 	const [avatar, setAvatar] = useState<File>()
 
 	const { handleSubmit, register } = useForm<IFormProps>({
-		defaultValues: props,
+		defaultValues: {
+			about,
+			city,
+			email,
+			has_private_likes,
+			location,
+			phone_number,
+			sex,
+			username,
+		},
 	})
 
 	const onSubmit: SubmitHandler<IFormProps> = async data => {
