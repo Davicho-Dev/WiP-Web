@@ -41,9 +41,10 @@ const AuthPage = () => {
 		<aside className='w-11/12 md:!w-1/2 lg:!w-[29rem] h-fit p-6 lg:mr-20 bg-white rounded-3xl shadow-2xl'>
 			<header className='flex flex-col gap-y-8 lg:!gap-y-10 mb-10'>
 				<IcLogo className='w-[200px] fill-neutral-800' />
-				<marquee className='text-3xl uppercase text-primary line-clamp-1'>
-					join now get feedback
-				</marquee>
+				<MarqueeTitle
+					className='text-3xl uppercase text-primary line-clamp-1'
+					label='join now get feedback'
+				/>
 			</header>
 			{currentAuthForm === 'login' ? <LoginForm /> : null}
 			{currentAuthForm === 'register' ? <RegisterForm /> : null}
@@ -83,6 +84,17 @@ const AuthPage = () => {
 			) : null}
 		</aside>
 	)
+}
+
+interface MarqueeTitleProps {
+	className?: string
+	label?: string
+}
+
+const MarqueeTitle = ({ className, label }: MarqueeTitleProps): JSX.Element => {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return <marquee className={className}>{label}</marquee>
 }
 
 export default AuthPage
