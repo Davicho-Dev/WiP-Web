@@ -41,9 +41,9 @@ const AuthPage = () => {
 		<aside className='w-11/12 md:!w-1/2 lg:!w-[29rem] h-fit p-6 lg:mr-20 bg-white rounded-3xl shadow-2xl'>
 			<header className='flex flex-col gap-y-8 lg:!gap-y-10 mb-10'>
 				<IcLogo className='w-[200px] fill-neutral-800' />
-				<h1 className='text-3xl uppercase text-primary line-clamp-1'>
+				<marquee className='text-3xl uppercase text-primary line-clamp-1'>
 					join now get feedback
-				</h1>
+				</marquee>
 			</header>
 			{currentAuthForm === 'login' ? <LoginForm /> : null}
 			{currentAuthForm === 'register' ? <RegisterForm /> : null}
