@@ -189,10 +189,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 						type='tel'
 						register={{ ...register('phone_number') }}
 					/>
-					<FormInput
-						placeholder='Sex (Yes, please)'
-						register={{ ...register('sex') }}
-					/>
+					<FormInput placeholder='Gender' register={{ ...register('sex') }} />
 				</section>
 			</section>
 			<ButtonSolid
