@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAuth0 } from '@auth0/auth0-react'
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { faApple, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams } from 'react-router-dom'
 
@@ -58,7 +58,7 @@ const AuthPage = () => {
 					<nav className='flex gap-x-4'>
 						<FontAwesomeIcon
 							className='cursor-pointer'
-							icon={faGoogle}
+							icon={faApple}
 							onClick={hdlLogin}
 						/>
 						<FontAwesomeIcon
