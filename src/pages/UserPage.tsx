@@ -21,7 +21,7 @@ import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
 import { apiPrivate } from '../utils'
 
-import DummyImg from '../../../../assets/img/img_no_picture.png'
+import DummyImg from '../assets/img/img_no_picture.png'
 
 const ProfilePage = () => {
 	const { username } = useParams()
