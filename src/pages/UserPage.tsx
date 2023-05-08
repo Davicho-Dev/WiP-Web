@@ -21,6 +21,8 @@ import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
 import { apiPrivate } from '../utils'
 
+import DummyImg from '../../../../assets/img/img_no_picture.png'
+
 const ProfilePage = () => {
 	const { username } = useParams()
 
@@ -76,7 +78,7 @@ const ProfilePage = () => {
 					<figure className='w-40 h-40 rounded-full overflow-hidden cursor-pointer shrink-0 grow-0'>
 						<img
 							className='w-full h-full object-cover'
-							src={picture}
+							src={picture ?? DummyImg}
 							alt={username + ' Avatar'}
 							title={username + ' Avatar'}
 						/>

@@ -12,7 +12,7 @@ export const hdlErrors = (err: AxiosError) => {
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	Object.entries(response.data).forEach(([key, value]) => {
+	Object.entries(response.data).forEach(([value]) => {
 		toast.error(`${value}`)
 	})
 }
