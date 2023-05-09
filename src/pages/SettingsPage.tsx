@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
 import { faUser } from '@fortawesome/free-regular-svg-icons'
+import { faArrowLeft, faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
 import { PasswordForm, ProfileForm } from '../components/organisms'
 import { useAppSelector } from '../hooks'
@@ -10,6 +11,8 @@ import { useAppSelector } from '../hooks'
 type TFormTab = 'profile' | 'password'
 
 const SettingsPage = () => {
+	const navigate = useNavigate()
+
 	const user = useAppSelector(state => state.user)
 
 	const [currentTab, setCurrentTab] = useState<TFormTab>('profile')
@@ -17,7 +20,15 @@ const SettingsPage = () => {
 	return (
 		<section className='w-full max-h-full grid lg:grid-flow-col lg:grid-cols-[15rem_1fr] lg:py-9 lg:px-32 gap-x-5 overflow-y-auto'>
 			<aside className=' '>
-				<h1 className='mb-4'>Settings</h1>
+				<header className='flex items-center lg:mb-4 h-12 lg:!h-fit px-4 md:!px-6 lg:!px-0 gap-x-2'>
+					<FontAwesomeIcon
+						icon={faArrowLeft}
+						onClick={() => navigate(-1)}
+						className='text-primary lg:hidden'
+					/>
+
+					<h1 className='grow md:!grow-0 text-center'>Settings</h1>
+				</header>
 				<nav className='border-b lg:!border-2 lg:rounded-[10px] overflow-hidden grid grid-flow-col grid-cols-2 lg:!grid-cols-1 lg:!grid-flow-row'>
 					<span
 						className={`w-full h-12 inline-flex gap-x-4 items-center justify-center lg:!justify-start px-5 cursor-pointer border-b-2 lg:border-l-2 lg:!border-b-0 ${
