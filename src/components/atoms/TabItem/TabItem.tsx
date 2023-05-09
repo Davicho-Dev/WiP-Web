@@ -19,7 +19,7 @@ export const TabItem = ({
 			onClick={onClick}
 		>
 			{children}
-			{label}_
+			<span className='hidden md:!block'>{label}_</span>
 		</span>
 	)
 }

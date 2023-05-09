@@ -1,39 +1,54 @@
 import { v4 } from 'uuid'
 
 import { TabItem } from '../../atoms'
+import {
+	faHeart,
+	faTableCells,
+	faUnlockKeyhole,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ITabsProps {
-	tabList: ITabItemProps[]
+	isPrivate?: boolean
+	isAnonymous?: boolean
 	currentTab: number
 	setCurrentTab: (tab: number) => void
 	className?: string
 }
 
-interface ITabItemProps {
-	icon?: React.ReactNode
-	label: string
-}
-
 export const Tabs = ({
 	currentTab,
 	setCurrentTab,
-	tabList,
 	className,
+	isAnonymous,
+	isPrivate,
 }: ITabsProps): JSX.Element => {
 	return (
 		<nav
-			className={`w-full grid grid-flow-col justify-center border-b border-b-neutral-300 ${className}`}
+			className={`w-full flex grid-flow-col grid-cols-3 justify-center border-b border-b-neutral-300 ${className}`}
 		>
-			{tabList &&
-				tabList.map(({ icon, label }, idx) => (
-					<TabItem
-						isActive={currentTab === idx}
-						key={v4()}
-						label={label}
-						children={icon}
-						onClick={() => setCurrentTab(idx)}
-					/>
-				))}
+			<TabItem
+				isActive={currentTab === 0}
+				children={<FontAwesomeIcon icon={faTableCells} />}
+				onClick={() => setCurrentTab(0)}
+				label='Post'
+			/>
+			{isAnonymous ? null : (
+				<TabItem
+					isActive={currentTab === 1}
+					children={<FontAwesomeIcon icon={faUnlockKeyhole} />}
+					onClick={() => setCurrentTab(1)}
+					label='Anonymous posts'
+				/>
+			)}
+			{isPrivate ? null : (
+				<TabItem
+					isActive={currentTab === 2}
+					children={<FontAwesomeIcon icon={faHeart} />}
+					onClick={() => setCurrentTab(2)}
+					label='Post you like'
+				/>
+			)}
 		</nav>
 	)
 }
