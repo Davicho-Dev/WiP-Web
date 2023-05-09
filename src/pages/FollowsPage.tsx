@@ -26,7 +26,7 @@ const FollowsPage = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPrivate.get(`/users/${userID}/follows/`)
+			const { data } = await apiPrivate.get(`/users/${userID}/followers/`)
 			console.log(data.results)
 		} catch (err) {
 			hdlErrors(err as AxiosError)
@@ -39,7 +39,7 @@ const FollowsPage = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPrivate.get(`/users/${userID}/follows/`)
+			const { data } = await apiPrivate.get(`/users/${userID}/followed/`)
 			console.log(data.results)
 		} catch (err) {
 			hdlErrors(err as AxiosError)
