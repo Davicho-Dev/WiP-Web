@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { AxiosError } from 'axios'
+import { jwtDecode } from 'jwt-js-decode'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -54,9 +55,12 @@ const LoginForm = () => {
 				data: { ACCESS, REFRESH, USERNAME },
 			} = await apiPublic.post<IAuthResp>('/auth/token/', formData)
 
+			const { payload } = jwtDecode(ACCESS)
+
 			localStorage.setItem('access', ACCESS)
 			localStorage.setItem('refresh', REFRESH)
 			localStorage.setItem('username', USERNAME)
+			localStorage.setItem('ID', payload.id)
 			dispatch(setHasAccess(true))
 
 			navigate('/')

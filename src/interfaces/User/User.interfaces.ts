@@ -14,6 +14,12 @@ export interface IUser {
 	picture?: string
 	public?: boolean
 	sex?: string
-	social?: any[]
+	social?: ISocial[]
 	username?: string
+}
+
+interface ISocial {
+	id?: number
+	network?: string
+	url?: string
 }

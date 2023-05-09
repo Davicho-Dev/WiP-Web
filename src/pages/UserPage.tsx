@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import {
-	faFacebook,
-	faInstagram,
-	faTiktok,
-	faTwitter,
-} from '@fortawesome/free-brands-svg-icons'
-import {
 	faHeart,
 	faTableCells,
 	faUnlockKeyhole,
@@ -14,12 +8,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { v4 } from 'uuid'
 
 import { ButtonSolid } from '../components/atoms'
 import { PostItemCompact, Tabs } from '../components/molecules'
 import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
-import { apiPrivate } from '../utils'
+import { SocialIcons, apiPrivate } from '../utils'
 
 import DummyImg from '../assets/img/img_no_picture.png'
 
@@ -43,7 +38,15 @@ const ProfilePage = () => {
 		},
 	])
 	const [
-		{ picture, about, has_private_likes, follower_count, following_count, id },
+		{
+			picture,
+			about,
+			has_private_likes,
+			follower_count,
+			following_count,
+			id,
+			social,
+		},
 		setUser,
 	] = useState<IUser>({})
 
@@ -86,22 +89,19 @@ const ProfilePage = () => {
 					<aside className='grow self-center inline-grid gap-y-2'>
 						<h1 className='text-2xl'>{username}</h1>
 						<nav className='flex gap-x-4'>
-							<FontAwesomeIcon
-								className='!text-primary cursor-pointer'
-								icon={faTiktok}
-							/>
-							<FontAwesomeIcon
-								className='!text-primary cursor-pointer'
-								icon={faFacebook}
-							/>
-							<FontAwesomeIcon
-								className='!text-primary cursor-pointer'
-								icon={faTwitter}
-							/>
-							<FontAwesomeIcon
-								className='!text-primary cursor-pointer'
-								icon={faInstagram}
-							/>
+							{social?.map(({ network, url }) => (
+								<a
+									key={v4()}
+									href={url}
+									target='_blank'
+									rel='noopener noreferrer'
+								>
+									<FontAwesomeIcon
+										className='!text-primary cursor-pointer'
+										icon={SocialIcons(network!)!}
+									/>
+								</a>
+							))}
 						</nav>
 					</aside>
 					<ButtonSolid
@@ -118,12 +118,12 @@ const ProfilePage = () => {
 					<ButtonSolid
 						label={`${follower_count} Followers_`}
 						onClick={() => navigate(`/user/follows/${id}/followers`)}
-						className='w-fit px-8 bg-transparent border border-2 border-neutral-800 text-neutral-800'
+						className='w-fit px-8 bg-transparent border-2 border-neutral-800 text-neutral-800'
 					/>
 					<ButtonSolid
 						label={`${following_count} Followed_`}
 						onClick={() => navigate(`/user/follows/${id}/followed`)}
-						className='w-fit px-8 bg-transparent border border-2 border-neutral-800 text-neutral-800'
+						className='w-fit px-8 bg-transparent border-2 border-neutral-800 text-neutral-800'
 					/>
 				</section>
 				<Tabs

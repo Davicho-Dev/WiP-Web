@@ -13,4 +13,14 @@ const getLocalUsername = () => {
 	return username
 }
 
-export { getLocalAccessToken, getLocalRefreshToken, getLocalUsername }
+const getLocalUserId = () => {
+	const userId = localStorage.getItem('ID')
+	return userId
+}
+
+export {
+	getLocalAccessToken,
+	getLocalRefreshToken,
+	getLocalUsername,
+	getLocalUserId,
+}
