@@ -47,7 +47,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
 
-	const { handleSubmit, register } = useForm<IFormProps>({
+	const { handleSubmit, register, watch } = useForm<IFormProps>({
 		defaultValues: {
 			about,
 			city,
@@ -175,9 +175,20 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 						</section>
 						<section className='grid gap-y-4 mt-6'>
 							<h1 className='text-2xl'>Interaction</h1>
-							<label className='flex gap-x-4'>
+							<label className='w-fit flex gap-x-6'>
 								Make likes private
-								<input type='checkbox' {...register('has_private_likes')} />
+								<input
+									type='checkbox'
+									{...register('has_private_likes')}
+									className='hidden'
+								/>
+								<span
+									className={`flex gap-x-4 relative w-6 h-3.5 right-0 rounded-full m-auto top-0 bottom-0 transition-all duration-500 ease-in-out after:content-[''] after:absolute after:w-5 after:h-5 after:rounded-full after:m-auto after:top-0 after:bottom-0 after:transition-all after:duration-500 after:ease-in-out ${
+										watch('has_private_likes')
+											? 'bg-primary/20 after:bg-primary after:right-[calc(0%_-_0.625rem)]'
+											: 'bg-neutral-200 after:bg-neutral-600 after:right-[calc(100%_-_0.625rem)]'
+									}`}
+								/>
 							</label>
 						</section>
 					</article>
