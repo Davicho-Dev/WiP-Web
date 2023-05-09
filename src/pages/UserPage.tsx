@@ -22,32 +22,18 @@ const ProfilePage = () => {
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 
 	const [
-		{ picture, about, has_private_likes, follower_count, following_count, id },
+		{
+			picture,
+			about,
+			has_private_likes,
+			follower_count,
+			following_count,
+			id,
+			social,
+		},
 		setUser,
 	] = useState<IUser>({})
 
-	const social = [
-		{
-			id: 1,
-			network: 'SP',
-			url: 'https://open.spotify.com/user/1111111111',
-		},
-		{
-			id: 2,
-			network: 'SC',
-			url: 'https://soundcloud.com/user-1111111111',
-		},
-		{
-			id: 3,
-			network: 'IN',
-			url: 'https://www.instagram.com/user-1111111111/',
-		},
-		{
-			id: 4,
-			network: 'FB',
-			url: 'https://www.facebook.com/user-1111111111/',
-		},
-	]
 	const navigate = useNavigate()
 
 	const getUser = async () => {
