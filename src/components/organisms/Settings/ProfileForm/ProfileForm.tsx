@@ -98,7 +98,10 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 	}
 
 	return (
-		<form className='grid gap-y-12 pt-10' onSubmit={handleSubmit(onSubmit)}>
+		<form
+			className='grid gap-y-12 pt-10 px-3 md:!px-6 lg:px-0'
+			onSubmit={handleSubmit(onSubmit)}
+		>
 			<section className='bg-[#f9fbf1] rounded-[20px] overflow-hidden border-neutral-800 border-2'>
 				<header className='w-full p-4 bg-neutral-800 text-white'>
 					<h1 className='text-white'>Profile</h1>
@@ -106,7 +109,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 						This data is public for any user
 					</span>
 				</header>
-				<section className='flex p-8 gap-x-6'>
+				<section className='flex px-3 md:!px-6 lg:!px-8 py-8 gap-6 flex-col md:!flex-row items-center md:!items-start'>
 					<aside>
 						<label
 							className='w-36 h-36 rounded-full overflow-hidden block relative'
@@ -131,7 +134,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 							/>
 						</label>
 					</aside>
-					<article className='inline-grid gap-y-4 grow'>
+					<article className='inline-grid gap-y-4 grow w-full'>
 						<FormInput
 							placeholder='Username'
 							register={{ ...register('username') }}

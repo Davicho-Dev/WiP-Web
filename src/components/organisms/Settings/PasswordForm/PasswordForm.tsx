@@ -59,7 +59,7 @@ export const PasswordForm = ({
 
 	return (
 		<form
-			className='flex flex-col gap-y-12 pt-10'
+			className='flex flex-col gap-y-12 pt-10 px-3 md:!px-6 lg:px-0'
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
