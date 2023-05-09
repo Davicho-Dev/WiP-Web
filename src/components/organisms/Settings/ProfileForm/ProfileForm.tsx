@@ -1,15 +1,15 @@
 import { FormEventHandler, useState } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
-import { jwtDecode } from 'jwt-js-decode'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
-import { PATTERN_EMAIL, getLocalAccessToken } from '../../../../constants'
+import { PATTERN_EMAIL, getLocalUserId } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 import { setUser } from '../../../../store'
-import { apiPrivate } from '../../../../utils'
+import { SocialIcons, apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
@@ -19,14 +19,16 @@ interface IFormProps {
 	city: string
 	location: string
 	username: string
-	website: string
-	facebook: string
-	instagram: string
-	tiktok: string
 	sex: string
 	phone_number: string
 	email: string
 	has_private_likes: boolean
+	social: ISocial[]
+}
+interface ISocial {
+	id?: number
+	network?: string
+	url?: string
 }
 
 export const ProfileForm = (props: IUser): JSX.Element => {
@@ -40,6 +42,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		phone_number,
 		sex,
 		username,
+		social,
 	} = props
 
 	const dispatch = useAppDispatch()
@@ -47,7 +50,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
 
-	const { handleSubmit, register, watch } = useForm<IFormProps>({
+	const { handleSubmit, register, watch, control } = useForm<IFormProps>({
 		defaultValues: {
 			about,
 			city,
@@ -57,29 +60,40 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 			phone_number,
 			sex,
 			username,
+			social,
 		},
+	})
+
+	const { fields } = useFieldArray({
+		control,
+		rules: { maxLength: 7 },
+		name: 'social',
 	})
 
 	const onSubmit: SubmitHandler<IFormProps> = async data => {
 		setOnLoading(true)
-		const access = getLocalAccessToken() ?? ''
-		const { payload } = jwtDecode(access)
+
+		const userID = getLocalUserId()
 
 		const formData = new FormData()
 
 		Object.entries(data).forEach(([key, value]) => {
-			if (value !== '' && value !== undefined && key !== 'picture') {
+			if (
+				value !== '' &&
+				value !== undefined &&
+				key !== 'picture' &&
+				key !== 'social'
+			) {
 				formData.append(key, value)
+			} else if (key === 'social') {
+				formData.append(key, JSON.stringify(value))
 			}
 		})
 
 		if (avatar) formData.append('picture', avatar)
 
 		try {
-			const { data } = await apiPrivate.patch(
-				`/users/${payload.user_id}/`,
-				formData
-			)
+			const { data } = await apiPrivate.patch(`/users/${userID}/`, formData)
 
 			dispatch(setUser(data))
 		} catch (err) {
@@ -155,26 +169,22 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 						<FormInput placeholder='City' register={{ ...register('city') }} />
 						<section className='grid gap-y-4 mt-6'>
 							<h1 className='text-2xl'>Social networks</h1>
-							<FormInput
-								placeholder='Website url'
-								type='url'
-								register={{ ...register('website') }}
-							/>
-							<FormInput
-								placeholder='Facebook url'
-								type='url'
-								register={{ ...register('facebook') }}
-							/>
-							<FormInput
-								placeholder='instagram url'
-								type='url'
-								register={{ ...register('instagram') }}
-							/>
-							<FormInput
-								placeholder='Tiktok url'
-								type='url'
-								register={{ ...register('tiktok') }}
-							/>
+							{fields.map(({ id, network, url }, index) => (
+								<FormInput
+									key={id}
+									icon={
+										<FontAwesomeIcon
+											icon={SocialIcons(network!)!}
+											className='text-sm mr-1'
+										/>
+									}
+									placeholder={`${network} URL`}
+									type='url'
+									register={{
+										...register(`social.${index}.url`, { value: url }),
+									}}
+								/>
+							))}
 						</section>
 						<section className='grid gap-y-4 mt-6'>
 							<h1 className='text-2xl'>Interaction</h1>
