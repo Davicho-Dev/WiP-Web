@@ -1,4 +1,4 @@
-export const socialLabels = (network: string) => {
+export const socialNames = (network: string) => {
 	return {
 		SP: 'Spotify',
 		SC: 'SoundCloud',
