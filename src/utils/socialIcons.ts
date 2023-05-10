@@ -6,7 +6,7 @@ import {
 	faTiktok,
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons'
-import { faWindowMaximize } from '@fortawesome/free-solid-svg-icons'
+import { faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
 
 export const SocialIcons = (icon: string) => {
 	return {

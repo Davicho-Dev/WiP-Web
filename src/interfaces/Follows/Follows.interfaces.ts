@@ -1,8 +1,8 @@
-export interface IFollowsResp {
+export interface IFollowersResp {
 	count?: number
 	next?: null
 	previous?: null
-	results: IFollowersResultItem[] | IFollowedResultItem[] | []
+	results: IFollowersResultItem[] | []
 }
 
 export interface IFollowersResultItem {
@@ -11,6 +11,13 @@ export interface IFollowersResultItem {
 	active: boolean
 	created: string
 	modified: string
+}
+
+export interface IFollowedResp {
+	count?: number
+	next?: null
+	previous?: null
+	results: IFollowedResultItem[] | []
 }
 
 export interface IFollowedResultItem {

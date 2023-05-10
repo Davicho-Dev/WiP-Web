@@ -1,7 +1,7 @@
+import { faMessage } from '@fortawesome/free-regular-svg-icons'
 import {
 	faBars,
 	faBell,
-	faBellConcierge,
 	faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,6 @@ import { Avatar, IcLogo } from '../../../atoms'
 
 import { IHeaderPrivateProps } from './HeaderCommon.interfaces'
 import styles from './HeaderCommon.module.sass'
-import { faMessage } from '@fortawesome/free-regular-svg-icons'
 
 export const HeaderCommon = ({
 	navigate,
@@ -27,7 +26,7 @@ export const HeaderCommon = ({
 			icon={faBars}
 		/>
 		<IcLogo
-			className='h-5 md:!h-8 fill-secondary cursor-pointer'
+			className='h-5 lg:!h-8 fill-secondary cursor-pointer'
 			onClick={() => navigate(hasAccess ? '/' : '/auth')}
 		/>
 		<nav className='flex justify-end items-center gap-x-8 grow'>
