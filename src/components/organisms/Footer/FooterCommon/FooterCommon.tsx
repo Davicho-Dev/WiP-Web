@@ -34,11 +34,15 @@ export const FooterCommon = ({
 		>
 			<FontAwesomeIcon icon={faHeart} />
 		</NavLink>
-		<Avatar
-			src={picture}
-			title={username}
-			className='w-6 h-6'
-			onClick={() => navigate(hasAccess ? `/user/${username}` : '/auth')}
-		/>
+		<NavLink
+			to={hasAccess ? `/user/${username}` : '/auth'}
+			className={({ isActive }) =>
+				`${
+					isActive ? 'border border-secondary' : 'text-white'
+				} leading-none rounded-full`
+			}
+		>
+			<Avatar src={picture} title={username} className='w-6 h-6' />
+		</NavLink>
 	</footer>
 )
