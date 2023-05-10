@@ -15,6 +15,7 @@ import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 import IcHands from '../../../../assets/img/img_hands.png'
 
 import styles from './RegisterForm.module.sass'
+import { Link } from 'react-router-dom'
 
 interface IFormProps {
 	email: string
@@ -146,15 +147,14 @@ const RegisterForm = () => {
 				<input
 					type='checkbox'
 					className='rounded-full'
-					id='termsConditions'
 					{...register('accept_terms_and_conditions', { required: true })}
 				/>
-				<label
+				<Link
+					to='/auth/terms-and-conditions'
 					className='text-primary underline cursor-pointer'
-					htmlFor='termsConditions'
 				>
 					I agree to the Terms and Conditions
-				</label>
+				</Link>
 			</fieldset>
 			<ButtonSolid label='Sign Up' disabled={onLoading} onLoading={onLoading} />
 		</form>

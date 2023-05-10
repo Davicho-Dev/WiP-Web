@@ -2,7 +2,7 @@
 
 exports[`ButtonSolid test suite Should render correctly 1`] = `
 <button
-  class="button "
+  class="button     "
 >
   Button Solid
 </button>

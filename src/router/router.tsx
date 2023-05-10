@@ -14,6 +14,7 @@ const FollowsPage = lazy(() => import('../pages/FollowsPage'))
 const HomePage = lazy(() => import('../pages/HomePage'))
 const SearchPage = lazy(() => import('../pages/SearchPage'))
 const SettingsPage = lazy(() => import('../pages/SettingsPage'))
+const TermsConditionsPage = lazy(() => import('../pages/TermsConditionsPage'))
 const UserPage = lazy(() => import('../pages/UserPage'))
 
 import { PrivateLayout, PublicLayout } from '../components/layouts'
@@ -57,6 +58,7 @@ const Router = () => {
 					path='forgot/:email/:token'
 					element={<ForgotPasswordVerificationPage />}
 				/>
+				<Route path='terms-and-conditions' element={<TermsConditionsPage />} />
 			</Route>
 		</Routes>
 	)
