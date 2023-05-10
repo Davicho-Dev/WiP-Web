@@ -17,5 +17,6 @@ export const SocialIcons = (icon: string) => {
 		TW: faTwitter,
 		TK: faTiktok,
 		WB: faWindowMaximize,
+		WB2: faWindowMaximize,
 	}[icon]
 }
