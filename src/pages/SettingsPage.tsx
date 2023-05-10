@@ -18,7 +18,7 @@ const SettingsPage = () => {
 	const [currentTab, setCurrentTab] = useState<TFormTab>('profile')
 
 	return (
-		<section className='w-full max-h-full grid lg:grid-flow-col lg:grid-cols-[15rem_1fr] lg:py-9 lg:px-32 gap-x-5 overflow-y-auto'>
+		<section className='w-full max-h-full flex flex-col lg:!grid lg:grid-flow-col lg:grid-cols-[15rem_1fr] lg:py-9 lg:px-32 gap-x-5 overflow-y-auto'>
 			<aside className=' '>
 				<header className='flex items-center lg:mb-4 h-12 lg:!h-fit px-4 md:!px-6 lg:!px-0 gap-x-2'>
 					<FontAwesomeIcon

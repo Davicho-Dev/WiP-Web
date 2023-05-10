@@ -151,7 +151,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 
 	return (
 		<form
-			className='grid gap-y-12 pt-10 px-3 md:!px-6 lg:px-0'
+			className='grid gap-y-4 md:!gap-y-8 lg:!gap-y-12 py-4 md:!py-6 lg:!py-10 px-3 md:!px-6 lg:px-0'
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<section className='bg-[#f9fbf1] rounded-[20px] overflow-hidden border-neutral-800 border-2'>
@@ -245,7 +245,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 					</article>
 				</section>
 			</section>
-			<section className='bg-[#f9fbf1] rounded-xl overflow-hidden border-neutral-800 border-2'>
+			<section className='bg-[#f9fbf1] rounded-[20px] overflow-hidden border-neutral-800 border-2'>
 				<header className='w-full p-4 bg-neutral-800 text-white'>
 					<h1 className='text-white'>Profile</h1>
 					<span className='text-sm text-white'>
