@@ -3,5 +3,6 @@ export interface IUserCardProps {
 	public_name: string
 	followed: boolean
 	picture: string | null
-	isFollower?: string
+	isFollower: boolean
+	username: string
 }

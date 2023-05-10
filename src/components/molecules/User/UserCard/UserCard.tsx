@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { AxiosError } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 import { hdlErrors } from '../../../../helpers'
 import { apiPrivate } from '../../../../utils'
@@ -15,10 +16,13 @@ export const UserCard = ({
 	picture,
 	public_name,
 	isFollower,
+	username,
 }: IUserCardProps): JSX.Element => {
 	const [isFollowed, setIsFollowed] = useState<boolean>(followed)
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [followSuccess, setFollowSuccess] = useState<boolean>(false)
+
+	const navigate = useNavigate()
 
 	const followUser = async (id: number, followed: boolean) => {
 		setOnLoading(true)
@@ -47,13 +51,20 @@ export const UserCard = ({
 			key={id}
 			className='flex justify-between gap-x-2 md:!gap-x-4 max-w-full overflow-hidden'
 		>
-			<Avatar className='w-11 h-11 shrink-0' src={picture ?? DummyImg} />
+			<Avatar
+				className='w-11 h-11 shrink-0 cursor-pointer'
+				src={picture ?? DummyImg}
+				onClick={() => navigate(`/users/${username}`)}
+			/>
 			<article className='grow shrink'>
-				<h1 className='w-max md:!w-fit text-sm line-clamp-1 text-ellipsis'>
+				<h1
+					className='w-max md:!w-fit text-sm line-clamp-1 text-ellipsis cursor-pointer'
+					onClick={() => navigate(`/users/${username}`)}
+				>
 					{public_name}
 				</h1>
 				<h5 className='w-max md:!w-fit text-xs line-clamp-1 text-ellipsis'>
-					{isFollower}
+					{isFollower ? 'Follows you' : null}
 				</h5>
 			</article>
 			<ButtonSolid
