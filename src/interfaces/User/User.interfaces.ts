@@ -4,8 +4,8 @@ export interface IUser {
 	dob?: string
 	email?: string
 	first_name?: string
-	follower_count?: number
-	following_count?: number
+	follower_count: number
+	following_count: number
 	has_private_likes?: boolean
 	id?: number
 	last_name?: string

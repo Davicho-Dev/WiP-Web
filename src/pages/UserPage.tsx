@@ -20,7 +20,8 @@ const ProfilePage = () => {
 
 	const [currentTab, setCurrentTab] = useState<number>(0)
 	const [onLoading, setOnLoading] = useState<boolean>(false)
-
+	const [isFollowed, setIsFollowed] = useState<boolean>(false)
+	const [followSuccess, setFollowSuccess] = useState<boolean>(false)
 	const [
 		{
 			picture,
@@ -32,7 +33,7 @@ const ProfilePage = () => {
 			social,
 		},
 		setUser,
-	] = useState<IUser>({})
+	] = useState<IUser>({ follower_count: 0, following_count: 0 })
 
 	const navigate = useNavigate()
 
@@ -43,10 +44,40 @@ const ProfilePage = () => {
 			const { data } = await apiPrivate.get(`/users/${username}/`)
 
 			setUser(data)
+			// TODO: Update follower count
+			// setIsFollowed(data.followed)
 		} catch (err) {
 			hdlErrors(err as AxiosError)
 		} finally {
 			setOnLoading(false)
+		}
+	}
+
+	const followUser = async (id: number, followed: boolean) => {
+		setOnLoading(true)
+
+		try {
+			await apiPrivate.patch(`users/${id}/follows/`, {
+				active: !followed,
+			})
+
+			setUser(prevState => ({
+				...prevState,
+				follower_count: followed
+					? prevState?.follower_count - 1
+					: prevState?.follower_count + 1,
+			}))
+
+			setIsFollowed(!followed)
+			setFollowSuccess(true)
+		} catch (err) {
+			hdlErrors(err as AxiosError)
+		} finally {
+			setOnLoading(false)
+
+			setTimeout(() => {
+				setFollowSuccess(false)
+			}, 1000)
 		}
 	}
 
@@ -103,8 +134,12 @@ const ProfilePage = () => {
 				{username !== getLocalUsername() ? (
 					<section className='w-full flex gap-4 flex-wrap justify-center lg:!justify-start md:!gap-x-6 px-4 md:!px-6 lg:!px-0'>
 						<ButtonSolid
-							label='Follow_'
+							label={isFollowed ? 'Following_' : 'Follow_'}
+							onLoading={onLoading}
+							onSuccess={followSuccess}
+							disabled={onLoading}
 							className='w-fit px-6 bg-transparent border-neutral-800 border'
+							onClick={() => followUser(id!, isFollowed)}
 						/>
 						<ButtonSolid
 							label='Request contact'

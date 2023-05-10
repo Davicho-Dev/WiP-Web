@@ -133,12 +133,12 @@ const FollowsPage = () => {
 						followsList.map(
 							({ active, from_user, created, modified, to_user }) => (
 								<UserCard
+									followed={active}
+									isFollower={active}
 									username={from_user?.username}
 									key={v4()}
-									followed={active}
 									id={from_user?.id}
 									picture={from_user?.picture}
-									isFollower={active}
 									public_name={
 										from_user?.first_name + ' ' + from_user?.last_name
 									}
@@ -154,12 +154,12 @@ const FollowsPage = () => {
 						followedList.map(
 							({ active, from_user, created, modified, to_user }) => (
 								<UserCard
+									followed={active!}
+									isFollower={active}
 									username={to_user?.username}
 									key={v4()}
-									followed={active!}
 									id={to_user?.id}
 									picture={to_user?.picture}
-									isFollower={active}
 									public_name={to_user?.first_name + ' ' + to_user?.last_name}
 								/>
 							)

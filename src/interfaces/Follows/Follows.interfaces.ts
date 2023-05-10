@@ -22,10 +22,10 @@ export interface IFollowedResp {
 
 export interface IFollowedResultItem {
 	from_user: number
-	to_user: IFollowResultItemUser
 	active: boolean
 	created: string
 	modified: string
+	to_user: IFollowResultItemUser
 }
 
 export interface IFollowResultItemUser {
