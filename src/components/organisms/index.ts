@@ -1,4 +1,5 @@
 export * from './Auth'
+export * from './Footer'
 export * from './Header'
 export * from './Settings'
 export * from './Sidebar'

@@ -17,11 +17,11 @@ import {
 	setUser,
 } from '../../../store'
 import { apiPrivate } from '../../../utils'
-import { HeaderCommon, Sidebar } from '../../organisms'
-
-import styles from './PrivateLayout.module.sass'
+import { FooterCommon, HeaderCommon, Sidebar } from '../../organisms'
 
 import NoAvatar from '../../../assets/img/img_no_avatar.png'
+
+import styles from './PrivateLayout.module.sass'
 
 const PrivateLayout = () => {
 	const access = getLocalAccessToken()
@@ -67,6 +67,12 @@ const PrivateLayout = () => {
 				<Sidebar {...{ showSidebar, navigate, hasAccess }} />
 				<Outlet />
 			</section>
+			<FooterCommon
+				navigate={navigate}
+				picture={picture ?? NoAvatar}
+				username={username ?? ''}
+				hasAccess={hasAccess}
+			/>
 		</main>
 	)
 }

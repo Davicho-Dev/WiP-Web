@@ -1,0 +1,1 @@
+export { FooterCommon } from './FooterCommon'
