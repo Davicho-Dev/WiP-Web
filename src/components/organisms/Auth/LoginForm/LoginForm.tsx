@@ -60,7 +60,8 @@ const LoginForm = () => {
 			localStorage.setItem('access', ACCESS)
 			localStorage.setItem('refresh', REFRESH)
 			localStorage.setItem('username', USERNAME)
-			localStorage.setItem('ID', payload.id)
+			localStorage.setItem('userID', payload.user_id)
+
 			dispatch(setHasAccess(true))
 
 			navigate('/')

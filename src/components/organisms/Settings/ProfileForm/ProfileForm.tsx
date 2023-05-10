@@ -1,15 +1,16 @@
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { PATTERN_EMAIL, getLocalUserId } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 import { setUser } from '../../../../store'
-import { SocialIcons, apiPrivate } from '../../../../utils'
+import { SocialIcons, SocialLabels, apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_picture.png'
@@ -49,6 +50,36 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
+	const [socialFields, setSocialFields] = useState<ISocial[]>([
+		{
+			network: 'SP',
+			url: '',
+		},
+		{
+			network: 'SC',
+			url: '',
+		},
+		{
+			network: 'IN',
+			url: '',
+		},
+		{
+			network: 'FB',
+			url: '',
+		},
+		{
+			network: 'TW',
+			url: '',
+		},
+		{
+			network: 'TK',
+			url: '',
+		},
+		{
+			network: 'WB',
+			url: '',
+		},
+	])
 
 	const { handleSubmit, register, watch, control } = useForm<IFormProps>({
 		defaultValues: {
@@ -60,7 +91,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 			phone_number,
 			sex,
 			username,
-			social,
+			social: socialFields,
 		},
 	})
 
@@ -96,6 +127,8 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 			const { data } = await apiPrivate.patch(`/users/${userID}/`, formData)
 
 			dispatch(setUser(data))
+
+			toast.success('Profile updated successfully')
 		} catch (err) {
 			hdlErrors(err as AxiosError)
 		} finally {
@@ -110,6 +143,11 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		// @ts-ignore
 		setAvatar(currentTarget?.files[0])
 	}
+
+	useEffect(() => {
+		if (social && social.length > 0)
+			setSocialFields(prevState => [...prevState, ...social])
+	}, [social])
 
 	return (
 		<form
@@ -178,7 +216,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 											className='text-sm mr-1'
 										/>
 									}
-									placeholder={`${network} URL`}
+									placeholder={`${SocialLabels(network!)} url`}
 									type='url'
 									register={{
 										...register(`social.${index}.url`, { value: url }),
@@ -196,7 +234,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 									className='hidden'
 								/>
 								<span
-									className={`flex gap-x-4 relative w-6 h-3.5 right-0 rounded-full m-auto top-0 bottom-0 transition-all duration-500 ease-in-out after:content-[''] after:absolute after:w-5 after:h-5 after:rounded-full after:m-auto after:top-0 after:bottom-0 after:transition-all after:duration-500 after:ease-in-out ${
+									className={`flex gap-x-4 relative w-6 h-3.5 right-0 rounded-full m-auto top-0 bottom-0 transition-all duration-500 ease-in-out after:content-[''] after:absolute after:w-5 after:h-5 after:rounded-full after:m-auto after:top-0 after:bottom-0 after:transition-all after:duration-500 after:ease-in-out cursor-pointer ${
 										watch('has_private_likes')
 											? 'bg-primary/20 after:bg-primary after:right-[calc(0%_-_0.625rem)]'
 											: 'bg-neutral-200 after:bg-neutral-600 after:right-[calc(100%_-_0.625rem)]'

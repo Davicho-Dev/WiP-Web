@@ -14,7 +14,7 @@ const getLocalUsername = () => {
 }
 
 const getLocalUserId = () => {
-	const userId = localStorage.getItem('ID')
+	const userId = localStorage.getItem('userID')
 	return userId
 }
 
