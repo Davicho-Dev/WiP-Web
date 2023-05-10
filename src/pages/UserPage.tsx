@@ -98,7 +98,7 @@ const ProfilePage = () => {
 						/>
 					</figure>
 					<aside className='grow self-center inline-grid md:!gap-y-2'>
-						<h1 className='text-sm md:text-2xl'>{username}</h1>
+						<h1 className='text-sm md:!text-2xl'>@{username}</h1>
 						<nav className='flex gap-x-4 mt-2 md:!mt-0'>
 							{social?.map(({ network, url }) => {
 								if (url && url !== '')
