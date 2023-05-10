@@ -2,10 +2,10 @@ export interface ISearchResp {
 	count?: number
 	next?: null
 	previous?: null
-	results: SearchUserResults[] | []
+	results: SearchResultUserItem[] | []
 }
 
-export interface SearchUserResults {
+export interface SearchResultUserItem {
 	id: number
 	public_name: string
 	username: string
