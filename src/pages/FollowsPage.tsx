@@ -2,27 +2,20 @@ import { useEffect, useState } from 'react'
 
 import { AxiosError } from 'axios'
 import { useParams } from 'react-router-dom'
-
-import { Tabs, UserCard } from '../components/molecules'
-import { hdlErrors } from '../helpers'
-import { apiPrivate } from '../utils'
-import { FormInput, TabItem } from '../components/atoms'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-	faHeart,
-	faMagnifyingGlass,
-	faTableCells,
-	faUnlockKeyhole,
-} from '@fortawesome/free-solid-svg-icons'
 import { v4 } from 'uuid'
+
+import { FormInput } from '../components/atoms'
+import { UserCard } from '../components/molecules'
+import { hdlErrors } from '../helpers'
 import {
-	IFollowResultItem,
 	IFollowedResp,
 	IFollowedResultItem,
 	IFollowersResp,
 	IFollowersResultItem,
-	IFollowsResp,
 } from '../interfaces'
+import { apiPrivate } from '../utils'
 
 const tabs = [
 	{
