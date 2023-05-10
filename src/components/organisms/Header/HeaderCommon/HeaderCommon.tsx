@@ -1,6 +1,7 @@
 import {
 	faBars,
 	faBell,
+	faBellConcierge,
 	faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,7 @@ import { Avatar, IcLogo } from '../../../atoms'
 
 import { IHeaderPrivateProps } from './HeaderCommon.interfaces'
 import styles from './HeaderCommon.module.sass'
+import { faMessage } from '@fortawesome/free-regular-svg-icons'
 
 export const HeaderCommon = ({
 	navigate,
@@ -25,10 +27,10 @@ export const HeaderCommon = ({
 			icon={faBars}
 		/>
 		<IcLogo
-			className='h-8 fill-secondary cursor-pointer'
+			className='h-5 md:!h-8 fill-secondary cursor-pointer'
 			onClick={() => navigate(hasAccess ? '/' : '/auth')}
 		/>
-		<nav className='flex justify-between items-center gap-x-8'>
+		<nav className='flex justify-end items-center gap-x-8 grow'>
 			<Link
 				className='w-fit h-fit leading-none'
 				to={hasAccess ? '/search' : '/auth'}
@@ -38,9 +40,14 @@ export const HeaderCommon = ({
 					className='text-xl text-white'
 				/>
 			</Link>
-			<FontAwesomeIcon icon={faBell} className='text-xl text-secondary' />
+			<FontAwesomeIcon
+				icon={faMessage}
+				className='text-xl text-white block lg:!hidden'
+			/>
+			<FontAwesomeIcon icon={faBell} className='text-xl text-white' />
 			<Avatar
 				src={picture}
+				className='hidden lg:!block'
 				title={username}
 				onClick={() => navigate(hasAccess ? `/user/${username}` : '/auth')}
 			/>
