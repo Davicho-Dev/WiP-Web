@@ -13,7 +13,7 @@ import { setUser } from '../../../../store'
 import { SocialIcons, SocialLabels, apiPrivate } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
-import DummyImg from '../../../../assets/img/img_no_picture.png'
+import DummyImg from '../../../../assets/img/img_no_avatar.png'
 
 interface IFormProps {
 	about: string

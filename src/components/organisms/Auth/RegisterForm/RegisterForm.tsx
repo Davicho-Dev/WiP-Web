@@ -4,6 +4,7 @@ import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { PATTERN_EMAIL, PATTERN_PASSWORD } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
@@ -15,7 +16,6 @@ import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 import IcHands from '../../../../assets/img/img_hands.png'
 
 import styles from './RegisterForm.module.sass'
-import { Link } from 'react-router-dom'
 
 interface IFormProps {
 	email: string

@@ -17,7 +17,7 @@ import { hdlErrors } from '../../helpers'
 import { apiPrivate, apiPublic } from '../../utils'
 
 import IcHands from '../../assets/img/img_hands.png'
-import DummyImg from '../../assets/img/img_no_picture.png'
+import DummyImg from '../../assets/img/img_no_avatar.png'
 
 interface IAuthResp {
 	ACCESS: string

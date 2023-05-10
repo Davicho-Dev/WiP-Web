@@ -13,7 +13,7 @@ import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
 import { SocialIcons, apiPrivate } from '../utils'
 
-import DummyImg from '../assets/img/img_no_picture.png'
+import DummyImg from '../assets/img/img_no_avatar.png'
 
 const ProfilePage = () => {
 	const { username } = useParams()
@@ -68,7 +68,6 @@ const ProfilePage = () => {
 					</figure>
 					<aside className='grow self-center inline-grid md:!gap-y-2'>
 						<h1 className='text-sm md:text-2xl'>{username}</h1>
-						<h5 className='text-sm md:text-2xl'>Electronic music</h5>
 						<nav className='flex gap-x-4 mt-2 md:!mt-0'>
 							{social?.map(({ network, url }) => {
 								if (url && url !== '')
