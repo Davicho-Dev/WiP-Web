@@ -25,7 +25,7 @@ export const Tabs = ({
 }: ITabsProps): JSX.Element => {
 	return (
 		<nav
-			className={`w-full flex grid-flow-col grid-cols-3 justify-center border-b border-b-neutral-300 ${className}`}
+			className={`w-full flex justify-center border-b border-b-neutral-300 ${className}`}
 		>
 			<TabItem
 				isActive={currentTab === 0}
