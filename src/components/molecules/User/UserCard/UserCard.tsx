@@ -54,12 +54,12 @@ export const UserCard = ({
 			<Avatar
 				className='w-11 h-11 shrink-0 cursor-pointer'
 				src={picture ?? DummyImg}
-				onClick={() => navigate(`/users/${username}`)}
+				onClick={() => navigate(`/user/${username}`)}
 			/>
 			<article className='grow shrink'>
 				<h1
 					className='w-max md:!w-fit text-sm line-clamp-1 text-ellipsis cursor-pointer'
-					onClick={() => navigate(`/users/${username}`)}
+					onClick={() => navigate(`/user/${username}`)}
 				>
 					{public_name}
 				</h1>
