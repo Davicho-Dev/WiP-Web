@@ -1,6 +1,4 @@
 export { apiPrivate } from './apiPrivate'
 export { apiPublic } from './apiPublic'
-// export { SocialIcons } from './SocialIcons'
-export { SocialIcons } from './SocialIcons'
-// export { SocialLabels } from './SocialLabels'
-export { SocialLabels } from './SocialLabels'
+export { socialIcons } from './socialIcons'
+export { socialLabels } from './socialLabels'

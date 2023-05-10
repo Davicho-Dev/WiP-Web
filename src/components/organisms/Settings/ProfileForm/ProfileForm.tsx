@@ -10,7 +10,7 @@ import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 import { setUser } from '../../../../store'
-import { SocialIcons, SocialLabels, apiPrivate } from '../../../../utils'
+import { apiPrivate, socialIcons, socialLabels } from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_avatar.png'
@@ -212,11 +212,11 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 									key={id}
 									icon={
 										<FontAwesomeIcon
-											icon={SocialIcons(network!)!}
+											icon={socialIcons(network!)!}
 											className='text-sm mr-1'
 										/>
 									}
-									placeholder={`${SocialLabels(network!)} url`}
+									placeholder={`${socialLabels(network!)} url`}
 									type='url'
 									register={{
 										...register(`social.${index}.url`, { value: url }),

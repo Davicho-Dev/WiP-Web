@@ -11,7 +11,7 @@ import { PostItemCompact, Tabs } from '../components/molecules'
 import { getLocalUsername } from '../constants'
 import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
-import { SocialIcons, apiPrivate } from '../utils'
+import { socialIcons, apiPrivate } from '../utils'
 
 import DummyImg from '../assets/img/img_no_avatar.png'
 
@@ -80,7 +80,7 @@ const ProfilePage = () => {
 										>
 											<FontAwesomeIcon
 												className='!text-primary cursor-pointer'
-												icon={SocialIcons(network!)!}
+												icon={socialIcons(network!)!}
 											/>
 										</a>
 									)

@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 import { faWindowMaximize } from '@fortawesome/free-regular-svg-icons'
 
-export const SocialIcons = (icon: string) => {
+export const socialIcons = (icon: string) => {
 	return {
 		SP: faSpotify,
 		SC: faSoundcloud,
