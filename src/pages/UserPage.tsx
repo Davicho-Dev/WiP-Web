@@ -12,11 +12,15 @@ import { getLocalUsername } from '../constants'
 import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
 import { socialIcons, apiPrivate } from '../utils'
+import { useAppSelector } from '../hooks'
+import { RootState } from '../store'
 
 import DummyImg from '../assets/img/img_no_avatar.png'
 
 const ProfilePage = () => {
 	const { username } = useParams()
+
+	const { hasAccess } = useAppSelector((state: RootState) => state.ui)
 
 	const [currentTab, setCurrentTab] = useState<number>(0)
 	const [onLoading, setOnLoading] = useState<boolean>(false)
@@ -139,7 +143,9 @@ const ProfilePage = () => {
 							onSuccess={followSuccess}
 							disabled={onLoading}
 							className='w-fit px-6 bg-transparent border-neutral-800 border'
-							onClick={() => followUser(id!, isFollowed)}
+							onClick={() =>
+								hasAccess ? followUser(id!, isFollowed) : navigate('/auth')
+							}
 						/>
 						<ButtonSolid
 							label='Request contact'

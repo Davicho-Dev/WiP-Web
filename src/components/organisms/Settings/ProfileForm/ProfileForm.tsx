@@ -1,4 +1,4 @@
-import { FormEventHandler, useEffect, useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
@@ -26,6 +26,7 @@ interface IFormProps {
 	has_private_likes: boolean
 	social: ISocial[]
 }
+
 interface ISocial {
 	id?: number
 	network?: string
@@ -50,36 +51,6 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 
 	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const [avatar, setAvatar] = useState<File>()
-	const [socialFields, setSocialFields] = useState<ISocial[]>([
-		{
-			network: 'SP',
-			url: '',
-		},
-		{
-			network: 'SC',
-			url: '',
-		},
-		{
-			network: 'IN',
-			url: '',
-		},
-		{
-			network: 'FB',
-			url: '',
-		},
-		{
-			network: 'TW',
-			url: '',
-		},
-		{
-			network: 'TK',
-			url: '',
-		},
-		{
-			network: 'WB',
-			url: '',
-		},
-	])
 
 	const { handleSubmit, register, watch, control } = useForm<IFormProps>({
 		defaultValues: {
@@ -91,7 +62,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 			phone_number,
 			sex,
 			username,
-			social: socialFields,
+			social,
 		},
 	})
 
@@ -143,11 +114,6 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 		// @ts-ignore
 		setAvatar(currentTarget?.files[0])
 	}
-
-	useEffect(() => {
-		if (social && social.length > 0)
-			setSocialFields(prevState => [...prevState, ...social])
-	}, [social])
 
 	return (
 		<form

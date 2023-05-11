@@ -7,6 +7,5 @@ export const socialNames = (network: string) => {
 		TW: 'Twitter',
 		TK: 'Tiktok',
 		WB: 'Web',
-		WB2: 'Web',
 	}[network]
 }
