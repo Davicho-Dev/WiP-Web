@@ -34,6 +34,7 @@ const ForgotPasswordForm = () => {
 		try {
 			await apiPublic.post('/auth/forgot-password/', {
 				...formData,
+				channel: 'Email',
 			})
 
 			setSuccess(true)

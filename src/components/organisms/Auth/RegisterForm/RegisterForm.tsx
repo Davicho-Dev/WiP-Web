@@ -53,6 +53,7 @@ const RegisterForm = () => {
 				email,
 				password,
 				accept_terms_and_conditions,
+				channel: 'Email',
 			})
 
 			setSuccess(true)
