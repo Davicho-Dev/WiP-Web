@@ -6,9 +6,11 @@ export interface ISearchResp {
 }
 
 export interface SearchResultUserItem {
+	followed: boolean
+	follower: boolean
 	id: number
+	picture: null | string
+	public_email: string
 	public_name: string
 	username: string
-	picture: null | string
-	followed: boolean
 }

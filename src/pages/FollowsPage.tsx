@@ -134,7 +134,7 @@ const FollowsPage = () => {
 							<UserCard
 								followed={followed}
 								id={from_user?.id}
-								isFollower={follower}
+								follower={follower}
 								key={v4()}
 								picture={from_user?.picture}
 								username={from_user?.username}
@@ -150,7 +150,7 @@ const FollowsPage = () => {
 							<UserCard
 								followed={followed}
 								id={to_user?.id}
-								isFollower={follower}
+								follower={follower}
 								key={v4()}
 								picture={to_user?.picture}
 								username={to_user?.username}

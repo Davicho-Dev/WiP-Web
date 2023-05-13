@@ -81,7 +81,7 @@ const SearchPage = () => {
 				<section className='w-full md:!w-4/5 lg:!w-3/5 py-10 grid gap-y-6 mx-auto px-4 md:!px-0'>
 					{userList.length > 0 ? (
 						userList.map(user => (
-							<UserCard key={user.id} {...user} isFollower={user.followed} />
+							<UserCard key={user.id} {...user} />
 						))
 					) : (
 						<h1>No user</h1>

@@ -12,9 +12,9 @@ import DummyImg from '../../../../assets/img/img_no_avatar.png'
 
 export const UserCard = ({
 	followed,
+	follower,
 	id,
 	picture,
-	isFollower,
 	username,
 }: IUserCardProps): JSX.Element => {
 	const [isFollowed, setIsFollowed] = useState<boolean>(followed)
@@ -63,7 +63,7 @@ export const UserCard = ({
 					@{username}
 				</h1>
 				<h5 className='w-max md:!w-fit text-xs line-clamp-1 text-ellipsis'>
-					{isFollower ? 'Follows you' : null}
+					{follower ? 'Follows you' : null}
 				</h5>
 			</article>
 			<ButtonSolid
