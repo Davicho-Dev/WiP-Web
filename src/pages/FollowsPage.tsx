@@ -130,40 +130,32 @@ const FollowsPage = () => {
 			<section className='w-full md:!w-4/5 lg:!w-3/5 py-10 grid gap-y-6 mx-auto px-4 md:!px-0'>
 				{currentTab === 0 ? (
 					followsList.length > 0 ? (
-						followsList.map(
-							({ active, from_user, created, modified, to_user }) => (
-								<UserCard
-									followed={active}
-									isFollower={active}
-									username={from_user?.username}
-									key={v4()}
-									id={from_user?.id}
-									picture={from_user?.picture}
-									public_name={
-										from_user?.first_name + ' ' + from_user?.last_name
-									}
-								/>
-							)
-						)
+						followsList.map(({ from_user, followed, follower }) => (
+							<UserCard
+								followed={followed}
+								id={from_user?.id}
+								isFollower={follower}
+								key={v4()}
+								picture={from_user?.picture}
+								username={from_user?.username}
+							/>
+						))
 					) : (
 						<h1 className='mx-auto py-80'>Nobody is following you yet</h1>
 					)
 				) : null}
 				{currentTab === 1 ? (
 					followedList.length > 0 ? (
-						followedList.map(
-							({ active, from_user, created, modified, to_user }) => (
-								<UserCard
-									followed={active!}
-									isFollower={active}
-									username={to_user?.username}
-									key={v4()}
-									id={to_user?.id}
-									picture={to_user?.picture}
-									public_name={to_user?.first_name + ' ' + to_user?.last_name}
-								/>
-							)
-						)
+						followedList.map(({ to_user, followed, follower }) => (
+							<UserCard
+								followed={followed}
+								id={to_user?.id}
+								isFollower={follower}
+								key={v4()}
+								picture={to_user?.picture}
+								username={to_user?.username}
+							/>
+						))
 					) : (
 						<h1 className='mx-auto py-80'>You are not following anyone yet</h1>
 					)

@@ -49,12 +49,10 @@ const ForgotPasswordVerificationPage = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPrivate.patch(`/users/${payload.user_id}/`, {
+			await apiPrivate.patch(`/users/${payload.user_id}/`, {
 				password: formData.password,
 			})
 
-			console.log(formData)
-			console.log(data)
 			setShowModal(true)
 		} catch (err) {
 			hdlErrors(err as AxiosError)

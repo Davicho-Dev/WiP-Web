@@ -66,6 +66,7 @@ const RegisterVerificationPage = () => {
 			await apiPrivate.patch(`/users/${payload.user_id}/`, formData)
 
 			localStorage.setItem('username', username!)
+			localStorage.setItem('userID', payload.user_id)
 
 			navigate('/')
 		} catch (err) {
@@ -141,7 +142,9 @@ const RegisterVerificationPage = () => {
 								<label>Create your username</label>
 								<FormInput
 									placeholder='User name'
-									register={{ ...register('username') }}
+									register={{
+										...register('username'),
+									}}
 								/>
 							</fieldset>
 							<fieldset>
@@ -157,7 +160,9 @@ const RegisterVerificationPage = () => {
 							<ButtonSolid
 								className='w-1/2 justify-self-end !bg-secondary gap-x-2 flex-row-reverse'
 								label='Next'
-								icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
+								icon={
+									<FontAwesomeIcon icon={faCircleArrowRight} className='mr-1' />
+								}
 								onClick={() => setStep(2)}
 								type='button'
 							/>
@@ -234,7 +239,7 @@ const RegisterVerificationPage = () => {
 					label="Let's do it"
 					className='w-1/2 gap-x-2 flex-row-reverse'
 					disabled={!success}
-					icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
+					icon={<FontAwesomeIcon icon={faCircleArrowRight} className='mr-1' />}
 					onClick={() => setShowNextStep(true)}
 				/>
 			</section>

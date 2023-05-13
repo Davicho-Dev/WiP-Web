@@ -17,13 +17,12 @@ import { setCurrentAuthForm } from '../store'
 
 const AuthPage = () => {
 	const { currentForm } = useParams()
+	const { loginWithRedirect } = useAuth0()
 
 	const { currentAuthForm, showAuthFormFooter } = useAppSelector(
 		state => state.ui
 	)
 	const dispatch = useAppDispatch()
-
-	const { loginWithRedirect } = useAuth0()
 
 	const hdlLogin = async () => {
 		await loginWithRedirect({

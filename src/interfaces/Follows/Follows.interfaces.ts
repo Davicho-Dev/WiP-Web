@@ -7,10 +7,12 @@ export interface IFollowersResp {
 
 export interface IFollowersResultItem {
 	from_user: IFollowResultItemUser
-	to_user: number
 	active: boolean
 	created: string
 	modified: string
+	to_user: number
+	follower: boolean
+	followed: boolean
 }
 
 export interface IFollowedResp {
@@ -25,6 +27,8 @@ export interface IFollowedResultItem {
 	active: boolean
 	created: string
 	modified: string
+	follower: boolean
+	followed: boolean
 	to_user: IFollowResultItemUser
 }
 
@@ -39,7 +43,11 @@ export interface IFollowResultItemUser {
 	social: ISocial[]
 	follower_count: number
 	following_count: number
+	has_private_likes: boolean
+	followed: boolean
+	follower: boolean
 }
+
 export interface ISocial {
 	id?: number
 	network?: string
