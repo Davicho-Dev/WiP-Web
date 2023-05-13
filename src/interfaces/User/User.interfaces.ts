@@ -16,6 +16,9 @@ export interface IUser {
 	sex?: string
 	social?: ISocial[]
 	username?: string
+	middle_name?: string
+	followed?: boolean
+	follower?: boolean
 }
 
 interface ISocial {

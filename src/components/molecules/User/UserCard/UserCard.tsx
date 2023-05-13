@@ -14,7 +14,6 @@ export const UserCard = ({
 	followed,
 	id,
 	picture,
-	public_name,
 	isFollower,
 	username,
 }: IUserCardProps): JSX.Element => {
@@ -56,12 +55,12 @@ export const UserCard = ({
 				src={picture ?? DummyImg}
 				onClick={() => navigate(`/user/${username}`)}
 			/>
-			<article className='grow shrink'>
+			<article className='inline-flex flex-col justify-center grow shrink'>
 				<h1
 					className='w-max md:!w-fit text-sm line-clamp-1 text-ellipsis cursor-pointer'
 					onClick={() => navigate(`/user/${username}`)}
 				>
-					{public_name}
+					@{username}
 				</h1>
 				<h5 className='w-max md:!w-fit text-xs line-clamp-1 text-ellipsis'>
 					{isFollower ? 'Follows you' : null}

@@ -45,11 +45,10 @@ const ProfilePage = () => {
 		setOnLoading(true)
 
 		try {
-			const { data } = await apiPrivate.get(`/users/${username}/`)
+			const { data } = await apiPrivate.get<IUser>(`/users/${username}/`)
 
 			setUser(data)
-			// TODO: Update follower count
-			// setIsFollowed(data.followed)
+			setIsFollowed(data.followed!)
 		} catch (err) {
 			hdlErrors(err as AxiosError)
 		} finally {
