@@ -40,6 +40,7 @@ const RegisterForm = () => {
 		handleSubmit,
 		getValues,
 		formState: { errors },
+		watch,
 	} = useForm<IFormProps>()
 
 	const onSubmit = async (formData: IFormProps) => {
@@ -73,7 +74,7 @@ const RegisterForm = () => {
 				<ButtonSolid
 					label="Let's do it"
 					className='w-1/2'
-					icon={<FontAwesomeIcon icon={faCircleArrowRight} />}
+					icon={<FontAwesomeIcon icon={faCircleArrowRight} className='mr-1' />}
 				/>
 			</section>
 		)
@@ -144,11 +145,34 @@ const RegisterForm = () => {
 				onError={errors.password_confirmation ? true : false}
 			/>
 			<fieldset className='w-full flex gap-x-2 items-center'>
-				<input
-					type='checkbox'
-					className='rounded-full'
-					{...register('accept_terms_and_conditions', { required: true })}
-				/>
+				<label
+					htmlFor='terms_conditions'
+					data-error={errors.accept_terms_and_conditions?.message}
+					className={`w-4 h-4 border border-neutral-800 rounded-full cursor-pointer relative before:bg-primary before:absolute before:m-auto before:inset-0 before:rounded-full before:transition-all before:ease-in before:duration-200 ${
+						watch('accept_terms_and_conditions')
+							? 'before:w-2.5 before:h-2.5'
+							: 'before:w-0 before:h-0'
+					} 
+					after:absolute after:w-fit after:h-fit after:top-[calc(100%_+_0.5rem)] after:mx-auto after:inset-x-0 after:text-xs after:whitespace-nowrap
+					${
+						errors.accept_terms_and_conditions
+							? `after:text-red-700 after:content-[attr(data-error)]`
+							: ''
+					}
+					`}
+				>
+					<input
+						id='terms_conditions'
+						type='checkbox'
+						className='hidden'
+						{...register('accept_terms_and_conditions', {
+							required: {
+								value: true,
+								message: 'Accept terms & conditions before you continue',
+							},
+						})}
+					/>
+				</label>
 				<Link
 					to='/auth/terms-and-conditions'
 					className='text-primary underline cursor-pointer'
