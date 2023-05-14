@@ -1,7 +1,7 @@
 export interface IFollowersResp {
-	count?: number
-	next?: null
-	previous?: null
+	count: number
+	next: null | string
+	previous: null | string
 	results: IFollowersResultItem[] | []
 }
 
@@ -16,9 +16,9 @@ export interface IFollowersResultItem {
 }
 
 export interface IFollowedResp {
-	count?: number
-	next?: null
-	previous?: null
+	count: number
+	next: null | string
+	previous: null | string
 	results: IFollowedResultItem[] | []
 }
 
