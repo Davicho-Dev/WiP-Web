@@ -44,7 +44,6 @@ export const UserCard = ({
 		}
 	}
 
-	// FIXME: Mobile view
 	return (
 		<article
 			key={id}
@@ -55,14 +54,14 @@ export const UserCard = ({
 				src={picture ?? DummyImg}
 				onClick={() => navigate(`/user/${username}`)}
 			/>
-			<article className='inline-flex flex-col justify-center grow shrink'>
+			<article className='min-w-[46%] max-w-[54%] md:!max-w-full inline-flex flex-col justify-center grow shrink text-lefts'>
 				<h1
-					className='w-max md:!w-fit text-sm line-clamp-1 text-ellipsis cursor-pointer'
+					className='w-full text-sm line-clamp-1 text-ellipsis break-words overflow-hidden cursor-pointer'
 					onClick={() => navigate(`/user/${username}`)}
 				>
-					@{username}
+					{`@${username}`}
 				</h1>
-				<h5 className='w-max md:!w-fit text-xs line-clamp-1 text-ellipsis'>
+				<h5 className='w-full text-xs line-clamp-1 text-ellipsis break-words overflow-hidden'>
 					{follower ? 'Follows you' : null}
 				</h5>
 			</article>
