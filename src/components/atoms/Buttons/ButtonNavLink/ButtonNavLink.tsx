@@ -18,7 +18,7 @@ export const ButtonNavLink = ({
 			className={({ isActive }) =>
 				`w-full h-10 grid items-center px-4 border-2 border-neutral-800 rounded-3xl ${
 					isActive ? 'bg-neutral-800 text-secondary' : 'text-neutral-800'
-				}  ${className}`
+				} ${className}`
 			}
 			to={to}
 		>

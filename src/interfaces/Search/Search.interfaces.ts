@@ -1,7 +1,7 @@
 export interface ISearchResp {
 	count?: number
-	next?: null
-	previous?: null
+	next: null | string
+	previous?: null | string
 	results: SearchResultUserItem[] | []
 }
 
