@@ -294,45 +294,49 @@ const FollowsPage = () => {
 					/>
 				}
 			>
-				{currentTab === 0 && !onSearch ? (
-					followsList.length > 0 ? (
-						followsList.map(({ from_user, followed, follower }) => (
-							<UserCard
-								followed={followed}
-								id={from_user?.id}
-								follower={follower}
-								key={v4()}
-								picture={from_user?.picture}
-								username={from_user?.username}
-							/>
-						))
-					) : (
-						<h1 className='mx-auto py-80'>Nobody is following you yet</h1>
-					)
-				) : null}
-				{currentTab === 1 && !onSearch ? (
-					followedList.length > 0 ? (
-						followedList.map(({ to_user, followed, follower }) => (
-							<UserCard
-								followed={followed}
-								id={to_user?.id}
-								follower={follower}
-								key={v4()}
-								picture={to_user?.picture}
-								username={to_user?.username}
-							/>
-						))
-					) : (
-						<h1 className='mx-auto py-80'>You are not following anyone yet</h1>
-					)
-				) : null}
-				{onSearch ? (
-					searchList.length > 0 ? (
-						searchList.map(user => <UserCard key={v4()} {...user} />)
-					) : (
-						<h1 className='mx-auto py-80'>No results found</h1>
-					)
-				) : null}
+				<section className='w-full md:!w-4/5 lg:!w-3/5 py-10 grid gap-y-6 mx-auto px-4 md:!px-0'>
+					{currentTab === 0 && !onSearch ? (
+						followsList.length > 0 ? (
+							followsList.map(({ from_user, followed, follower }) => (
+								<UserCard
+									followed={followed}
+									id={from_user?.id}
+									follower={follower}
+									key={v4()}
+									picture={from_user?.picture}
+									username={from_user?.username}
+								/>
+							))
+						) : (
+							<h1 className='mx-auto py-80'>Nobody is following you yet</h1>
+						)
+					) : null}
+					{currentTab === 1 && !onSearch ? (
+						followedList.length > 0 ? (
+							followedList.map(({ to_user, followed, follower }) => (
+								<UserCard
+									followed={followed}
+									id={to_user?.id}
+									follower={follower}
+									key={v4()}
+									picture={to_user?.picture}
+									username={to_user?.username}
+								/>
+							))
+						) : (
+							<h1 className='mx-auto py-80'>
+								You are not following anyone yet
+							</h1>
+						)
+					) : null}
+					{onSearch ? (
+						searchList.length > 0 ? (
+							searchList.map(user => <UserCard key={v4()} {...user} />)
+						) : (
+							<h1 className='mx-auto py-80'>No results found</h1>
+						)
+					) : null}
+				</section>
 			</InfiniteScroll>
 		</main>
 	)
