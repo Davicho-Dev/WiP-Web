@@ -15,19 +15,8 @@ import { ButtonSolid, FormInput, FormInputPassword } from '../../../atoms'
 
 import IcHands from '../../../../assets/img/img_hands.png'
 
+import { IFormProps, IRegisterResp } from './RegisterForm.interfaces'
 import styles from './RegisterForm.module.sass'
-
-interface IFormProps {
-	email: string
-	password: string
-	password_confirmation: string
-	accept_terms_and_conditions: boolean
-}
-
-interface IRegisterResp {
-	ACCESS: string
-	REFRESH: string
-}
 
 const RegisterForm = () => {
 	const [onLoading, setOnLoading] = useState<boolean>(false)
@@ -95,7 +84,7 @@ const RegisterForm = () => {
 						},
 					}),
 				}}
-				onError={errors.email ? true : false}
+				onError={!!errors.email}
 			/>
 			<FormInputPassword
 				placeholder='Password'
@@ -119,7 +108,7 @@ const RegisterForm = () => {
 						},
 					}),
 				}}
-				onError={errors.password ? true : false}
+				onError={!!errors.password}
 			/>
 			<FormInputPassword
 				placeholder='Repeat Password'
@@ -142,7 +131,7 @@ const RegisterForm = () => {
 						},
 					}),
 				}}
-				onError={errors.password_confirmation ? true : false}
+				onError={!!errors.password_confirmation}
 			/>
 			<fieldset className='w-full flex gap-x-2 items-center'>
 				<label

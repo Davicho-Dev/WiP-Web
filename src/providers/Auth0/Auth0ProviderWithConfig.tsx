@@ -29,7 +29,7 @@ const Auth0ProviderWithConfig = ({
 			authorizationParams={{
 				redirect_uri: redirectUri,
 				scope,
-				audience,
+				// audience,
 			}}
 			onRedirectCallback={onRedirectCallback}
 		>
