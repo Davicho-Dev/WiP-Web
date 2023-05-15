@@ -159,7 +159,7 @@ const FollowsPage = () => {
 		try {
 			const { data } = await apiPrivate.get<ISearchFollowsResp>(`/users/`, {
 				params: {
-					follower: currentTab === 0 ? target.value : null,
+					followers: currentTab === 0 ? target.value : null,
 					followed: currentTab === 1 ? target.value : null,
 					limit: 20,
 				},
