@@ -16,8 +16,15 @@ import { useAppDispatch, useAppSelector } from '../hooks'
 import { setCurrentAuthForm } from '../store'
 
 const AuthPage = () => {
+	const {
+		loginWithRedirect,
+		loginWithPopup,
+		isAuthenticated,
+		getAccessTokenSilently,
+		user,
+	} = useAuth0()
+
 	const { currentForm } = useParams()
-	const { loginWithRedirect } = useAuth0()
 
 	const { currentAuthForm, showAuthFormFooter } = useAppSelector(
 		state => state.ui
@@ -25,12 +32,27 @@ const AuthPage = () => {
 	const dispatch = useAppDispatch()
 
 	const hdlLogin = async () => {
-		await loginWithRedirect({
-			appState: {
-				returnTo: '/',
+		// await loginWithRedirect({
+		// 	appState: {
+		// 		returnTo: '/',
+		// 	},
+		// })
+
+		await loginWithPopup({
+			authorizationParams: {
+				scope: 'openid profile email',
 			},
 		})
 	}
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			getAccessTokenSilently().then(token => {
+				console.log(token)
+			})
+			console.log(user)
+		}
+	}, [isAuthenticated, getAccessTokenSilently, user])
 
 	useEffect(() => {
 		if (currentForm) dispatch(setCurrentAuthForm(currentForm))
