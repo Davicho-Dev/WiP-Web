@@ -13,8 +13,8 @@ const Auth0ProviderWithConfig = ({
 	const domain = import.meta.env.VITE_AUTH0_DOMAIN
 	const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID
 	const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL
-	const audience = 'https://api.wip.taipi.com.co/api/v1/'
 	const scope = import.meta.env.VITE_AUTH0_SCOPE
+	const audience = 'https://davicho-dev.us.auth0.com/api/v2/'
 
 	const onRedirectCallback = (appState?: AppState) => {
 		navigate(appState?.returnTo || window.location.pathname)
@@ -29,7 +29,7 @@ const Auth0ProviderWithConfig = ({
 			authorizationParams={{
 				redirect_uri: redirectUri,
 				scope,
-				// audience,
+				audience,
 			}}
 			onRedirectCallback={onRedirectCallback}
 		>

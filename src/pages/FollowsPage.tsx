@@ -38,8 +38,6 @@ const FollowsPage = () => {
 	const [followsList, setFollowsList] = useState<IFollowersResultItem[]>([])
 	const [followedList, setFollowedList] = useState<IFollowedResultItem[]>([])
 	const [searchList, setSearchList] = useState<ISearchFollowsResultItem[]>([])
-	const [count, setCount] = useState<number>(0)
-
 	const [offset, setOffset] = useState<number>(0)
 	const [keyword, setKeyword] = useState<string>('')
 	const [hasMoreResults, setHasMoreResults] = useState<boolean>(false)
