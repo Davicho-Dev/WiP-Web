@@ -13,8 +13,8 @@ const Auth0ProviderWithConfig = ({
 	const domain = import.meta.env.VITE_AUTH0_DOMAIN
 	const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID
 	const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL
-	const scope = 'openid profile email'
 	const audience = 'https://api.wip.taipi.com.co/api/v1/'
+	const scope = import.meta.env.VITE_AUTH0_SCOPE
 
 	const onRedirectCallback = (appState?: AppState) => {
 		navigate(appState?.returnTo || window.location.pathname)
