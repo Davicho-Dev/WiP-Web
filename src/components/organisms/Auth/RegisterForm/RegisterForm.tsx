@@ -58,7 +58,10 @@ const RegisterForm = () => {
 	if (success)
 		return (
 			<section className='grid justify-items-center gap-y-6'>
-				<h1 className='text-4xl'>Successfully registered user</h1>
+				<h1 className='text-xl text-center'>
+					We have sent you a verification model, please verify it to continue
+					the process
+				</h1>
 				<img className='w-20' src={IcHands} alt='' />
 				<ButtonSolid
 					label="Let's do it"
