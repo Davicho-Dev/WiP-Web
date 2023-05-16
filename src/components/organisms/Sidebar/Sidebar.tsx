@@ -29,6 +29,7 @@ export const Sidebar = ({
 
 	const hdlLogout = () => {
 		dispatch(clearUser())
+
 		logout({ navigate })
 
 		//auth0Logout({ logoutParams: { returnTo: '/auth' } })
