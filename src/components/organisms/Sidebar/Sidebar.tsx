@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom'
 import { ButtonNavLink, ButtonSolid } from '../../atoms'
 import { useAppDispatch } from '../../../hooks'
 import { clearUser } from '../../../store'
+import { logout } from '../../../helpers'
 
 import { ISidebarProps } from './Sidebar.interfaces'
 import styles from './Sidebar.module.sass'
@@ -28,6 +29,7 @@ export const Sidebar = ({
 
 	const hdlLogout = () => {
 		dispatch(clearUser())
+		logout({ navigate })
 
 		//auth0Logout({ logoutParams: { returnTo: '/auth' } })
 		navigate('/auth')
