@@ -2,12 +2,11 @@ import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
 export const hdlErrors = (err: AxiosError) => {
-	const { response, status } = err
+	const { response, request } = err
 
-	console.log({ err })
-
-	if (!response || !response.data || status === '500') {
+	if (!response || !response.data || request.status === 500) {
 		toast.error('Network Error')
+
 		return
 	}
 
