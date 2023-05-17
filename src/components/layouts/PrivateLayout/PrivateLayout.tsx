@@ -25,14 +25,14 @@ import styles from './PrivateLayout.module.sass'
 
 const PrivateLayout = () => {
 	const access = getLocalAccessToken()
-	const refresh = getLocalRefreshToken()
 
 	const navigate = useNavigate()
 
-	const { picture, username } = useAppSelector((state: RootState) => state.user)
-	const { hasAccess, showSidebar } = useAppSelector(
-		(state: RootState) => state.ui
-	)
+	const {
+		user: { picture, username },
+		ui: { hasAccess, showSidebar },
+	} = useAppSelector((state: RootState) => state)
+
 	const dispatch = useAppDispatch()
 
 	const getUser = async () => {
@@ -48,7 +48,7 @@ const PrivateLayout = () => {
 	}
 
 	useEffect(() => {
-		if (access) {
+		if (access && hasAccess) {
 			getUser()
 			dispatch(setHasAccess(true))
 		}
