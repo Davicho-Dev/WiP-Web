@@ -17,11 +17,11 @@ import { setCurrentAuthForm } from '../store'
 
 const AuthPage = () => {
 	const {
-		loginWithRedirect,
 		loginWithPopup,
 		isAuthenticated,
 		getAccessTokenSilently,
 		user,
+		getIdTokenClaims,
 	} = useAuth0()
 
 	const { currentForm } = useParams()
@@ -47,8 +47,11 @@ const AuthPage = () => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			getAccessTokenSilently().then(token => {
-				console.log(token)
+			getAccessTokenSilently().then(access => {
+				console.log(access)
+			})
+			getIdTokenClaims().then(id => {
+				console.log(id)
 			})
 			console.log(user)
 		}
