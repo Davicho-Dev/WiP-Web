@@ -27,13 +27,12 @@ export const Sidebar = ({
 	const { logout: auth0Logout } = useAuth0()
 	const dispatch = useAppDispatch()
 
-	const hdlLogout = () => {
+	const hdlLogout = async () => {
 		dispatch(clearUser())
 
-		logout({ navigate })
+		await localStorage.clear()
 
-		//auth0Logout({ logoutParams: { returnTo: '/auth' } })
-		navigate('/auth')
+		auth0Logout({ logoutParams: { returnTo: '/auth' } })
 	}
 
 	return (

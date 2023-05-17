@@ -38,12 +38,6 @@ const AuthPage = () => {
 	const dispatch = useAppDispatch()
 
 	const hdlLogin = async () => {
-		// await loginWithRedirect({
-		// 	appState: {
-		// 		returnTo: '/',
-		// 	},
-		// })
-
 		await loginWithPopup({
 			authorizationParams: {
 				scope: 'openid profile email',
