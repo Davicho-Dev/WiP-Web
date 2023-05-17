@@ -1,12 +1,14 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAuth0 } from '@auth0/auth0-react'
 import { faApple, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
 
 import { ButtonLink } from '../components/atoms'
-import { IcLogo } from '../components/atoms/Icons'
+import { IcLogo } from '../components/atoms'
 import {
 	ForgotPasswordForm,
 	LoginForm,
@@ -14,8 +16,12 @@ import {
 } from '../components/organisms'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setCurrentAuthForm } from '../store'
+import { hdlErrors } from '../helpers'
+import { apiPrivate, apiPublic } from '../utils'
 
 const AuthPage = () => {
+	const navigate = useNavigate()
+	const [onLoading, setOnLoading] = useState<boolean>(false)
 	const {
 		loginWithPopup,
 		isAuthenticated,
@@ -45,16 +51,34 @@ const AuthPage = () => {
 		})
 	}
 
+	const validateToken = async () => {
+		try {
+			await apiPrivate.get('/auth/validate_auth0/')
+
+			navigate('/')
+		} catch (err) {
+			hdlErrors(err as AxiosError)
+		}
+	}
+
 	useEffect(() => {
 		if (isAuthenticated) {
-			getAccessTokenSilently().then(token => {
-				console.log({ access: token })
-			})
 			getIdTokenClaims()
-				.then(token => {
-					console.log({ id: token })
+				.then(resp => {
+					const __raw = resp!.__raw
+					const nickname = resp!.nickname?.replace(' ', '.')
+					const email = resp!.email
+
+					if (!__raw) throw new Error('No token')
+
+					localStorage.setItem('username', nickname ?? email ?? '')
+					localStorage.setItem('access', __raw)
+					validateToken()
 				})
-				.catch(err => console.log({ err }))
+				.catch(err => {
+					toast.error(err.message)
+					console.log(err.message)
+				})
 			console.log(user)
 		}
 	}, [isAuthenticated, getAccessTokenSilently, user])
