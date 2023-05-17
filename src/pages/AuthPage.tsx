@@ -47,12 +47,14 @@ const AuthPage = () => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			getAccessTokenSilently().then(access => {
-				console.log(access)
+			getAccessTokenSilently().then(token => {
+				console.log({ access: token })
 			})
-			getIdTokenClaims().then(id => {
-				console.log(id)
-			})
+			getIdTokenClaims()
+				.then(token => {
+					console.log({ id: token })
+				})
+				.catch(err => console.log({ err }))
 			console.log(user)
 		}
 	}, [isAuthenticated, getAccessTokenSilently, user])
