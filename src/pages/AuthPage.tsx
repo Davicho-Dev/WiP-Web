@@ -55,8 +55,6 @@ const AuthPage = () => {
 		try {
 			await apiPrivate.get('/auth/validate_auth0/')
 
-			dispatch(setHasAccess(true))
-
 			navigate('/')
 		} catch (err) {
 			hdlErrors(err as AxiosError)
@@ -73,15 +71,17 @@ const AuthPage = () => {
 
 					if (!__raw) throw new Error('No token')
 
-					localStorage.setItem('username', nickname ?? email ?? '')
 					localStorage.setItem('access', __raw)
 					validateToken()
+
+					if (nickname) localStorage.setItem('username', nickname)
+
+					if (email && !nickname) localStorage.setItem('username', email)
 				})
 				.catch(err => {
 					toast.error(err.message)
 					console.log(err.message)
 				})
-			console.log(user)
 		}
 	}, [isAuthenticated, getAccessTokenSilently, user])
 

@@ -48,7 +48,7 @@ const PrivateLayout = () => {
 	}
 
 	useEffect(() => {
-		if (access && refresh) {
+		if (access) {
 			getUser()
 			dispatch(setHasAccess(true))
 		}
