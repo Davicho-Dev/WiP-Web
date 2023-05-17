@@ -15,7 +15,7 @@ import {
 	RegisterForm,
 } from '../components/organisms'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setCurrentAuthForm } from '../store'
+import { setCurrentAuthForm, setHasAccess } from '../store'
 import { hdlErrors } from '../helpers'
 import { apiPrivate, apiPublic } from '../utils'
 
@@ -54,6 +54,8 @@ const AuthPage = () => {
 	const validateToken = async () => {
 		try {
 			await apiPrivate.get('/auth/validate_auth0/')
+
+			dispatch(setHasAccess(true))
 
 			navigate('/')
 		} catch (err) {
