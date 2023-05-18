@@ -48,11 +48,12 @@ const PrivateLayout = () => {
 	}
 
 	useEffect(() => {
-		if (access && hasAccess) {
-			getUser()
-			dispatch(setHasAccess(true))
-		}
+		if (access) dispatch(setHasAccess(true))
 	}, [])
+
+	useEffect(() => {
+		if (access && hasAccess) getUser()
+	}, [hasAccess])
 
 	return (
 		<main className={styles.wrapper}>
