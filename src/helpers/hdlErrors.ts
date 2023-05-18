@@ -6,13 +6,13 @@ export const hdlErrors = (err: AxiosError) => {
 
 	if (!response || !response.data || request.status === 500) {
 		toast.error('Network Error')
-
-		return
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	Object.entries(response.data).forEach(([, value]) => {
-		toast.error(`${value}`)
-	})
+	if (response && request.status !== 500) {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		Object.entries(response.data).forEach(([, value]) => {
+			toast.error(`${value}`)
+		})
+	}
 }
