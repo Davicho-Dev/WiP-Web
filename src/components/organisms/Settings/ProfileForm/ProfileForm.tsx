@@ -5,12 +5,17 @@ import { AxiosError } from 'axios'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { PATTERN_EMAIL, getLocalUserId } from '../../../../constants'
+import { PATTERN_EMAIL } from '../../../../constants'
 import { hdlErrors } from '../../../../helpers'
 import { useAppDispatch } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 import { setUser } from '../../../../store'
-import { apiPrivate, socialIcons, socialNames } from '../../../../utils'
+import {
+	apiPrivate,
+	socialIcons,
+	socialNames,
+	getUserId,
+} from '../../../../utils'
 import { Avatar, ButtonSolid, FormInput } from '../../../atoms'
 
 import DummyImg from '../../../../assets/img/img_no_avatar.png'
@@ -75,7 +80,7 @@ export const ProfileForm = (props: IUser): JSX.Element => {
 	const onSubmit: SubmitHandler<IFormProps> = async data => {
 		setOnLoading(true)
 
-		const userID = getLocalUserId()
+		const userID = getUserId()
 
 		const formData = new FormData()
 

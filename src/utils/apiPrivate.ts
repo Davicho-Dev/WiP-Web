@@ -1,10 +1,11 @@
 import axios, { AxiosError } from 'axios'
 
-import { getLocalAccessToken } from '../constants'
+import { getAccessToken } from '../utils'
 import { refresh } from '../helpers'
+import { apiUrl } from '../constants'
 
 export const apiPrivate = axios.create({
-	baseURL: import.meta.env.VITE_API_URL,
+	baseURL: apiUrl,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -12,13 +13,14 @@ export const apiPrivate = axios.create({
 
 apiPrivate.interceptors.request.use(
 	config => {
-		const access = getLocalAccessToken()
+		const access = getAccessToken()
 
 		if (access) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			config.headers['Authorization'] = 'Bearer ' + access
 		}
+
 		return config
 	},
 	error => {

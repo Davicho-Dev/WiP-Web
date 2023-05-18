@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useAuth0 } from '@auth0/auth0-react'
 import { faApple, faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -7,8 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 
-import { ButtonLink } from '../components/atoms'
-import { IcLogo } from '../components/atoms'
+import { ButtonLink, IcLogo } from '../components/atoms'
 import {
 	ForgotPasswordForm,
 	LoginForm,
@@ -17,11 +16,12 @@ import {
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setCurrentAuthForm, setHasAccess } from '../store'
 import { hdlErrors } from '../helpers'
-import { apiPrivate, apiPublic } from '../utils'
+import { apiPrivate } from '../utils'
+import { scope } from '../constants'
 
 const AuthPage = () => {
 	const navigate = useNavigate()
-	const [onLoading, setOnLoading] = useState<boolean>(false)
+
 	const {
 		loginWithPopup,
 		isAuthenticated,
@@ -40,7 +40,7 @@ const AuthPage = () => {
 	const hdlLogin = async () => {
 		await loginWithPopup({
 			authorizationParams: {
-				scope: 'openid profile email',
+				scope,
 			},
 		})
 	}

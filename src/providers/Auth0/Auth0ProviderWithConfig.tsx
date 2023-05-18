@@ -1,6 +1,8 @@
 import { AppState, Auth0Provider } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
 
+import { domain, audience, clientId, redirectUri } from '../../constants'
+
 interface IAuth0ProviderWithConfigProps {
 	children: React.ReactNode | React.ReactNode[]
 }
@@ -9,12 +11,6 @@ const Auth0ProviderWithConfig = ({
 	children,
 }: IAuth0ProviderWithConfigProps) => {
 	const navigate = useNavigate()
-	const domain = import.meta.env.VITE_AUTH0_DOMAIN
-	const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID
-	const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL
-	const scope = import.meta.env.VITE_AUTH0_SCOPE
-	// const audience = import.meta.env.VITE_AUTH0_AUDIENCE
-	const audience = 'https://davicho-dev.us.auth0.com/api/v2/'
 
 	const onRedirectCallback = (appState?: AppState) => {
 		navigate(appState?.returnTo || window.location.pathname)
@@ -28,7 +24,7 @@ const Auth0ProviderWithConfig = ({
 			domain={domain}
 			authorizationParams={{
 				redirect_uri: redirectUri,
-				scope,
+				scope: 'read:users,read:current_user,read:user_idp_tokens',
 				audience,
 			}}
 			onRedirectCallback={onRedirectCallback}

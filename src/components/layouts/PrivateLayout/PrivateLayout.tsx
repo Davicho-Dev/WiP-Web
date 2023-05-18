@@ -3,11 +3,6 @@ import { useEffect } from 'react'
 import { AxiosError } from 'axios'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import {
-	getLocalAccessToken,
-	getLocalRefreshToken,
-	getLocalUsername,
-} from '../../../constants'
 import { hdlErrors } from '../../../helpers'
 import { useAppDispatch, useAppSelector } from '../../../hooks'
 import {
@@ -16,7 +11,7 @@ import {
 	setShowSidebar,
 	setUser,
 } from '../../../store'
-import { apiPrivate } from '../../../utils'
+import { getAccessToken, apiPrivate, getUsername } from '../../../utils'
 import { FooterCommon, HeaderCommon, Sidebar } from '../../organisms'
 
 import NoAvatar from '../../../assets/img/img_no_avatar.png'
@@ -24,7 +19,7 @@ import NoAvatar from '../../../assets/img/img_no_avatar.png'
 import styles from './PrivateLayout.module.sass'
 
 const PrivateLayout = () => {
-	const access = getLocalAccessToken()
+	const access = getAccessToken()
 
 	const navigate = useNavigate()
 
@@ -36,10 +31,10 @@ const PrivateLayout = () => {
 	const dispatch = useAppDispatch()
 
 	const getUser = async () => {
-		const username = getLocalUsername()
+		const user = getUsername()
 
 		try {
-			const { data } = await apiPrivate.get(`/users/${username}/`)
+			const { data } = await apiPrivate.get(`/users/${user}/`)
 
 			dispatch(setUser(data))
 		} catch (err) {

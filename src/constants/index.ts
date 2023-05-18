@@ -1,2 +1,2 @@
 export * from './regex'
-export * from './readStorage'
+export * from './env'
