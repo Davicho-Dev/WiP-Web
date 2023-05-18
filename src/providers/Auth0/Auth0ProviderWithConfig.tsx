@@ -24,7 +24,8 @@ const Auth0ProviderWithConfig = ({
 			domain={domain}
 			authorizationParams={{
 				redirect_uri: redirectUri,
-				scope: 'read:users read:current_user read:user_idp_tokens',
+				scope:
+					'openid email profile read:users read:current_user read:user_idp_token',
 				audience: audience ?? 'https://davicho-dev.us.auth0.com/api/v2/',
 			}}
 			onRedirectCallback={onRedirectCallback}
