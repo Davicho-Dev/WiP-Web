@@ -50,7 +50,6 @@ const AuthPage = () => {
 			await apiPrivate.get('/auth/validate_auth0/')
 
 			dispatch(setHasAccess(true))
-			console.log('has access')
 
 			navigate('/')
 		} catch (err) {
@@ -62,6 +61,7 @@ const AuthPage = () => {
 		if (isAuthenticated) {
 			getIdTokenClaims()
 				.then(resp => {
+					console.log({ resp })
 					const __raw = resp!.__raw
 					const nickname = resp!.nickname?.replace(' ', '.')
 					const email = resp!.email
