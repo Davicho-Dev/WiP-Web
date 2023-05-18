@@ -13,6 +13,7 @@ import {
 } from '../../../store'
 import { getAccessToken, apiPrivate, getUsername } from '../../../utils'
 import { FooterCommon, HeaderCommon, Sidebar } from '../../organisms'
+import { IUser } from '../../../interfaces'
 
 import NoAvatar from '../../../assets/img/img_no_avatar.png'
 
@@ -34,7 +35,11 @@ const PrivateLayout = () => {
 		const user = getUsername()
 
 		try {
-			const { data } = await apiPrivate.get(`/users/${user}/`)
+			const { data } = await apiPrivate.get<IUser>(`/users/${user}/`)
+			const { username, id } = data
+
+			localStorage.setItem('username', `${username}`)
+			localStorage.setItem('userID', `${id}`)
 
 			dispatch(setUser(data))
 		} catch (err) {
