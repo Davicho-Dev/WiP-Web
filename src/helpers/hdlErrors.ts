@@ -4,7 +4,15 @@ import { toast } from 'react-toastify'
 export const hdlErrors = (err: AxiosError) => {
 	const { response, request } = err
 
-	if (!response || !response.data || request.status === 500) {
+	if (request.status === 500) {
+		toast.error('Server Error')
+
+		return
+	}
+
+	console.log('Error status code:' + request.status)
+
+	if (!response || !response.data) {
 		toast.error('Network Error')
 	}
 

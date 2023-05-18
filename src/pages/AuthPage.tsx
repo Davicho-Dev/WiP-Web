@@ -61,7 +61,6 @@ const AuthPage = () => {
 		if (isAuthenticated) {
 			getIdTokenClaims()
 				.then(resp => {
-					console.log({ resp })
 					const __raw = resp!.__raw
 					const nickname = resp!.nickname?.replace(' ', '.')
 					const email = resp!.email
