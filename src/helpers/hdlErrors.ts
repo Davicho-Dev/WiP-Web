@@ -8,7 +8,7 @@ export const hdlErrors = (err: AxiosError) => {
 		toast.error('Network Error')
 	}
 
-	if (response && request.status !== 500) {
+	if (response?.data && request.status !== 500) {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		Object.entries(response.data).forEach(([, value]) => {
