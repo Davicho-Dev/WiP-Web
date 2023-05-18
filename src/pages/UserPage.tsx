@@ -8,10 +8,9 @@ import { v4 } from 'uuid'
 
 import { ButtonSolid } from '../components/atoms'
 import { PostItemCompact, Tabs } from '../components/molecules'
-import { getLocalUsername } from '../constants'
 import { hdlErrors } from '../helpers'
 import { IUser } from '../interfaces'
-import { socialIcons, apiPrivate } from '../utils'
+import { socialIcons, apiPrivate, getUsername } from '../utils'
 import { useAppSelector } from '../hooks'
 import { RootState } from '../store'
 
@@ -121,7 +120,7 @@ const ProfilePage = () => {
 							})}
 						</nav>
 					</aside>
-					{username === getLocalUsername() ? (
+					{username === getUsername() ? (
 						<button
 							type='button'
 							onClick={() => navigate('/settings')}
@@ -134,7 +133,7 @@ const ProfilePage = () => {
 						</button>
 					) : null}
 				</section>
-				{username !== getLocalUsername() ? (
+				{username !== getUsername() ? (
 					<section className='w-full flex gap-4 flex-wrap justify-center lg:!justify-start md:!gap-x-6 px-4 md:!px-6 lg:!px-0'>
 						<ButtonSolid
 							label={isFollowed ? 'Following_' : 'Follow_'}
@@ -175,8 +174,8 @@ const ProfilePage = () => {
 				<Tabs
 					currentTab={currentTab}
 					setCurrentTab={setCurrentTab}
-					isAnonymous={username !== getLocalUsername()}
-					isPrivate={has_private_likes && username !== getLocalUsername()}
+					isAnonymous={username !== getUsername()}
+					isPrivate={has_private_likes && username !== getUsername()}
 				/>
 			</header>
 			<section className='grid grid-cols-1 md:!grid-cols-2 xl:!grid-cols-3 gap-8 py-8 px-4 md:!px-6 lg:!px-0'>
