@@ -49,6 +49,7 @@ const AuthPage = () => {
 		try {
 			await apiPrivate.get('/auth/validate_auth0/')
 
+			dispatch(setHasAccess(true))
 			navigate('/')
 		} catch (err) {
 			hdlErrors(err as AxiosError)
