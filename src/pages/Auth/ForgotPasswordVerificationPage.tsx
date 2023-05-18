@@ -9,9 +9,9 @@ import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { ButtonSolid, FormInputPassword, IcLogo } from '../../components/atoms'
-import { PATTERN_PASSWORD, getLocalAccessToken } from '../../constants'
+import { PATTERN_PASSWORD } from '../../constants'
 import { hdlErrors } from '../../helpers'
-import { apiPrivate, apiPublic } from '../../utils'
+import { apiPrivate, apiPublic, getAccessToken } from '../../utils'
 
 interface IAuthResp {
 	ACCESS: string
@@ -44,7 +44,7 @@ const ForgotPasswordVerificationPage = () => {
 	} = useForm<IFormProps>()
 
 	const onSubmit = async (formData: IFormProps) => {
-		const access = getLocalAccessToken() ?? ''
+		const access = getAccessToken()
 		const { payload } = jwtDecode(access)
 		setOnLoading(true)
 

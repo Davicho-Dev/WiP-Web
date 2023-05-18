@@ -12,8 +12,9 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { NavLink } from 'react-router-dom'
 
 import { ButtonNavLink, ButtonSolid } from '../../atoms'
-import { useAppDispatch } from '../../../hooks'
 import { clearUser } from '../../../store'
+import { redirectUri } from '../../../constants'
+import { useAppDispatch } from '../../../hooks'
 
 import { ISidebarProps } from './Sidebar.interfaces'
 import styles from './Sidebar.module.sass'
@@ -23,7 +24,8 @@ export const Sidebar = ({
 	hasAccess,
 	showSidebar,
 }: ISidebarProps): JSX.Element => {
-	const { logout: auth0Logout } = useAuth0()
+	const returnTo = redirectUri
+	const { logout } = useAuth0()
 	const dispatch = useAppDispatch()
 
 	const hdlLogout = async () => {
@@ -31,7 +33,7 @@ export const Sidebar = ({
 
 		await localStorage.clear()
 
-		auth0Logout({ logoutParams: { returnTo: '/auth' } })
+		logout({ logoutParams: { returnTo } })
 	}
 
 	return (

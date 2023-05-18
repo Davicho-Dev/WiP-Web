@@ -12,9 +12,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { ButtonLink, ButtonSolid, FormInput } from '../../components/atoms'
 import { IcLogo } from '../../components/atoms/Icons'
-import { getLocalAccessToken } from '../../constants'
 import { hdlErrors } from '../../helpers'
-import { apiPrivate, apiPublic } from '../../utils'
+import { apiPrivate, apiPublic, getAccessToken } from '../../utils'
 
 import IcHands from '../../assets/img/img_hands.png'
 import DummyImg from '../../assets/img/img_no_avatar.png'
@@ -48,7 +47,8 @@ const RegisterVerificationPage = () => {
 	const onSubmit = async ({ about, username }: IFormProps) => {
 		setOnLoading(true)
 
-		const { payload } = jwtDecode(getLocalAccessToken()!)
+		const access = getAccessToken()
+		const { payload } = jwtDecode(access)
 
 		const formData = new FormData()
 
