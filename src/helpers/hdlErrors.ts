@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 export const hdlErrors = (err: AxiosError) => {
 	const { response, request } = err
 
+	console.log({ err })
 	console.log({ response })
 	console.log({ request })
 
