@@ -14,10 +14,11 @@ import {
 	RegisterForm,
 } from '../components/organisms'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { setCurrentAuthForm, setHasAccess } from '../store'
+import { setCurrentAuthForm, setHasAccess, setUser } from '../store'
 import { hdlErrors } from '../helpers'
 import { apiPrivate } from '../utils'
 import { scope } from '../constants'
+import { IUser } from '../interfaces'
 
 const AuthPage = () => {
 	const navigate = useNavigate()
@@ -45,13 +46,33 @@ const AuthPage = () => {
 		})
 	}
 
+	const getUser = async () => {
+		try {
+			const { data } = await apiPrivate.get<IUser>(`/users/current/`)
+			const { username, id, first_sign_up, email } = data
+
+			localStorage.setItem('username', `${username}`)
+			localStorage.setItem('userID', `${id}`)
+
+			dispatch(setUser(data))
+
+			if (first_sign_up) {
+				navigate(`/auth/register/${email}`)
+			} else {
+				navigate('/')
+			}
+		} catch (err) {
+			hdlErrors(err as AxiosError)
+		}
+	}
+
 	const validateToken = async () => {
 		try {
 			await apiPrivate.get('/auth/validate_auth0/')
 
 			dispatch(setHasAccess(true))
 
-			navigate('/')
+			getUser()
 		} catch (err) {
 			hdlErrors(err as AxiosError)
 		}

@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ButtonLink, ButtonSolid, FormInput } from '../../components/atoms'
 import { IcLogo } from '../../components/atoms/Icons'
 import { hdlErrors } from '../../helpers'
-import { apiPrivate, apiPublic, getAccessToken } from '../../utils'
+import { apiPrivate, apiPublic, getAccessToken, getUserId } from '../../utils'
 
 import IcHands from '../../assets/img/img_hands.png'
 import DummyImg from '../../assets/img/img_no_avatar.png'
@@ -30,6 +30,7 @@ interface IFormProps {
 type TQueryParams = {
 	token: string
 	email: string
+	firstTime?: string
 }
 
 const RegisterVerificationPage = () => {
@@ -48,6 +49,7 @@ const RegisterVerificationPage = () => {
 		setOnLoading(true)
 
 		const access = getAccessToken()
+		const userID = getUserId()
 		const { payload } = jwtDecode(access)
 
 		const formData = new FormData()
@@ -55,18 +57,23 @@ const RegisterVerificationPage = () => {
 		if (avatar) {
 			formData.append('picture', avatar)
 		}
+
 		if (username) {
 			formData.append('username', username)
 		}
+
 		if (about) {
 			formData.append('about', about)
 		}
 
 		try {
-			await apiPrivate.patch(`/users/${payload.user_id}/`, formData)
+			await apiPrivate.patch(
+				`/users/${token ? payload.user_id : userID}/`,
+				formData
+			)
 
 			localStorage.setItem('username', username!)
-			localStorage.setItem('userID', payload.user_id)
+			if (token) localStorage.setItem('userID', payload.user_id)
 
 			navigate('/')
 		} catch (err) {
@@ -110,7 +117,11 @@ const RegisterVerificationPage = () => {
 	}
 
 	useEffect(() => {
-		hdlVerifyToken()
+		if (token) {
+			hdlVerifyToken()
+		} else {
+			setSuccess(true)
+		}
 	}, [])
 
 	if (showNextStep)
