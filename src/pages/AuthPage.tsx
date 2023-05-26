@@ -23,13 +23,7 @@ import { IUser } from '../interfaces'
 const AuthPage = () => {
 	const navigate = useNavigate()
 
-	const {
-		loginWithPopup,
-		isAuthenticated,
-		getAccessTokenSilently,
-		user,
-		getIdTokenClaims,
-	} = useAuth0()
+	const { loginWithPopup, isAuthenticated, user, getIdTokenClaims } = useAuth0()
 
 	const { currentForm } = useParams()
 
@@ -100,7 +94,7 @@ const AuthPage = () => {
 					console.log(err.message)
 				})
 		}
-	}, [isAuthenticated, getAccessTokenSilently, user])
+	}, [isAuthenticated, user])
 
 	useEffect(() => {
 		if (currentForm) dispatch(setCurrentAuthForm(currentForm))
