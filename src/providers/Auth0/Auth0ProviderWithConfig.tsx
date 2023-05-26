@@ -1,7 +1,7 @@
 import { AppState, Auth0Provider } from '@auth0/auth0-react'
 import { useNavigate } from 'react-router-dom'
 
-import { domain, audience, clientId, redirectUri } from '../../constants'
+import { domain, audience, clientId, redirectUri, scope } from '../../constants'
 
 interface IAuth0ProviderWithConfigProps {
 	children: React.ReactNode | React.ReactNode[]
@@ -24,9 +24,8 @@ const Auth0ProviderWithConfig = ({
 			domain={domain}
 			authorizationParams={{
 				redirect_uri: redirectUri,
-				scope:
-					'openid email profile read:users read:current_user read:user_idp_token',
-				audience: audience ?? 'https://davicho-dev.us.auth0.com/api/v2/',
+				scope,
+				audience,
 			}}
 			onRedirectCallback={onRedirectCallback}
 		>
