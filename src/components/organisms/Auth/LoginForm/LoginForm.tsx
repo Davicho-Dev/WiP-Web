@@ -88,7 +88,7 @@ const LoginForm = () => {
 						},
 					}),
 				}}
-				onError={errors.email ? true : false}
+				onError={!!errors.email}
 			/>
 			<FormInputPassword
 				placeholder='Password'
@@ -102,7 +102,7 @@ const LoginForm = () => {
 						},
 					}),
 				}}
-				onError={errors.password ? true : false}
+				onError={!!errors.password}
 			/>
 			<ButtonSolid label='Login' disabled={onLoading} onLoading={onLoading} />
 			<ButtonLink
