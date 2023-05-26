@@ -18,8 +18,6 @@ const Auth0ProviderWithConfig = ({
 
 	if (!(domain && clientId && redirectUri)) return <>{children}</>
 
-	console.log({ domain, clientId, redirectUri, scope, audience })
-
 	return (
 		<Auth0Provider
 			clientId={clientId}

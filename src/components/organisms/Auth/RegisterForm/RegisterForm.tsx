@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
@@ -59,15 +57,10 @@ const RegisterForm = () => {
 		return (
 			<section className='grid justify-items-center gap-y-6'>
 				<h1 className='text-xl text-center'>
-					We have sent you a verification model, please verify it to continue
-					the process
+					We have sent you a verification mail, please verify it to continue the
+					process
 				</h1>
 				<img className='w-20' src={IcHands} alt='' />
-				<ButtonSolid
-					label="Let's do it"
-					className='w-1/2'
-					icon={<FontAwesomeIcon icon={faCircleArrowRight} className='mr-1' />}
-				/>
 			</section>
 		)
 
