@@ -58,8 +58,10 @@ const Router = () => {
 					path='forgot/:email/:token'
 					element={<ForgotPasswordVerificationPage />}
 				/>
-				<Route path='terms-and-conditions' element={<TermsConditionsPage />} />
 			</Route>
+			<Route path='/terms_conditions' element={<TermsConditionsPage />} />
+			<Route path='/privacy_policy' element={<TermsConditionsPage />} />
+			<Route path='/marketing' element={<TermsConditionsPage />} />
 		</Routes>
 	)
 }
