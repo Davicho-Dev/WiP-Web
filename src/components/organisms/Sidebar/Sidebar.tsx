@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import { ButtonNavLink, ButtonSolid } from '../../atoms'
 import { clearUser } from '../../../store'
@@ -24,16 +24,21 @@ export const Sidebar = ({
 	hasAccess,
 	showSidebar,
 }: ISidebarProps): JSX.Element => {
-	const returnTo = redirectUri
-	const { logout } = useAuth0()
+	const { logout, isAuthenticated } = useAuth0()
+
 	const dispatch = useAppDispatch()
+
+	const returnTo = redirectUri
 
 	const hdlLogout = async () => {
 		dispatch(clearUser())
-
 		await localStorage.clear()
 
-		logout({ logoutParams: { returnTo } })
+		if (isAuthenticated) {
+			logout({ logoutParams: { returnTo } })
+		} else {
+			navigate('/auth')
+		}
 	}
 
 	return (
