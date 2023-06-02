@@ -21,7 +21,7 @@ export const Tabs = ({
 	setCurrentTab,
 	className,
 	isAnonymous,
-	isPrivate,
+	isPrivate = true,
 }: ITabsProps): JSX.Element => {
 	return (
 		<nav
