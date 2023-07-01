@@ -1,2 +1,2 @@
-export * from './Auth'
-export * from './CMS'
+export * from './auth'
+export { hdlErrors } from './hdlErrors'

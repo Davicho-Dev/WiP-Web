@@ -1,0 +1,12 @@
+.button
+  @apply bg-secondary text-primary w-4/5 h-10 rounded-3xl flex justify-center items-center
+
+  &:disabled
+    @apply bg-neutral-300 text-neutral-500 cursor-not-allowed
+
+  &--success
+    @apply bg-green-600 px-3.5 border-none #{'!important'}
+
+  &--loading
+    @apply bg-transparent px-3 #{'!important'}
+    @apply text-white

@@ -1,33 +1,38 @@
 import { StrictMode } from 'react'
 
 import ReactDOM from 'react-dom/client'
-import axios from 'axios'
-
-import { AuthProvider, ThemeProvider } from './context'
-import Router from './router'
-
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify'
+
+import { Auth0ProviderWithConfig } from './providers'
+import { Router } from './router'
+import { store } from './store'
+
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/globals.sass'
 
-axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
-// if (sessionStorage.getItem('TOKEN')) axios.defaults.withCredentials = true
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<StrictMode>
-		<ThemeProvider>
-			<AuthProvider>
-				<Router />
-				<ToastContainer
-					closeOnClick={true}
-					draggable={false}
-					hideProgressBar={true}
-					newestOnTop={true}
-					pauseOnHover={false}
-					position='bottom-right'
-				/>
-			</AuthProvider>
-		</ThemeProvider>
+		<QueryClientProvider client={queryClient}>
+			<BrowserRouter>
+				<Auth0ProviderWithConfig>
+					<Provider store={store}>
+						<Router />
+						<ToastContainer
+							closeOnClick={true}
+							draggable={false}
+							hideProgressBar={true}
+							newestOnTop={true}
+							pauseOnHover={false}
+							position='bottom-right'
+						/>
+					</Provider>
+				</Auth0ProviderWithConfig>
+			</BrowserRouter>
+		</QueryClientProvider>
 	</StrictMode>
 )

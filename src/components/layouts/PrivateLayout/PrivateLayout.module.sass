@@ -1,0 +1,9 @@
+.wrapper
+  @apply w-screen h-screen flex flex-col shrink-0
+
+  &__content
+    grid-template-columns: 1fr
+    @apply w-full h-full grid grid-flow-col grow overflow-hidden
+
+    @screen lg
+      grid-template-columns: 16rem 1fr
